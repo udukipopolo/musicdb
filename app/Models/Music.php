@@ -16,4 +16,9 @@ class Music extends Model
     {
         return $this->belongsTo(Album::class);
     }
+
+    public function parts()
+    {
+        return $this->hasMany(Part::class);
+    }
 }

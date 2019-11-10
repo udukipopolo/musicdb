@@ -23,5 +23,8 @@ Route::get('search/music', 'SearchMusicController@index')->name('search.music.in
 Route::get('search/artist', 'SearchArtistController@index')->name('search.artist.index');
 
 Route::group(['middleware' => 'auth'], function () {
-
+    Route::group(['prefix' => 'manage', 'as'=>'manage.'], function () {
+        Route::resource('album', 'ManageAlbumController');
+        Route::resource('artist', 'ManageArtistController');
+    });
 });

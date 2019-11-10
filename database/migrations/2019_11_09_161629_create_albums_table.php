@@ -16,6 +16,8 @@ class CreateAlbumsTable extends Migration
         Schema::create('albums', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title')->comment('アルバムタイトル');
+            $table->bigInteger('artist_id')->unsigned()->index()->comment('アーティストID');
+            $table->string('artist_name')->comment('アーティスト名');
             $table->timestamps();
         });
     }

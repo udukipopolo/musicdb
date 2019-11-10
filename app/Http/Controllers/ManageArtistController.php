@@ -21,7 +21,7 @@ class ManageArtistController extends Controller
             if ($request->filled('name')) {
                 $artists->where('name', 'LIKE', '%'.$request->name.'%');
             }
-            $artists->order('name', 'ASC');
+            $artists->orderBy('name', 'ASC');
             $param['artists'] = $artists->paginate(50);
         }
 

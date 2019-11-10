@@ -1,3 +1,3 @@
-@if ($errors->has($key))
-<div class="invalid-feedback">{{ $errors->first($key) }}</div>
-@endif
+@error($key)
+<div class="invalid-feedback">{{ $message }}</div>
+@enderror

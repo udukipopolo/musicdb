@@ -9,6 +9,17 @@
             </div>
             <div class="card-body">
                 {{ Form::open(['route'=>['manage.artist.store'], 'method'=>'POST', 'class'=>'']) }}
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
                 <div class="form-group row">
                     {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'.ViewUtil::hasErrorClass($errors, 'name')])}}
                     <div class="col-md-8">

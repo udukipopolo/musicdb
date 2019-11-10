@@ -39,7 +39,6 @@ class ManageArtistController extends Controller
      */
     public function store(Request $request)
     {
-        \Log::debug('store start');
         $request->validate(
             [
                 'name' => 'required|max:255',
@@ -52,7 +51,6 @@ class ManageArtistController extends Controller
             ]
         );
 
-        \Log::debug('validate OK');
 
         return redirect()->route('manage.artist.index')->with('message', 'アーティストを登録しました。');
     }

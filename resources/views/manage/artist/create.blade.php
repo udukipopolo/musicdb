@@ -10,23 +10,10 @@
             <div class="card-body">
                 {{ Form::open(['route'=>['manage.artist.store'], 'method'=>'POST', 'class'=>'']) }}
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-@error('name')
-    <div class="alert alert-danger">{{ $message }}</div>
-@enderror
-
                 <div class="form-group row">
-                    {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'.ViewUtil::hasErrorClass($errors, 'name')])}}
+                    {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('name', null, ['class'=>'form-control']) }}
+                        {{ Form::text('name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'name')]) }}
                         @include('layouts.parts.error_message', ['key'=>'name'])
                     </div>
                 </div>

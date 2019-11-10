@@ -26,7 +26,9 @@ class ManageArtistController extends Controller
      */
     public function create()
     {
-        //
+        $param = [];
+
+        return view('manage.artist.create', $param);
     }
 
     /**

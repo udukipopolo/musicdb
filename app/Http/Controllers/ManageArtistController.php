@@ -67,7 +67,11 @@ class ManageArtistController extends Controller
      */
     public function show(Artist $artist)
     {
-        //
+        $param = [
+            'artist' => $artist,
+        ];
+
+        return view('manage.artist.show', $param);
     }
 
     /**

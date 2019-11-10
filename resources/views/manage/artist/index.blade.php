@@ -10,11 +10,9 @@
                 </div>
                 <div class="card-body">
                     {{ Form::open(['route'=>['manage.artist.index'], 'method'=>'GET', 'class'=>'form-inline']) }}
-                        <div class="mr-md-2">
-                            <label class="sr-only" form="name">アーティスト名</label>
-                            {{ Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'アーティスト名']) }}
-                            {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
-                        </div>
+                        <label class="sr-only" form="name">アーティスト名</label>
+                        {{ Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'アーティスト名']) }}
+                        {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
                         {{ Html::linkRoute('manage.artist.create', '新規登録', [], ['class'=>'btn btn-primary']) }}
                     {{ Form::close() }}
                 </div>

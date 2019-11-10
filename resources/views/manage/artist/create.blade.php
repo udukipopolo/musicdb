@@ -25,7 +25,9 @@
                 </div>
 
                 <div class="form-group row">
-                    {{ Form::submit('登録', ['class'=>'btn btn-primary']) }}
+                    <div class="col-md-12">
+                        {{ Form::submit('登録', ['class'=>'btn btn-primary']) }}
+                    </div>
                 </div>
 
                 {{ Form::close() }}

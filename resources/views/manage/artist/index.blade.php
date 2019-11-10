@@ -3,6 +3,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
+        @include('layouts.parts.message')
+
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">

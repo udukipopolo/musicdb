@@ -39,7 +39,17 @@ class ManageArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|max:255',
+                'belonging' => '',
+            ],
+            [],
+            [
+                'name' => 'アーティスト名',
+                'belonging' => '所属事務所',
+            ]
+        );
     }
 
     /**

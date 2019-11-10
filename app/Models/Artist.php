@@ -8,6 +8,7 @@ class Artist extends Model
 {
     protected $fillable = [
         'name',
+        'belonging',
     ];
 
     public function parts()

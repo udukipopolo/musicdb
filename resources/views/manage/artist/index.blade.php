@@ -3,14 +3,14 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        @include('layouts.parts.message')
-
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     アーティスト管理
                 </div>
                 <div class="card-body">
+                    @include('layouts.parts.message')
+
                     {{ Form::open(['route'=>['manage.artist.index'], 'method'=>'GET', 'class'=>'form-inline']) }}
                         <label class="sr-only" form="name">アーティスト名</label>
                         {{ Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'アーティスト名']) }}

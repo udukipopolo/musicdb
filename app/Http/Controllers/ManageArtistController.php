@@ -51,6 +51,10 @@ class ManageArtistController extends Controller
             ]
         );
 
+        $artist = Artist::create([
+            'name' => $request->name,
+            'belonging' => $request->input('belonging', ''),
+        ]);
 
         return redirect()->route('manage.artist.index')->with('message', 'アーティストを登録しました。');
     }

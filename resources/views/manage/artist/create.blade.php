@@ -19,6 +19,9 @@
         </ul>
     </div>
 @endif
+@error('name')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
 
                 <div class="form-group row">
                     {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'.ViewUtil::hasErrorClass($errors, 'name')])}}

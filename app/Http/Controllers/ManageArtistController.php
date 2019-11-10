@@ -16,6 +16,15 @@ class ManageArtistController extends Controller
     {
         $param = [];
 
+        if (count($request->query()) > 0) {
+            $artists = Artist::query();
+            if ($request->filled('name')) {
+                $artists->where('name', 'LIKE', '%'.$request->name.'%');
+            }
+            $artists->order('name', 'ASC');
+            $param['artists'] = $artists->paginate(50);
+        }
+
         return view('manage.artist.index', $param);
     }
 

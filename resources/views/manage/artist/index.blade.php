@@ -21,16 +21,26 @@
             </div>
         </div>
 
+        @isset($artists)
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     アーティスト一覧
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                    @foreach ($artists as $artist)
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        {{ Html::linkRoute('manage.artist.show', $artist->name, [$artist->id]) }}
+                    </div>
+                    @endforeach
+                    </div>
+
+                    {{ $artists->appends(Request::input())->links() }}
                 </div>
             </div>
         </div>
-
+        @endisset
     </div>
 </div>
 @endsection

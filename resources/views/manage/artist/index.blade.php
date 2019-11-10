@@ -4,11 +4,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card">
+                <div class="card-heading">
                     アーティスト管理
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     {{ Form::open(['route'=>['manage.artist.index'], 'method'=>'GET', 'class'=>'form-inline']) }}
                         <div class="form-group">
                             <label class="sr-only" form="name">アーティスト名</label>
@@ -22,11 +22,11 @@
         </div>
 
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card">
+                <div class="card-heading">
                     アーティスト一覧
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                 </div>
             </div>
         </div>

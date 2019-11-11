@@ -7,7 +7,14 @@
 $(document).ready(function(){
     $('.js-select2').select2()
         .on('select2:select', function(e) {
-            console.log(e);
+            console.log(e.params.data);
+            let artist_id = e.params.data.id;
+            let artist_name = e.params.data.text;
+            if (artist_id != '') {
+                $('#album_artist_name').val(artist_name);
+            } else {
+                $('#album_artist_name').val('');
+            }
         });
     // $('#album_artist_id').change(function() {
     //     console.log($(this).select2('data'));

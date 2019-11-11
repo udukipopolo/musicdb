@@ -125,7 +125,12 @@ class ManageAlbumController extends Controller
      */
     public function edit(Album $album)
     {
-        //
+        $params = [
+            'album' => $album,
+            'artists' => Artist::orderBy('name', 'ASC')->get()->pluck('name', 'id'),
+        ];
+
+        return view('manage.album.edit', $params);
     }
 
     /**

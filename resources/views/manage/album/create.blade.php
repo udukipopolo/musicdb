@@ -4,7 +4,9 @@
 {{ Html::style('css/select2.min.css') }}
 {{ Html::script('js/select2.min.js') }}
 <script>
-$('.select2').select2();
+$(document).ready(function(){
+    $('.js-select2').select2();
+});
 </script>
 
 @endsection
@@ -30,7 +32,7 @@ $('.select2').select2();
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
-                        {{ Form::select('artist_id', [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control select2'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist_id']) }}
+                        {{ Form::select('artist_id', [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist_id']) }}
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
                     </div>
                     <div class="col-md-4">

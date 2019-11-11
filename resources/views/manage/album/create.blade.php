@@ -7,13 +7,13 @@
 $(document).ready(function(){
     $('.js-select2').select2()
         .on('select2:select', function(e) {
-            console.log(e.params.data);
-            let artist_id = e.params.data.id;
-            let artist_name = e.params.data.text;
-            if (artist_id != '') {
-                $('#album_artist_name').val(artist_name);
+            var name_id = '#'+$(this).attr('id')+'_name';
+            let id = e.params.data.id;
+            let name = e.params.data.text;
+            if (id != '') {
+                $(name_id).val(name);
             } else {
-                $('#album_artist_name').val('');
+                $(name_id).val('');
             }
         });
 });
@@ -42,7 +42,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
-                        {{ Form::select('artist_id', [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist_id']) }}
+                        {{ Form::select('artist_id', [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist']) }}
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
                     </div>
                     <div class="col-md-4">

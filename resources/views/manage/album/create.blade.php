@@ -6,7 +6,7 @@
 <script>
 $(document).ready(function(){
     $('.js-select2').select2()
-        .on('change', function(e) {
+        .on('select2:select', function(e) {
             console.log(e);
         });
     // $('#album_artist_id').change(function() {

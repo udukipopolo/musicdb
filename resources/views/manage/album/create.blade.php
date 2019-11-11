@@ -9,8 +9,7 @@ $(document).ready(function(){
         .on('change', (event) => {
             console.log(event.target);
             let artist_id = event.target.value;
-            let artist_name = event.target.text;
-            alert(artist_name);
+            let artist_name = event.target.textContent;
             if (artist_id != '') {
                 $('#album_artist_name').val(artist_name);
             } else {

@@ -21,6 +21,9 @@
     <!-- Styles -->
     {{ Html::style('css/bootstrap.min.css') }}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+@yield('head')
+
 </head>
 <body>
     <div id="app">

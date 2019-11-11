@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Artist;
 use Illuminate\Http\Request;
 
 class ManageAlbumController extends Controller
@@ -37,7 +38,12 @@ class ManageAlbumController extends Controller
      */
     public function create()
     {
-        //
+        $params = [];
+
+        $artists = Artist::orderBy('name', 'ASC')->get()->pluck('name', 'id');
+        $params['artists'] = $artists;
+
+        return view('manage.album.create', $params);
     }
 
     /**
@@ -48,7 +54,21 @@ class ManageAlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required|max:255',
+                'artist_id' => '',
+                'artist_name' => 'required|max:255',
+            ],
+            [],
+            [
+                'title' => 'アルバムタイトル',
+                'artist_id' => '',
+                'artist_name' => 'アーティスト名',
+            ]
+        );
+
+        return redirect()->route('manage.album.index');
     }
 
     /**

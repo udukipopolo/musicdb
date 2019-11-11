@@ -5,12 +5,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                アーティスト詳細
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
-                    </li>
-                </ul>
+                <h3 class="mr-auto p-3">アーティスト詳細</h3>
+                <div class="btn-group" role="group">
+                    <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success float-right">編集</a>
+                </div>
                 <div class="clearfix"></div>
             </div>
             <div class="card-body">

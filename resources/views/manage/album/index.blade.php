@@ -27,14 +27,27 @@
                 <div class="card-header">
                     アルバム一覧
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                    @foreach ($albums as $album)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        {{ Html::linkRoute('manage.album.show', $album->name, [$album->id]) }}
-                    </div>
-                    @endforeach
-                    </div>
+                <tr class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>アルバム名</th>
+                                <th>アーティスト名</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($albums as $album)
+                            <tr>
+                                <td>
+                                    {{ Html::linkRoute('manage.album.show', $album->title, [$album->id]) }}
+                                </td>
+                                <td>
+                                    {{ $album->artist_name }}
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
                     {{ $albums->appends(Request::input())->links() }}
                 </div>

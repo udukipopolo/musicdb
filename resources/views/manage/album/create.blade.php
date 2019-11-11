@@ -7,6 +7,7 @@
 $(document).ready(function(){
     $('.js-select2').select2()
         .on('change', (event) => {
+            alert('change');
             let artist_id = event.target.value;
             let artist_name = event.target.text;
             if (artist_id != '') {

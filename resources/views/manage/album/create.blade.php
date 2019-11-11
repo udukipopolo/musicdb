@@ -14,7 +14,8 @@ $(document).ready(function(){
             } else {
                 $('#album_artist_name').val('');
             }
-        });
+        })
+        .trigger('change');
 });
 </script>
 

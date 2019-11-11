@@ -54,6 +54,31 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('musics', '楽曲', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>曲名</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                if (old('musics') && count(old('musics')) > 10) {
+                                    $max = count(old('musics'));
+                                } else {
+                                    $max = 10;
+                                }
+                                @endphp
+                                @for($no = 1; $no <= $max; $no++)
+                                <tr>
+                                    <td>{{ $no }}</td>
+                                    <td>
+                                        {{ Form::text("musics[{$no}]", old('musics.'.$no), ['class'=>'form-control']) }}
+                                    </td>
+                                </tr>
+                                @endfor
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

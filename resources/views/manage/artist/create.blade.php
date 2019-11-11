@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('head')
-{{ Html::script('js/select2.min.js') }}
-<script>
-$('.select2').select2();
-</script>
-
-@endsection
-
 @section('content')
 <div class="container-fluid">
     <div class="col-md-12">
@@ -29,7 +21,7 @@ $('.select2').select2();
                 <div class="form-group row">
                     {{ Form::label('belonging', '所属事務所', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::textarea('belonging', null, ['class'=>'form-control select2'.ViewUtil::hasErrorClass($errors, 'belonging'), 'cols'=>'6']) }}
+                        {{ Form::textarea('belonging', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'belonging'), 'cols'=>'6']) }}
                         <p class="help-block">※複数ある場合、もしくは変更する場合は改行で追記してください。</p>
                         @include('layouts.parts.error_message', ['key'=>'belonging'])
                     </div>

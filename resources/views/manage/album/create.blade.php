@@ -6,9 +6,10 @@
 <script>
 $(document).ready(function(){
     $('.js-select2').select2();
-    $('#album_artist_id').change(function() {
-        let artist_id = $('option:selected').val();
-        let artist_name = $('option:selected').text();
+    var album_artist_id = $('#album_artist_id');
+    $(album_artist_id).change(function() {
+        let artist_id = $(album_artist_id).select2('data').id;
+        let artist_name = $(album_artist_id).select2('data').text;
         if (artist_id != '') {
             $('#album_artist_name').val(artist_name);
         } else {

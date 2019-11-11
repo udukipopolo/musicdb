@@ -16,6 +16,15 @@ $(document).ready(function(){
                 $(name_id).val('');
             }
         });
+    $('#add_row').click(function() {
+        var track_no = $('#max_num').val() + 1;
+
+        var row = '<tr><td>'+track_no+'</td><td><input class="form-control" name="musics['+track_no+']" type="text"></td></tr>';
+
+        $('#track_list').append(row);
+
+        $('#max_num').val(track_no);
+    });
 });
 </script>
 
@@ -61,7 +70,7 @@ $(document).ready(function(){
                                     <th>曲名</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="track_list">
                                 @php
                                 if (old('musics') && count(old('musics')) > 10) {
                                     $max = count(old('musics'));
@@ -79,6 +88,8 @@ $(document).ready(function(){
                                 @endfor
                             </tbody>
                         </table>
+                        {{ Form::hidden('max_num', $max, ['id'=>'max_num']) }}
+                        <button type="button" id="add_row">行追加</button>
                     </div>
                 </div>
 

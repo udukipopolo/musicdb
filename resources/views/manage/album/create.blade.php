@@ -5,18 +5,16 @@
 {{ Html::script('js/select2.min.js') }}
 <script>
 $(document).ready(function(){
-    $('.js-select2').select2()
-        .on('change', (event) => {
-            console.log($(this).text());
-            let artist_id = event.target.value;
-            let artist_name = event.target.textContent;
-            if (artist_id != '') {
-                $('#album_artist_name').val(artist_name);
-            } else {
-                $('#album_artist_name').val('');
-            }
-        })
-        .trigger('change');
+    $('.js-select2').select2();
+    $('#album_artist_id').change(function() {
+        let artist_id = $('option:selected').val();
+        let artist_name = $(this).select2('data').text;
+        if (artist_id != '') {
+            $('#album_artist_name').val(artist_name);
+        } else {
+            $('#album_artist_name').val('');
+        }
+    });
 });
 </script>
 

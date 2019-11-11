@@ -89,7 +89,7 @@ $(document).ready(function(){
                             </tbody>
                         </table>
                         {{ Form::hidden('max_num', $max, ['id'=>'max_num']) }}
-                        <button type="button" id="add_row">行追加</button>
+                        <button type="button" id="add_row" class="btn btn-secondary">行追加</button>
                     </div>
                 </div>
 

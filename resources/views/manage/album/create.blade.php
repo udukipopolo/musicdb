@@ -6,7 +6,7 @@
 <script>
 $(document).ready(function(){
     $('.js-select2').select2()
-        .on('change', function(e) {
+        .on('change.select2', function(e) {
             var data = e.params.data;
             console.log(data);
         });

@@ -6,6 +6,11 @@
         <div class="card">
             <div class="card-header">
                 アーティスト詳細
+                <div class="nav pull-right">
+                    <li>
+                        <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    </li>
+                </div>
             </div>
             <div class="card-body">
                 <div class="form-group row">

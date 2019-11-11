@@ -91,7 +91,11 @@ class ManageArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        //
+        $param = [
+            'artist' => $artist,
+        ];
+
+        return view('manage.artist.edit', $param);
     }
 
     /**
@@ -103,7 +107,22 @@ class ManageArtistController extends Controller
      */
     public function update(Request $request, Artist $artist)
     {
-        //
+        $request->validate(
+            [
+                'name' => 'required|max:255',
+                'belonging' => '',
+            ],
+            [],
+            [
+                'name' => 'アーティスト名',
+                'belonging' => '所属事務所',
+            ]
+        );
+
+        $artist->name = $request->name;
+        $artist->belonging = $request->input('belonging', '');
+
+        return redirect()->route('manage.artist.show', $artist->id)->with('message', '更新しました。');
     }
 
     /**

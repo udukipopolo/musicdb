@@ -14,18 +14,20 @@ class ManageArtistController extends Controller
      */
     public function index(Request $request)
     {
-        $param = [];
+        $params = [];
 
         if (count($request->query()) > 0) {
+            $params['input'] = $request->input();
+
             $artists = Artist::query();
             if ($request->filled('name')) {
                 $artists->where('name', 'LIKE', '%'.$request->name.'%');
             }
             $artists->orderBy('name', 'ASC');
-            $param['artists'] = $artists->paginate(50);
+            $params['artists'] = $artists->paginate(50);
         }
 
-        return view('manage.artist.index', $param);
+        return view('manage.artist.index', $params);
     }
 
     /**
@@ -35,9 +37,9 @@ class ManageArtistController extends Controller
      */
     public function create()
     {
-        $param = [];
+        $params = [];
 
-        return view('manage.artist.create', $param);
+        return view('manage.artist.create', $params);
     }
 
     /**
@@ -76,11 +78,11 @@ class ManageArtistController extends Controller
      */
     public function show(Artist $artist)
     {
-        $param = [
+        $params = [
             'artist' => $artist,
         ];
 
-        return view('manage.artist.show', $param);
+        return view('manage.artist.show', $params);
     }
 
     /**
@@ -91,11 +93,11 @@ class ManageArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        $param = [
+        $params = [
             'artist' => $artist,
         ];
 
-        return view('manage.artist.edit', $param);
+        return view('manage.artist.edit', $params);
     }
 
     /**

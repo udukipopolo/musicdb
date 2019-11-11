@@ -6,37 +6,37 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    アーティスト管理
+                    アルバム管理
                 </div>
                 <div class="card-body">
                     @include('layouts.parts.message')
 
-                    {{ Form::open(['route'=>['manage.artist.index'], 'method'=>'GET', 'class'=>'form-inline']) }}
-                        <label class="sr-only" form="name">アーティスト名</label>
-                        {{ Form::text('name', @$input['name'], ['class'=>'form-control', 'placeholder'=>'アーティスト名']) }}
+                    {{ Form::open(['route'=>['manage.album.index'], 'method'=>'GET', 'class'=>'form-inline']) }}
+                        <label class="sr-only" form="name">アルバムタイトル</label>
+                        {{ Form::text('title', @$input['title'], ['class'=>'form-control', 'placeholder'=>'アルバムタイトル']) }}
                         {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
-                        {{ Html::linkRoute('manage.artist.create', '新規登録', [], ['class'=>'btn btn-primary']) }}
+                        {{ Html::linkRoute('manage.album.create', '新規登録', [], ['class'=>'btn btn-primary']) }}
                     {{ Form::close() }}
                 </div>
             </div>
         </div>
 
-        @isset($artists)
+        @isset($albums)
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    アーティスト一覧
+                    アルバム一覧
                 </div>
                 <div class="card-body">
                     <div class="row">
-                    @foreach ($artists as $artist)
+                    @foreach ($albums as $album)
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        {{ Html::linkRoute('manage.artist.show', $artist->name, [$artist->id]) }}
+                        {{ Html::linkRoute('manage.album.show', $album->name, [$album->id]) }}
                     </div>
                     @endforeach
                     </div>
 
-                    {{ $artists->appends(Request::input())->links() }}
+                    {{ $albums->appends(Request::input())->links() }}
                 </div>
             </div>
         </div>

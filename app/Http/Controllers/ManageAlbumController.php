@@ -14,7 +14,20 @@ class ManageAlbumController extends Controller
      */
     public function index(Request $request)
     {
-        //
+        $params = [];
+
+        if (count($request->query()) > 0) {
+            $params['input'] = $request->input();
+
+            $albums = Album::query();
+            if ($request->filled('title')) {
+                $albums->where('title', 'LIKE', '%'.$request->title.'%');
+            }
+            $albums->orderBy('title', 'ASC');
+            $params['albums'] = $albums->paginate(50);
+        }
+
+        return view('manage.album.index', $params);
     }
 
     /**

@@ -121,6 +121,7 @@ class ManageArtistController extends Controller
 
         $artist->name = $request->name;
         $artist->belonging = $request->input('belonging', '');
+        $artist->save();
 
         return redirect()->route('manage.artist.show', $artist->id)->with('message', '更新しました。');
     }

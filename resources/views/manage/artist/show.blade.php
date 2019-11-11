@@ -6,13 +6,16 @@
         <div class="card">
             <div class="card-header">
                 アーティスト詳細
-                <div class="nav pull-right">
-                    <li>
-                        <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success"><i class="fa fa-pencil"></i></a>
                     </li>
-                </div>
+                </ul>
+                <div class="clearfix"></div>
             </div>
             <div class="card-body">
+                @include('layouts.parts.message')
+
                 <div class="form-group row">
                     {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">

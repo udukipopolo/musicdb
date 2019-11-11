@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('head')
-{{ Html::style('css/select2.min.js') }}
+{{ Html::style('css/select2.min.css') }}
 {{ Html::script('js/select2.min.js') }}
 <script>
 $('.select2').select2();

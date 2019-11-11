@@ -7,10 +7,9 @@
 $(document).ready(function(){
     $('.js-select2').select2()
         .on('change', (event) => {
-            console.log(event.currentTarget.textContent);
-            console.log(event.currentTarget.find(':selected'));
+            console.log($(this).text());
             let artist_id = event.target.value;
-            let artist_name = event.currentTarget.textContent;
+            let artist_name = event.target.textContent;
             if (artist_id != '') {
                 $('#album_artist_name').val(artist_name);
             } else {

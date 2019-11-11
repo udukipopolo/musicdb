@@ -42,7 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody id="track_list">
-                                @foreach($album->musics as $music)
+                                @foreach($album->musics->sortBy('track_no') as $music)
                                 <tr>
                                     <td>{{ $music->track_no }}</td>
                                     <td>{{ $music->title }}</td>

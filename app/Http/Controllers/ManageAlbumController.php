@@ -85,7 +85,7 @@ class ManageAlbumController extends Controller
             $album = Album::create([
                 'title' => $request->title,
                 'artist_id' => $artist->id,
-                'artist_name' => $artist->name,
+                'artist_name' => $request->artist_name,
             ]);
 
             foreach ($request->musics AS $no=>$title) {
@@ -142,7 +142,60 @@ class ManageAlbumController extends Controller
      */
     public function update(Request $request, Album $album)
     {
-        //
+        $request->validate(
+            [
+                'title' => 'required|max:255',
+                'artist_id' => '',
+                'artist_name' => 'required|max:255',
+                'musics' => 'array',
+                'musics.*' => 'max:255',
+            ],
+            [],
+            [
+                'title' => 'アルバムタイトル',
+                'artist_id' => '',
+                'artist_name' => 'アーティスト名',
+                'musics.*' => '楽曲名',
+            ]
+        );
+
+        \DB::transaction(function () use($request, &$album) {
+            $artist = Artist::find($request->input('artist_id'));
+            if (!$artist) {
+                $artist = Artist::create([
+                    'name' => $request->artist_name,
+                    'belonging' => '',
+                ]);
+            }
+
+            $album->title = $request->title;
+            $album->artist_id = $artist->id;
+            $album->artist_name = $request->artist_name;
+            $album->save();
+
+            foreach ($request->musics AS $no=>$title) {
+                $music = $album->musics()->where('track_no', $no)->first();
+                if (empty($title)) {
+                    if ($music) {
+                        $music->parts()->delete();
+                        $music->delete();
+                    }
+                } else {
+                    if ($music) {
+                        $music->title = $title;
+                        $music->save();
+                    } else {
+                        $album->musics()->create([
+                            'title' => $title,
+                            'track_no' => $no,
+                        ]);
+                    }
+                }
+            }
+
+        });
+
+        return redirect()->route('manage.album.show', $album)->with('message', 'アルバムを更新しました。');
     }
 
     /**

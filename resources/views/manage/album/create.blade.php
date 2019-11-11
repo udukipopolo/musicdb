@@ -17,7 +17,7 @@ $(document).ready(function(){
             }
         });
     $('#add_row').click(function() {
-        var track_no = $('#max_num').val() + 1;
+        var track_no = parseInt($('#max_num').val()) + 1;
 
         var row = '<tr><td>'+track_no+'</td><td><input class="form-control" name="musics['+track_no+']" type="text"></td></tr>';
 

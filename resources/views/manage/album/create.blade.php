@@ -16,16 +16,6 @@ $(document).ready(function(){
                 $('#album_artist_name').val('');
             }
         });
-    // $('#album_artist_id').change(function() {
-    //     console.log($(this).select2('data'));
-    //     let artist_id = $('option:selected').val();
-    //     let artist_name = $('option:selected').text();
-    //     if (artist_id != '') {
-    //         $('#album_artist_name').val(artist_name);
-    //     } else {
-    //         $('#album_artist_name').val('');
-    //     }
-    // });
 });
 </script>
 

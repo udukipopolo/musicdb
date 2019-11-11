@@ -59,16 +59,47 @@ class ManageAlbumController extends Controller
                 'title' => 'required|max:255',
                 'artist_id' => '',
                 'artist_name' => 'required|max:255',
+                'musics' => 'array',
+                'musics.*' => 'max:255',
             ],
             [],
             [
                 'title' => 'アルバムタイトル',
                 'artist_id' => '',
                 'artist_name' => 'アーティスト名',
+                'musics.*' => '楽曲名',
             ]
         );
 
-        return redirect()->route('manage.album.index');
+        $album = null;
+
+        \DB::transaction(function () use($request, &$album) {
+            $artist = Artist::find($request->input('artist_id'));
+            if (!$artist) {
+                $artist = Artist::create([
+                    'name' => $request->artist_name,
+                    'belonging' => '',
+                ]);
+            }
+
+            $album = Album::create([
+                'title' => $request->title,
+                'artist_id' => $artist->id,
+                'artist_name' => $artist->name,
+            ]);
+
+            foreach ($request->musics AS $no=>$title) {
+                if (empty($title)) {
+                    continue;
+                }
+                $album->musics()->create([
+                    'title' => $title,
+                    'track_no' => $no,
+                ]);
+            }
+        });
+
+        return redirect()->route('manage.album.show', $album)->with('message', 'アルバムを登録しました。');
     }
 
     /**
@@ -79,7 +110,11 @@ class ManageAlbumController extends Controller
      */
     public function show(Album $album)
     {
-        //
+        $params = [
+            'album' => $album,
+        ];
+
+        return view('manage.album.show', $params);
     }
 
     /**

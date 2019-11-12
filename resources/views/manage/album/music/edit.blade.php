@@ -55,7 +55,7 @@ $(document).ready(function(){
 
         $('#part_list').append(template);
 
-        $('#max_num').val(track_no);
+        $('#max_num').val(no);
 
         setSelect2();
     });

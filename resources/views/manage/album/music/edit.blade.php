@@ -105,8 +105,8 @@ $(document).ready(function(){
                             <tbody id="part_list">
                                 @php
                                 $parts = $music->parts;
-                                if (old('parts')) {
-                                    $max = count(old('parts'));
+                                if (old('add_artist_id')) {
+                                    $max = count(old('add_artist_id'));
                                 } elseif ($parts->count() > 0) {
                                     $max = 0;
                                 } else {

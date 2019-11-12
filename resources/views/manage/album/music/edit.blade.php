@@ -6,8 +6,8 @@
 <template id="add_row_template">
 <tr>
     <td>
-        {{ Form::select("template_artist_id", [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2', 'id'=>'template_artist']) }}
-        {{ Form::text("template_artist_name", null, ['class'=>'form-control', 'id'=>"template_artist_name"]) }}
+        {{ Form::select("template_artist_id", [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2', 'id'=>'id_template_artist']) }}
+        {{ Form::text("template_artist_name", null, ['class'=>'form-control', 'id'=>"id_template_artist_name"]) }}
     </td>
     <td>
         {{ Form::text("template_part_name", null, ['class'=>'form-control']) }}
@@ -34,24 +34,13 @@ $(document).ready(function(){
     $('#add_row').click(function() {
         var no = parseInt($('#max_num').val()) + 1;
 
-        var template = $('#add_row_template').clone();
+        var template = $('#add_row_template').clone().html();
 
-        template.find('select').each(function() {
-            this.name = 'add_artist_id['+no+']';
-            this.id = 'add_artist_'+no;
-        });
-        template.find('input').each(function() {
-            switch(this.name) {
-                case 'template_artist_name':
-                    this.name = 'add_artist_name['+no+']';
-                    this.id = 'add_artist_'+no+'_name';
-                    break;
-                case 'template_part_name':
-                    this.name = 'add_part_name['+no+']';
-                    break;
-            }
-        });
-
+        template = template.replace('template_artist_id', 'add_artist_id['+no+']')
+            .replace('id_template_artist', 'add_artist_'+no)
+            .replace('template_artist_name', 'add_artist_name['+no+']')
+            .replace('id_template_artist_name', 'add_artist_'+no+'_name')
+            .replace('template_part_name', 'add_part_name['+no+']');
 
         $('#part_list').append(template);
 

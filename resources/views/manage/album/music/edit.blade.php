@@ -72,7 +72,7 @@ $(document).ready(function(){
                 楽曲パート編集
             </div>
             <div class="card-body">
-                {{ Form::open(['route'=>['manage.album..musicupdate', $album->id, $music->id], 'method'=>'PUT', 'class'=>'']) }}
+                {{ Form::open(['route'=>['manage.album.musicupdate', $album->id, $music->id], 'method'=>'PUT', 'class'=>'']) }}
 
                 <div class="form-group row">
                     {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
@@ -128,7 +128,7 @@ $(document).ready(function(){
                                 @foreach ($parts as $part)
                                 <tr>
                                     <td>
-                                        {{ Form::select("edit_artist_id[".$part->id."]", [''=>'新規登録']+$artists->toArray(), $part->arist_id, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'$part->id), 'id'=>'edit_artist_'.$part->id]) }}
+                                        {{ Form::select("edit_artist_id[".$part->id."]", [''=>'新規登録']+$artists->toArray(), $part->arist_id, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'.$part->id), 'id'=>'edit_artist_'.$part->id]) }}
                                         {{ Form::text("edit_artist_name[".$part->id."]", $part->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_artist_name.'.$part->id), 'id'=>"edit_artist_{$part->id}_name"]) }}
                                     </td>
                                     <td>
@@ -140,7 +140,7 @@ $(document).ready(function(){
                                 @for($no = 1; $no <= $max; $no++)
                                 <tr>
                                     <td>
-                                        {{ Form::select("add_artist_id[{$no}]", [''=>'新規登録']+$artists->toArray(), old('add_artist_id.'.$no), ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'add_artist_id.'$no), 'id'=>'add_artist_'.$no]) }}
+                                        {{ Form::select("add_artist_id[{$no}]", [''=>'新規登録']+$artists->toArray(), old('add_artist_id.'.$no), ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'add_artist_id.'.$no), 'id'=>'add_artist_'.$no]) }}
                                         {{ Form::text("add_artist_name[{$no}]", old('add_artist_name.'.$no), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'add_artist_name.'.$no), 'id'=>"add_artist_{$no}_name"]) }}
                                     </td>
                                     <td>

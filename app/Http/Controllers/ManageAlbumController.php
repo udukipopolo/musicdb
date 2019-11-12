@@ -272,6 +272,9 @@ class ManageAlbumController extends Controller
             // 新規登録
             if ($request->filled('add_artist_name')) {
                 foreach($request->add_artist_name as $no=>$artist_name) {
+                    if (!$request->filled('add_artist_name.'.$no)) {
+                        continue;
+                    }
                     if ($request->filled('add_artist_id.'.$no)) {
                         $artist = Artist::find($request->input('add_artist_id.'.$no));
                     } else {

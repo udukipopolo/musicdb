@@ -72,7 +72,7 @@ $(document).ready(function(){
                 楽曲パート編集
             </div>
             <div class="card-body">
-                {{ Form::open(['route'=>['manage.album.musicupdate', $album->id, $music->id], 'method'=>'PUT', 'class'=>'']) }}
+                {{ Form::open(['route'=>['manage.album.music.update', $album->id, $music->id], 'method'=>'PUT', 'class'=>'']) }}
 
                 <div class="form-group row">
                     {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}

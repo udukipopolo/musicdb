@@ -251,10 +251,12 @@ class ManageAlbumController extends Controller
         );
 
         $validator->after(function($validator) use($request) {
-            foreach($request->edit_artist_id as $part_id=>$artist_id) {
-                if (empty($artist_id) && $request->filled('edit_artist_name.'.$part_id)) {
-                    if (Artist::where('name', $request->input('edit_artist_name.'.$part_id))->count() > 0) {
-                        $validator->errors()->add('edit_artist_name.'.$part_id, '同名のアーティストが登録されています。');
+            if ($request->filled('edit_artist_id')) {
+                foreach($request->edit_artist_id as $part_id=>$artist_id) {
+                    if (empty($artist_id) && $request->filled('edit_artist_name.'.$part_id)) {
+                        if (Artist::where('name', $request->input('edit_artist_name.'.$part_id))->count() > 0) {
+                            $validator->errors()->add('edit_artist_name.'.$part_id, '同名のアーティストが登録されています。');
+                        }
                     }
                 }
             }

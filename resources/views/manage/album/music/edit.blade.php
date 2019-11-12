@@ -6,11 +6,11 @@
 <template id="add_row_template">
 <tr>
     <td>
-        {{ Form::select("template_artist_id", [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2', 'id'=>'id_template_artist']) }}
-        {{ Form::text("template_artist_name", null, ['class'=>'form-control', 'id'=>"id_template_artist_name"]) }}
+        {{ Form::select("name_template_artist_id", [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2', 'id'=>'id_template_artist']) }}
+        {{ Form::text("name_template_artist_name", null, ['class'=>'form-control', 'id'=>"id_template_artist_name"]) }}
     </td>
     <td>
-        {{ Form::text("template_part_name", null, ['class'=>'form-control']) }}
+        {{ Form::text("name_template_part_name", null, ['class'=>'form-control']) }}
     </td>
 </tr>
 </template>
@@ -36,11 +36,11 @@ $(document).ready(function(){
 
         var template = $('#add_row_template').clone().html();
 
-        template = template.replace('template_artist_id', 'add_artist_id['+no+']')
+        template = template.replace('name_template_artist_id', 'add_artist_id['+no+']')
             .replace('id_template_artist', 'add_artist_'+no)
-            .replace('template_artist_name', 'add_artist_name['+no+']')
+            .replace('name_template_artist_name', 'add_artist_name['+no+']')
             .replace('id_template_artist_name', 'add_artist_'+no+'_name')
-            .replace('template_part_name', 'add_part_name['+no+']');
+            .replace('name_template_part_name', 'add_part_name['+no+']');
 
         $('#part_list').append(template);
 

@@ -231,5 +231,65 @@ class ManageAlbumController extends Controller
             abort(404);
         }
 
+        $request->validate(
+            [
+                'edit_artist_id' => '',
+                'edit_artist_name.*' => 'max:255',
+                'edit_part_name.*' => 'required_with:edit_artist_name.*|max:255',
+                'add_artist_id' => '',
+                'add_artist_name.*' => 'max:255',
+                'add_part_name.*' => 'required_with:add_artist_name.*|max:255',
+            ],
+            [],
+            [
+                'edit_artist_name.*' => 'アーティスト名',
+                'edit_part_name.*' => 'パート名',
+                'add_artist_name.*' => 'アーティスト名',
+                'add_part_name.*' => 'パート名',
+            ]
+        );
+
+        \DB::transaction(function () use($request, $album, $music) {
+            // 更新
+            foreach($music->parts as $part) {
+                if ($request->filled('edit_artist_name.'.$part->id)) {
+                    if ($request->filled('edit_artist_id.'.$part->id)) {
+                        $artist = Artist::find($request->input('edit_artist_id.'.$part->id));
+                    } else {
+                        $artist = Artist::create([
+                            'name' => $request->input('edit_artist_name.'.$part->id),
+                            'belonging' => '',
+                        ]);
+                    }
+                    $part->artist_id = $artist->id;
+                    $part->artist_name = $request->input('edit_artist_name.'.$part->id);
+                    $part->part_name = $request->input('edit_part_name.'.$part->id);
+                } else {
+                    $part->delete();
+                }
+            }
+
+            // 新規登録
+            if ($request->filled('add_artist_name')) {
+                foreach($request->add_artist_name as $no=>$artist_name) {
+                    if ($request->filled('add_artist_id.'.$no)) {
+                        $artist = Artist::find($request->input('add_artist_id.'.$no));
+                    } else {
+                        $artist = Artist::create([
+                            'name' => $request->input('add_artist_name.'.$no),
+                            'belonging' => '',
+                        ]);
+                    }
+                    $music->parts()->create([
+                        'artist_id' => $artist->id,
+                        'artist_name' => $request->input('add_artist_name.'.$no),
+                        'part_name' => $request->input('add_part_name.'.$no)
+                    ]);
+                }
+            }
+
+        });
+
+        return redirect()->route('manage.album.show', $album->id)->with('message', '更新しました。');
     }
 }

@@ -117,7 +117,7 @@ $(document).ready(function(){
                                 @foreach ($parts as $part)
                                 <tr>
                                     <td>
-                                        {{ Form::select("edit_artist_id[".$part->id."]", [''=>'新規登録']+$artists->toArray(), $part->arist_id, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'.$part->id), 'id'=>'edit_artist_'.$part->id]) }}
+                                        {{ Form::select("edit_artist_id[".$part->id."]", [''=>'新規登録']+$artists->toArray(), $part->artist_id, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'.$part->id), 'id'=>'edit_artist_'.$part->id]) }}
                                         {{ Form::text("edit_artist_name[".$part->id."]", $part->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_artist_name.'.$part->id), 'id'=>"edit_artist_{$part->id}_name"]) }}
                                         @include('layouts.parts.error_message', ['key'=>'edit_artist_name.'.$part->id])
                                     </td>

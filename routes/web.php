@@ -25,6 +25,8 @@ Route::get('search/artist', 'SearchArtistController@index')->name('search.artist
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'manage', 'as'=>'manage.'], function () {
         Route::resource('album', 'ManageAlbumController');
+        Route::get('album/{album}/music/{music}', 'ManageAlbumController@editMusic')->name('album.music.edit');
+        Route::put('album/{album}/music/{music}', 'ManageAlbumController@updateMusic')->name('album.music.update');
         Route::resource('artist', 'ManageArtistController');
     });
 });

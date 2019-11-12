@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\Music;
 use Illuminate\Http\Request;
 
 class ManageAlbumController extends Controller
@@ -207,5 +208,28 @@ class ManageAlbumController extends Controller
     public function destroy(Album $album)
     {
         //
+    }
+
+    public function editMusic(Album $album, Music $music)
+    {
+        if ($album->id != $music->album_id) {
+            abort(404);
+        }
+
+        $params = [
+            'album' => $album,
+            'music' => $music,
+            'artists' => Artist::orderBy('name', 'ASC')->get()->pluck('name', 'id'),
+        ];
+
+        return view('manage.album.music.edit', $params);
+    }
+
+    public function updateMusic(Request $request, Album $album, Music $music)
+    {
+        if ($album->id != $music->album_id) {
+            abort(404);
+        }
+
     }
 }

@@ -45,7 +45,7 @@
                                 @foreach($album->musics->sortBy('track_no') as $music)
                                 <tr>
                                     <td>{{ $music->track_no }}</td>
-                                    <td>{{ $music->title }}</td>
+                                    <td>{{ Html::linkRoute('manage.album.music.edit', $music->title, [$album->id, $music->id], []) }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

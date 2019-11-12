@@ -42,6 +42,10 @@ class SearchMusicController extends Controller
 
     public function show(Music $music)
     {
+        $params = [
+            'music' => $music,
+        ];
 
+        return view('search.music.show', $params);
     }
 }

@@ -115,7 +115,7 @@ $(document).ready(function(){
                             </thead>
                             <tbody id="part_list">
                                 @php
-                                $parts = $musics->parts;
+                                $parts = $music->parts;
                                 if (old('parts')) {
                                     $max = count(old('parts'));
                                 } elseif ($parts->count() > 0) {

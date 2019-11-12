@@ -142,6 +142,7 @@ $(document).ready(function(){
                                 </tr>
                                 @endfor
                             </tbody>
+                            <p class="help-block">※新規登録で同一人物を一度に複数登録すると、別人物として登録されてしまうため、同じ人が複数パートに所属する場合はあらかじめアーティスト管理で登録するか、一人ずつ更新ボタンを押して登録してください。</p>
                         </table>
                         {{ Form::hidden('max_num', $max, ['id'=>'max_num']) }}
                         <button type="button" id="add_row" class="btn btn-secondary">行追加</button>

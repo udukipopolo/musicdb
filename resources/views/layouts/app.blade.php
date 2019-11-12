@@ -44,6 +44,8 @@
                                 検索 <span class="caret"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                {{ Html::linkRoute('search.music.index', '楽曲検索', [], ['class'=>'dropdown-item']) }}
+                                {{ Html::linkRoute('search.artist.index', 'アーティスト検索', [], ['class'=>'dropdown-item']) }}
                             </div>
                         </li>
                     </ul>

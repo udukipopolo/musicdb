@@ -20,6 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('search/music', 'SearchMusicController@index')->name('search.music.index');
+Route::get('search/music/{music}', 'SearchMusicController@shwo')->name('search.music.show');
 Route::get('search/artist', 'SearchArtistController@index')->name('search.artist.index');
 
 Route::group(['middleware' => 'auth'], function () {

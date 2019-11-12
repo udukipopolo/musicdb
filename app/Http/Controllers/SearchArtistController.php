@@ -13,18 +13,20 @@ class SearchArtistController extends Controller
         $input = $request->input();
         $params['input'] = $input;
 
-        $artists = Artist::query();
+        if (count($request->query()) > 0) {
+            $artists = Artist::query();
 
-        if ($request->filled('artist_name')) {
-            $artists->where('name', 'LIKE', '%'.$request->artist_name.'%')
-                ->orWhereHas('parts', function($parts) use($request) {
-                    $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%');
-                });
+            if ($request->filled('artist_name')) {
+                $artists->where('name', 'LIKE', '%'.$request->artist_name.'%')
+                    ->orWhereHas('parts', function($parts) use($request) {
+                        $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%');
+                    });
+            }
+
+            $artists->orderBy('name', 'ASC');
+
+            $params['artists'] = $artists->paginate(50);
         }
-
-        $artists->orderBy('name', 'ASC');
-
-        $params['artists'] = $artists->paginate(50);
 
         return view('search.artist.index', $params);
     }

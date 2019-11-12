@@ -15,7 +15,7 @@ class CreateArtistsTable extends Migration
     {
         Schema::create('artists', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->comment('アーティスト名');
+            $table->string('name')->unique()->comment('アーティスト名');
             $table->text('belonging')->comment('所属');
             $table->timestamps();
         });

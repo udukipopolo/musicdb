@@ -231,7 +231,8 @@ class ManageAlbumController extends Controller
             abort(404);
         }
 
-        $request->validate(
+        $validator = \Validator::make(
+            $request->all(),
             [
                 'edit_artist_id' => '',
                 'edit_artist_name.*' => 'max:255',
@@ -248,6 +249,27 @@ class ManageAlbumController extends Controller
                 'add_part_name.*' => 'パート名',
             ]
         );
+
+        $validator->after(function($validator) use($request) {
+            foreach($request->edit_artist_id as $part_id=>$artist_id) {
+                if (empty($artist_id) && $request->filled('edit_artist_name.'.$part_id)) {
+                    if (Artist::where('name', $request->input('edit_artist_name.'.$part_id))->count() > 0) {
+                        $validator->errors()->add('edit_artist_name.'.$part_id, '同名のアーティストが登録されています。');
+                    }
+                }
+            }
+            foreach($request->add_artist_id as $no=>$artist_id) {
+                if (empty($artist_id) && $request->filled('add_artist_name.'.$no)) {
+                    if (Artist::where('name', $request->input('add_artist_name.'.$no))->count() > 0) {
+                        $validator->errors()->add('add_artist_name.'.$no, '同名のアーティストが登録されています。');
+                    }
+                }
+            }
+        });
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
 
         \DB::transaction(function () use($request, $album, $music) {
             // 更新

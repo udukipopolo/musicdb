@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ManageArtistController extends Controller
 {
@@ -52,7 +53,7 @@ class ManageArtistController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required|max:255',
+                'name' => 'required|max:255|unique:artists,name',
                 'belonging' => '',
             ],
             [],
@@ -111,7 +112,11 @@ class ManageArtistController extends Controller
     {
         $request->validate(
             [
-                'name' => 'required|max:255',
+                'name' => [
+                    'required',
+                    'max:255',
+                    Rule::unique('artists', 'name')->ignore($artist->id),
+                ],
                 'belonging' => '',
             ],
             [],

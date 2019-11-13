@@ -89,7 +89,7 @@ class ManageAlbumController extends Controller
                 'title' => $request->title,
                 'artist_id' => $artist->id,
                 'artist_name' => $request->artist_name,
-                'description' => $request->description,
+                'description' => ($request->filled('description')) ? $request->description : '',
             ]);
 
             foreach ($request->musics AS $no=>$title) {
@@ -177,7 +177,7 @@ class ManageAlbumController extends Controller
             $album->title = $request->title;
             $album->artist_id = $artist->id;
             $album->artist_name = $request->artist_name;
-            $album->description = $request->description;
+            $album->description = ($request->filled('description')) ? $request->description : '';
             $album->save();
 
             foreach ($request->musics AS $no=>$title) {

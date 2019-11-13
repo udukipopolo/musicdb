@@ -280,9 +280,8 @@ class ManageAlbumController extends Controller
                     if ($request->filled('edit_artist_id.'.$part->id)) {
                         $artist = Artist::find($request->input('edit_artist_id.'.$part->id));
                     } else {
-                        $artist = Artist::create([
+                        $artist = Artist::firstOrCreate([
                             'name' => $request->input('edit_artist_name.'.$part->id),
-                            'belonging' => '',
                         ]);
                     }
                     $part->artist_id = $artist->id;
@@ -302,9 +301,8 @@ class ManageAlbumController extends Controller
                     if ($request->filled('add_artist_id.'.$no)) {
                         $artist = Artist::find($request->input('add_artist_id.'.$no));
                     } else {
-                        $artist = Artist::create([
+                        $artist = Artist::firstOrCreate([
                             'name' => $request->input('add_artist_name.'.$no),
-                            'belonging' => '',
                         ]);
                     }
                     $music->parts()->create([

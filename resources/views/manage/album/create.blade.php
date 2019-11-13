@@ -96,7 +96,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('description', '詳細・アルバムに携わった人等', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('description', null, ['class'=>'form-control', 'rows'=>'6']) }}
+                        {{ Form::textarea('description', null, ['class'=>'form-control', 'rows'=>'6']) }}
                     </div>
                 </div>
 

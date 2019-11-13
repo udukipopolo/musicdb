@@ -289,6 +289,7 @@ class ManageAlbumController extends Controller
                     $part->artist_id = $artist->id;
                     $part->artist_name = $request->input('edit_artist_name.'.$part->id);
                     $part->part_name = $request->input('edit_part_name.'.$part->id);
+                    $part->save();
                 } else {
                     $part->delete();
                 }

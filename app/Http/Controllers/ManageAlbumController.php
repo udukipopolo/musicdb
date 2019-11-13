@@ -62,6 +62,7 @@ class ManageAlbumController extends Controller
                 'artist_name' => 'required|max:255',
                 'musics' => 'array',
                 'musics.*' => 'max:255',
+                'description' => '',
             ],
             [],
             [
@@ -69,6 +70,7 @@ class ManageAlbumController extends Controller
                 'artist_id' => '',
                 'artist_name' => 'アーティスト名',
                 'musics.*' => '楽曲名',
+                'description' => '詳細・アルバムに携わった人等',
             ]
         );
 
@@ -87,6 +89,7 @@ class ManageAlbumController extends Controller
                 'title' => $request->title,
                 'artist_id' => $artist->id,
                 'artist_name' => $request->artist_name,
+                'description' => $request->description,
             ]);
 
             foreach ($request->musics AS $no=>$title) {
@@ -150,6 +153,7 @@ class ManageAlbumController extends Controller
                 'artist_name' => 'required|max:255',
                 'musics' => 'array',
                 'musics.*' => 'max:255',
+                'description' => '',
             ],
             [],
             [
@@ -157,6 +161,7 @@ class ManageAlbumController extends Controller
                 'artist_id' => '',
                 'artist_name' => 'アーティスト名',
                 'musics.*' => '楽曲名',
+                'description' => '詳細・アルバムに携わった人等',
             ]
         );
 
@@ -172,6 +177,7 @@ class ManageAlbumController extends Controller
             $album->title = $request->title;
             $album->artist_id = $artist->id;
             $album->artist_name = $request->artist_name;
+            $album->description = $request->description;
             $album->save();
 
             foreach ($request->musics AS $no=>$title) {

@@ -35,6 +35,7 @@ class SearchArtistController extends Controller
     {
         $params = [
             'artist' => $artist,
+            'parts' => $artist->parts()->paginate(20),
         ];
 
         return view('search.artist.show', $params);

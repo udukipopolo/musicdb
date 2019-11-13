@@ -9,9 +9,35 @@
                     詳細
                 </div>
                 <div class="card-body">
-                    <div class="row">
+                    <h2>{{ $artist->name }}</h2>
 
+                    <h3>担当楽曲一覧</h3>
+
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>アルバム</th>
+                                    <th>曲名</th>
+                                    <th>名義</th>
+                                    <th>パート</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($parts as $part)
+                                <tr>
+                                    <td>{{ $part->music->album->title }}</td>
+                                    <td>{{ Html::linkRoute('search.music.show', $part->music->title, [$part->music->id]) }}</td>
+                                    <td>{{ $part->artist_name }}</td>
+                                    <td>{{ $part->part_name }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
+
+                    {{ $parts->appends(Request::input())->links() }}
+
                 </div>
             </div>
         </div>

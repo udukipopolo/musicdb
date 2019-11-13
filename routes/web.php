@@ -30,5 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('album/{album}/music/{music}', 'ManageAlbumController@editMusic')->name('album.music.edit');
         Route::put('album/{album}/music/{music}', 'ManageAlbumController@updateMusic')->name('album.music.update');
         Route::resource('artist', 'ManageArtistController');
+
+        Route::get('bulk/regist', 'ManageBulkRegistrationController@index')->name('bulk.regist.index');
+        Route::post('bulk/regist/csv', 'ManageBulkRegistrationController@csv')->name('bulk.regist.csv');
     });
 });

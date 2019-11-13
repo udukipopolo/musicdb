@@ -10,6 +10,7 @@ class Album extends Model
         'title',
         'artist_id',
         'artist_name',
+        'description',
     ];
 
     public function musics() {

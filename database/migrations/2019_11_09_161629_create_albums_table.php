@@ -18,6 +18,7 @@ class CreateAlbumsTable extends Migration
             $table->string('title')->comment('アルバムタイトル');
             $table->bigInteger('artist_id')->unsigned()->index()->comment('アーティストID');
             $table->string('artist_name')->comment('アーティスト名');
+            $table->text('description')->comment('詳細・アルバムスタッフ等');
             $table->timestamps();
         });
     }

@@ -260,10 +260,12 @@ class ManageAlbumController extends Controller
                     }
                 }
             }
-            foreach($request->add_artist_id as $no=>$artist_id) {
-                if (empty($artist_id) && $request->filled('add_artist_name.'.$no)) {
-                    if (Artist::where('name', $request->input('add_artist_name.'.$no))->count() > 0) {
-                        $validator->errors()->add('add_artist_name.'.$no, '同名のアーティストが登録されています。');
+            if ($request->filled('add_artist_id')) {
+                foreach($request->add_artist_id as $no=>$artist_id) {
+                    if (empty($artist_id) && $request->filled('add_artist_name.'.$no)) {
+                        if (Artist::where('name', $request->input('add_artist_name.'.$no))->count() > 0) {
+                            $validator->errors()->add('add_artist_name.'.$no, '同名のアーティストが登録されています。');
+                        }
                     }
                 }
             }

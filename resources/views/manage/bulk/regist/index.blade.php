@@ -14,10 +14,10 @@
                     <h3>CSVアップロード</h3>
                     {{ Form::open(['route'=>['manage.bulk.regist.csv'], 'method'=>'POST', 'class'=>'form-inline']) }}
                         <div class="form-group">
-                        {{ Form::file('csv') }}
+                        {{ Form::file('csv_file') }}
                         </div>
                         {{ Form::submit('送信', ['class'=>'form-control']) }}
-                        @include('layouts.parts.error_message', ['key'=>'csv'])
+                        @include('layouts.parts.error_message', ['key'=>'csv_file'])
                     {{ Form::close() }}
                 </div>
             </div>

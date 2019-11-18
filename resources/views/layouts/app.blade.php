@@ -70,7 +70,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     {{ Html::linkRoute('manage.album.index', 'アルバム管理', [], ['class'=>'dropdown-item']) }}
                                     {{ Html::linkRoute('manage.artist.index', 'アーティスト管理', [], ['class'=>'dropdown-item']) }}
-                                    {{ Html::linkRoute('bulk.regist.index', '一括登録', [], ['class'=>'dropdown-item']) }}
+                                    {{ Html::linkRoute('manage.bulk.regist.index', '一括登録', [], ['class'=>'dropdown-item']) }}
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

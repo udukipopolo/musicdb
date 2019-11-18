@@ -96,12 +96,17 @@ class ManageBulkRegistrationController extends Controller
                         }
 
                         // パート
-                        $music->parts()->create([
-                            'artist_id' => $part_artist->id,
-                            'artist_name' => $row->get(7),
-                            'part_name' => $row->get(5),
-                        ]);
-
+                        $part = Part::where('artist_id', $part_artist->id)
+                            ->where('artist_name', $row->get(7))
+                            ->where('part_name', $row->get(5))
+                            ->first();
+                        if (!$part) {
+                            $music->parts()->create([
+                                'artist_id' => $part_artist->id,
+                                'artist_name' => $row->get(7),
+                                'part_name' => $row->get(5),
+                            ]);
+                        }
                     }
 
                     $row_count++;

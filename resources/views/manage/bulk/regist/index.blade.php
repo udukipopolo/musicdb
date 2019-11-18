@@ -12,9 +12,10 @@
                     @include('layouts.parts.message')
 
                     <h3>CSVアップロード</h3>
-                    {{ Form::open(['route'=>['manage.bulk.regist.csv'], 'method'=>'POST', 'class'=>'form-inline']) }}
+                    {{ Form::open(['route'=>['manage.bulk.regist.csv'], 'method'=>'POST', 'class'=>'form-inline', 'files'=>true]) }}
                         <div class="form-group">
                         {{ Form::file('csv_file', ['class'=>'form-control-file'.ViewUtil::hasErrorClass($errors, 'csv_file')]) }}
+                        <p class="help-block">※文字エンコーディングはUTF-8にしてください。</p>
                         @include('layouts.parts.error_message', ['key'=>'csv_file'])
                         </div>
                         {{ Form::submit('送信', ['class'=>'form-control']) }}

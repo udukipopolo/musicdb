@@ -213,7 +213,13 @@ class ManageAlbumController extends Controller
      */
     public function destroy(Album $album)
     {
-        //
+        foreach($album->musics as $music) {
+            $music->parts()->delete();
+            $music->delete();
+        }
+        $album->delete();
+
+        return redirect()->route('manage.album.index')->with('message', 'アルバム情報を削除しました。');
     }
 
     public function editMusic(Album $album, Music $music)

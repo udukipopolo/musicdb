@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
 use App\Models\Music;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,16 @@ class SearchMusicController extends Controller
             }
 
             if ($request->filled('artist_name')) {
-                $musics->whereHas('parts', function($parts) use($request) {
+                $artists = Artist::where('name', 'LIKE', '%'.$request->artist_name.'%')
+                    ->get()
+                    ->pluck('id');
+                $musics->whereHas('parts', function($parts) use($request, $artists) {
                     $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%')
-                        ->orWhereHas('artist', function($artist) use($request) {
-                            $artist->where('name', 'LIKE', '%'.$request->artist_name.'%');
-                        });
+                        ->orWhereIn('artist_id', $artists);
+                })
+                ->orWhereHas('album', function($album) use($request, $artists) {
+                    $album->where('artist_name', 'LIKE', '%'.$request->artist_name.'%')
+                        ->orWhereIn('artist_id', $artists);
                 });
             }
 

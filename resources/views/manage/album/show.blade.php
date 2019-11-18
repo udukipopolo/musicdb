@@ -9,8 +9,15 @@
         <div class="card">
             <div class="card-header">
                 アルバム詳細
-                <div class="btn-group float-right" role="group">
-                    <a href="{{ route('manage.album.edit', [$album->id]) }}" class="btn btn-success">編集</a>
+                <div class="btn-toolbar float-right" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('manage.album.edit', [$album->id]) }}" class="btn btn-success">編集</a>
+                    </div>
+                    <div class="btn-group" role="group">
+                        {{ Form::open(['route'=>['manage.album.destroy', $album->id], 'method'=>'DELETE', 'onsubmit'=>'return confirm("アルバムを削除しますか？");']) }}
+                            {{ Form::submit('削除', ['class'=>'btn btn-danger']) }}
+                        {{ Form::close() }}
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>

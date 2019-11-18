@@ -26,7 +26,7 @@
                 <div class="form-group row">
                     {{ Form::label('belonging', '所属事務所', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'cols'=>'6', 'readonly']) }}
+                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
                     </div>
                 </div>
 

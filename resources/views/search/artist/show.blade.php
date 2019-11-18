@@ -14,7 +14,7 @@
                     <h3>所属事務所</h3>
 
                     <div class="col-md-12">
-                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'cols'=>'4', 'readonly']) }}
+                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'rows'=>'4', 'readonly']) }}
                     </div>
 
 

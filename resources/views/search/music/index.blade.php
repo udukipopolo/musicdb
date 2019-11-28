@@ -29,6 +29,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
+                                {{ Html::linkRoute('search.music.index', 'クリア', [], ['class'=>'btn btn-light']) }}
                             </div>
                         </div>
                     {{ Form::close() }}

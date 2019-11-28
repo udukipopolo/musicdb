@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Music;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ManageAlbumController extends Controller
 {
@@ -57,7 +58,13 @@ class ManageAlbumController extends Controller
     {
         $request->validate(
             [
-                'title' => 'required|max:255',
+                'title' => [
+                    'required',
+                    'max:255',
+                    Rule::unique('albums')->where(function($query) use($request) {
+                        return $query->where('artist_name', $request->artist_name);
+                    }),
+                ],
                 'artist_id' => '',
                 'artist_name' => 'required|max:255',
                 'musics' => 'array',
@@ -148,7 +155,13 @@ class ManageAlbumController extends Controller
     {
         $request->validate(
             [
-                'title' => 'required|max:255',
+                'title' => [
+                    'required',
+                    'max:255',
+                    Rule::unique('albums')->where(function($query) use($request) {
+                        return $query->where('artist_name', $request->artist_name);
+                    })->ignore($album->id),
+                ],
                 'artist_id' => '',
                 'artist_name' => 'required|max:255',
                 'musics' => 'array',

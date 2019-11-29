@@ -43,7 +43,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('title', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'title')]) }}
+                        {{ Form::text('title', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'title'), 'placeholder'=>'Q-MHz']) }}
                         @include('layouts.parts.error_message', ['key'=>'title'])
                     </div>
                 </div>
@@ -52,10 +52,12 @@ $(document).ready(function(){
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
                         {{ Form::select('artist_id', [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist']) }}
+                        <span class="help-block">※登録済みのアーティストはこちらから選択</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
                     </div>
                     <div class="col-md-4">
-                        {{ Form::text('artist_name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name']) }}
+                        {{ Form::text('artist_name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name', 'placeholder'=>'Q-MHz']) }}
+                        <span class="help-block">※別名義で登録したい場合は、こちらを編集</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_name'])
                     </div>
                 </div>
@@ -82,7 +84,7 @@ $(document).ready(function(){
                                 <tr>
                                     <td>{{ $no }}</td>
                                     <td>
-                                        {{ Form::text("musics[{$no}]", old('musics.'.$no), ['class'=>'form-control']) }}
+                                        {{ Form::text("musics[{$no}]", old('musics.'.$no), ['class'=>'form-control']+(($no==1) ? ['placeholder'=>'LiVE DiVE MHz!!'] : [])) }}
                                     </td>
                                 </tr>
                                 @endfor

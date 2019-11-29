@@ -13,7 +13,7 @@
                 <div class="form-group row">
                     {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'name')]) }}
+                        {{ Form::text('name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'name'), 'placeholder'=>'Q-MHz']) }}
                         @include('layouts.parts.error_message', ['key'=>'name'])
                     </div>
                 </div>

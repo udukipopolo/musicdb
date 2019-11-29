@@ -162,8 +162,8 @@ class ManageAlbumController extends Controller
                         return $query->where('artist_name', $request->artist_name);
                     })->ignore($album->id),
                 ],
-                'artist_id' => '',
-                'artist_name' => 'required|max:255',
+                'artist_id' => 'required|max:255',
+                'artist_name' => 'max:255',
                 'musics' => 'array',
                 'musics.*' => 'max:255',
                 'description' => '',
@@ -171,15 +171,15 @@ class ManageAlbumController extends Controller
             [],
             [
                 'title' => 'アルバムタイトル',
-                'artist_id' => '',
-                'artist_name' => 'アーティスト名',
+                'artist_id' => 'アーティスト名',
+                'artist_name' => '別名義',
                 'musics.*' => '楽曲名',
                 'description' => '詳細・アルバムに携わった人等',
             ]
         );
 
         \DB::transaction(function () use($request, &$album) {
-            $artist = Artist::find($request->input('artist_id'));
+            $artist = Artist::whre('name', $request->input('artist_id'))->first();
             if (!$artist) {
                 $artist = Artist::create([
                     'name' => $request->artist_name,

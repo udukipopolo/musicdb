@@ -147,4 +147,13 @@ class ManageArtistController extends Controller
 
         return redirect()->route('manage.artist.index')->with('message', 'アーティストを削除しました。');
     }
+
+    public function apiArtistList(Request $request)
+    {
+        $artists = Artist::query();
+        if ($request->filed('q')) {
+            $artists->where('name', 'LIKE', '%'.$request->q.'%');
+        }
+        return $artists->get()->pluck('name', 'id')->toJson();
+    }
 }

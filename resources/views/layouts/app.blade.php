@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     {{ Html::script('js/bootstrap.min.js') }}
+    {{ Html::script('js/jquery.easy-autocomplete.min.js') }}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,6 +21,8 @@
 
     <!-- Styles -->
     {{ Html::style('css/bootstrap.min.css') }}
+    {{ Html::style('css/easy-autocomplete.min.css') }}
+    {{ Html::style('css/easy-autocomplete.themes.min.css') }}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 @yield('head')

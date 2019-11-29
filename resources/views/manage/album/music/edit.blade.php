@@ -132,7 +132,7 @@ $(document).ready(function(){
                                 @for($no = 1; $no <= $max; $no++)
                                 <tr>
                                     <td>
-                                        {{ Form::select("add_artist_id[{$no}]", old('add_artist_id.'.$no), ['class'=>'form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'add_artist_id.'.$no), 'id'=>'add_artist_'.$no]) }}
+                                        {{ Form::text("add_artist_id[{$no}]", old('add_artist_id.'.$no), ['class'=>'form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'add_artist_id.'.$no), 'id'=>'add_artist_'.$no]) }}
                                         {{ Form::text("add_artist_name[{$no}]", old('add_artist_name.'.$no), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'add_artist_name.'.$no), 'id'=>"add_artist_{$no}_name"]) }}
                                         @include('layouts.parts.error_message', ['key'=>'add_artist_name.'.$no])
                                     </td>

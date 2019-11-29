@@ -6,10 +6,10 @@
 <template id="add_row_template">
 <tr>
     <td>
-        {{ Form::text("name_template_artist_id", null, ['class'=>'col-md-6 form-control js-autocomplete', 'id'=>'id_template_artist']) }}
+        {{ Form::text("name_template_artist_id", null, ['class'=>'form-control js-autocomplete', 'id'=>'id_template_artist']) }}
     </td>
     <td>
-        {{ Form::text("name_template_artist_name", null, ['class'=>'col-md-6 form-control', 'id'=>"id_template_artist_name"]) }}
+        {{ Form::text("name_template_artist_name", null, ['class'=>'form-control', 'id'=>"id_template_artist_name"]) }}
     </td>
     <td>
         {{ Form::text("name_template_part_name", null, ['class'=>'form-control']) }}
@@ -121,11 +121,11 @@ $(document).ready(function(){
                                 @foreach ($parts as $part)
                                 <tr>
                                     <td>
-                                        {{ Form::text("edit_artist_id[".$part->id."]", $part->artist->name, ['class'=>'col-md-6 form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'.$part->id), 'id'=>'edit_artist_'.$part->id]) }}
+                                        {{ Form::text("edit_artist_id[".$part->id."]", $part->artist->name, ['class'=>'form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'.$part->id), 'id'=>'edit_artist_'.$part->id]) }}
                                         @include('layouts.parts.error_message', ['key'=>'edit_artist_id.'.$part->id])
                                     </td>
                                     <td>
-                                        {{ Form::text("edit_artist_name[".$part->id."]", $part->artist_name, ['class'=>'col-md-6 form-control'.ViewUtil::hasErrorClass($errors, 'edit_artist_name.'.$part->id), 'id'=>"edit_artist_{$part->id}_name"]) }}
+                                        {{ Form::text("edit_artist_name[".$part->id."]", $part->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_artist_name.'.$part->id), 'id'=>"edit_artist_{$part->id}_name"]) }}
                                         @include('layouts.parts.error_message', ['key'=>'edit_artist_name.'.$part->id])
                                     </td>
                                     <td>
@@ -138,11 +138,11 @@ $(document).ready(function(){
                                 @for($no = 1; $no <= $max; $no++)
                                 <tr>
                                     <td>
-                                        {{ Form::text("add_artist_id[{$no}]", old('add_artist_id.'.$no), ['class'=>'col-md-6 form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'add_artist_id.'.$no), 'id'=>'add_artist_'.$no]) }}
+                                        {{ Form::text("add_artist_id[{$no}]", old('add_artist_id.'.$no), ['class'=>'form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'add_artist_id.'.$no), 'id'=>'add_artist_'.$no]) }}
                                         @include('layouts.parts.error_message', ['key'=>'add_artist_id.'.$no])
                                     </td>
                                     <td>
-                                        {{ Form::text("add_artist_name[{$no}]", old('add_artist_name.'.$no), ['class'=>'col-md-6 form-control'.ViewUtil::hasErrorClass($errors, 'add_artist_name.'.$no), 'id'=>"add_artist_{$no}_name"]) }}
+                                        {{ Form::text("add_artist_name[{$no}]", old('add_artist_name.'.$no), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'add_artist_name.'.$no), 'id'=>"add_artist_{$no}_name"]) }}
                                         @include('layouts.parts.error_message', ['key'=>'add_artist_name.'.$no])
                                     </td>
                                     <td>

@@ -87,7 +87,7 @@ class ManageAlbumController extends Controller
             $artist = Artist::where('name', $request->input('artist_id'))->first();
             if (!$artist) {
                 $artist = Artist::create([
-                    'name' => $request->artist_name,
+                    'name' => $request->artist_id,
                     'belonging' => '',
                 ]);
             }
@@ -188,7 +188,7 @@ class ManageAlbumController extends Controller
             $artist = Artist::where('name', $request->input('artist_id'))->first();
             if (!$artist) {
                 $artist = Artist::create([
-                    'name' => $request->artist_name,
+                    'name' => $request->artist_id,
                     'belonging' => '',
                 ]);
             }

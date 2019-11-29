@@ -92,7 +92,7 @@ class ManageAlbumController extends Controller
                 ]);
             }
 
-            if ($request->filled('artsit_name')) {
+            if ($request->filled('artist_name')) {
                 $artist_name = $request->artist_name;
             } else {
                 $artist_name = $artist->name;
@@ -193,7 +193,7 @@ class ManageAlbumController extends Controller
                 ]);
             }
 
-            if ($request->filled('artsit_name')) {
+            if ($request->filled('artist_name')) {
                 $artist_name = $request->artist_name;
             } else {
                 $artist_name = $artist->name;

@@ -98,7 +98,7 @@ $(document).ready(function(){
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>アーティスト名</th>
+                                    <th>アーティスト名 / 表示名(別名義)</th>
                                     <th>パート</th>
                                 </tr>
                             </thead>

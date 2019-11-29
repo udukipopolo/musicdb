@@ -151,9 +151,10 @@ class ManageArtistController extends Controller
     public function apiArtistList(Request $request)
     {
         $artists = Artist::query();
+        $artists->select(['name', 'id']);
         if ($request->filled('q')) {
             $artists->where('name', 'LIKE', '%'.$request->q.'%');
         }
-        return $artists->get()->pluck('name', 'id')->toJson();
+        return $artists->get()->toJson();
     }
 }

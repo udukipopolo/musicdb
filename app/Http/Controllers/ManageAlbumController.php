@@ -271,22 +271,25 @@ class ManageAlbumController extends Controller
         $validator = \Validator::make(
             $request->all(),
             [
-                'edit_artist_id' => '',
+                'edit_artist_id' => 'max:255',
                 'edit_artist_name.*' => 'max:255',
                 'edit_part_name.*' => 'required_with:edit_artist_name.*|max:255',
-                'add_artist_id' => '',
+                'add_artist_id' => 'max:255',
                 'add_artist_name.*' => 'max:255',
                 'add_part_name.*' => 'required_with:add_artist_name.*|max:255',
             ],
             [],
             [
-                'edit_artist_name.*' => 'アーティスト名',
+                'edit_artist_id.*' => 'アーティスト名',
+                'edit_artist_name.*' => '別名義',
                 'edit_part_name.*' => 'パート名',
-                'add_artist_name.*' => 'アーティスト名',
+                'add_artist_id.*' => 'アーティスト名',
+                'add_artist_name.*' => '別名義',
                 'add_part_name.*' => 'パート名',
             ]
         );
 
+        /*
         $validator->after(function($validator) use($request) {
             if ($request->filled('edit_artist_id')) {
                 foreach($request->edit_artist_id as $part_id=>$artist_id) {
@@ -307,6 +310,7 @@ class ManageAlbumController extends Controller
                 }
             }
         });
+        */
 
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
@@ -315,16 +319,19 @@ class ManageAlbumController extends Controller
         \DB::transaction(function () use($request, $album, $music) {
             // 更新
             foreach($music->parts as $part) {
-                if ($request->filled('edit_artist_name.'.$part->id)) {
-                    if ($request->filled('edit_artist_id.'.$part->id)) {
-                        $artist = Artist::find($request->input('edit_artist_id.'.$part->id));
+                if ($request->filled('edit_artist_id.'.$part->id)) {
+                    $artist = Artist::firstOrCreate([
+                        'name' => $request->input('edit_artist_id.'.$part->id),
+                    ]);
+
+                    if ($request->filled('edit_artist_name.'.$part->id)) {
+                        $artist_name = $request->input('edit_artist_name.'.$part->id);
                     } else {
-                        $artist = Artist::firstOrCreate([
-                            'name' => $request->input('edit_artist_name.'.$part->id),
-                        ]);
+                        $artist_name = $artist->name;
                     }
+
                     $part->artist_id = $artist->id;
-                    $part->artist_name = $request->input('edit_artist_name.'.$part->id);
+                    $part->artist_name = $artist_name;
                     $part->part_name = $request->input('edit_part_name.'.$part->id);
                     $part->save();
                 } else {
@@ -335,19 +342,23 @@ class ManageAlbumController extends Controller
             // 新規登録
             if ($request->filled('add_artist_name')) {
                 foreach($request->add_artist_name as $no=>$artist_name) {
-                    if (!$request->filled('add_artist_name.'.$no)) {
+                    if (!$request->filled('add_artist_id.'.$no)) {
                         continue;
                     }
-                    if ($request->filled('add_artist_id.'.$no)) {
-                        $artist = Artist::find($request->input('add_artist_id.'.$no));
+
+                    $artist = Artist::firstOrCreate([
+                        'name' => $request->input('add_artist_id.'.$no),
+                    ]);
+
+                    if ($request->filled('add_artist_name.'.$no)) {
+                        $artist_name = $request->input('add_artist_name.'.$no);
                     } else {
-                        $artist = Artist::firstOrCreate([
-                            'name' => $request->input('add_artist_name.'.$no),
-                        ]);
+                        $artist_name = $artist->name;
                     }
+
                     $music->parts()->create([
                         'artist_id' => $artist->id,
-                        'artist_name' => $request->input('add_artist_name.'.$no),
+                        'artist_name' => $artist_name,
                         'part_name' => $request->input('add_part_name.'.$no)
                     ]);
                 }

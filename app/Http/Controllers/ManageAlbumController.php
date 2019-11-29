@@ -84,7 +84,7 @@ class ManageAlbumController extends Controller
         $album = null;
 
         \DB::transaction(function () use($request, &$album) {
-            $artist = Artist::whre('name', $request->input('artist_id'))->first();
+            $artist = Artist::where('name', $request->input('artist_id'))->first();
             if (!$artist) {
                 $artist = Artist::create([
                     'name' => $request->artist_name,
@@ -185,7 +185,7 @@ class ManageAlbumController extends Controller
         );
 
         \DB::transaction(function () use($request, &$album) {
-            $artist = Artist::whre('name', $request->input('artist_id'))->first();
+            $artist = Artist::where('name', $request->input('artist_id'))->first();
             if (!$artist) {
                 $artist = Artist::create([
                     'name' => $request->artist_name,

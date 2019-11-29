@@ -1,23 +1,8 @@
 @extends('layouts.app')
 
 @section('head')
-{{ Html::style('css/select2.min.css') }}
-{{ Html::script('js/select2.min.js') }}
 <script>
 $(document).ready(function(){
-    {{--
-    $('.js-select2').select2()
-        .on('select2:select', function(e) {
-            var name_id = '#'+$(this).attr('id')+'_name';
-            let id = e.params.data.id;
-            let name = e.params.data.text;
-            if (id != '') {
-                $(name_id).val(name);
-            } else {
-                $(name_id).val('');
-            }
-        });
-    --}}
     $('#add_row').click(function() {
         var track_no = parseInt($('#max_num').val()) + 1;
 
@@ -62,27 +47,11 @@ $(document).ready(function(){
                     </div>
                 </div>
 
-                {{--
-                <div class="form-group row">
-                    {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
-                    <div class="col-md-4">
-                        {{ Form::select('artist_id', [''=>'新規登録']+$artists->toArray(), null, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist']) }}
-                        <span class="help-block">※登録済みのアーティストはこちらから選択</span>
-                        @include('layouts.parts.error_message', ['key'=>'artist_id'])
-                    </div>
-                    <div class="col-md-4">
-                        {{ Form::text('artist_name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name', 'placeholder'=>'Q-MHz']) }}
-                        <span class="help-block">※別名義で登録したい場合は、こちらを編集</span>
-                        @include('layouts.parts.error_message', ['key'=>'artist_name'])
-                    </div>
-                </div>
-                --}}
-
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
                         {{ Form::text('artist_id', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist', 'placeholder'=>'Q-MHz']) }}
-                        <span class="help-block">※登録済みのアーティストはこちらから選択</span>
+                        <span class="help-block">※アーティスト名を入力してください。</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
                     </div>
                     <div class="col-md-4">

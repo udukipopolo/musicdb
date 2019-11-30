@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\Part;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -169,9 +170,6 @@ class ManageBulkRegistrationController extends Controller
                 foreach ($file as $row_data) {
                     if ($row_count > 1) {
                         $row = collect($row_data);
-                        // $row->transform(function($item, $key) {
-                        //     return mb_convert_encoding($item, 'UTF-8', 'SJIS');
-                        // });
 
                         // アルバムアーティスト
                         $album_artist = Artist::where('name', $row->get(1))->first();

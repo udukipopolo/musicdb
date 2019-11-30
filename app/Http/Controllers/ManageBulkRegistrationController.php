@@ -134,7 +134,7 @@ class ManageBulkRegistrationController extends Controller
                 'url' => [
                     'required',
                     'active_url',
-                    'regex' => '/^https:\/\/docs\.google\.com\/spreadsheets\/.+/$',
+                    'regex:/^https:\/\/docs\.google\.com\/spreadsheets\/.+/$',
                 ],
             ],
             [],

@@ -7,6 +7,7 @@ use App\Models\Artist;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use NoRewindIterator;
 use SplFileObject;
 
 class ManageBulkRegistrationController extends Controller
@@ -157,24 +158,11 @@ class ManageBulkRegistrationController extends Controller
                     throw new Exception();
                 }
 
-                $client = new Client([
-                    'base_url' => "https://docs.google.com/spreadsheets/d/{$matches[1]}/",
-                ]);
-                $method = 'GET';
-                $uri = "export?format=csv";
-                $options = [];
-                $response = $client->request($method, $uri, $options);
-
-                dd($response->getBody()->getContents());
-
-
                 \setlocale(LC_ALL, 'ja_JP.UTF-8');
 
-                $uploaded_file = $request->file('csv_file');
+                $url = "https://docs.google.com/spreadsheets/d/{$matches[1]}/export?format=csv";
 
-                $file_path = $request->file('csv_file')->path($uploaded_file);
-
-                $file = new SplFileObject($file_path);
+                $file = new NoRewindIterator(new SplFileObject($url));
                 $file->setFlags(SplFileObject::READ_CSV);
 
                 $row_count = 1;

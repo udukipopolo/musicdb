@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Artist;
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use SplFileObject;
@@ -151,11 +152,20 @@ class ManageBulkRegistrationController extends Controller
             \DB::transaction(function () use($request) {
                 $matches = null;
                 preg_match('/^https:\/\/docs\.google\.com\/spreadsheets\/d\/(.+)\/edit.+$/u', $request->url, $matches);
-                dd($matches);
+
+                if (!isset($matches[1])) {
+                    throw new Exception();
+                }
 
                 $client = new Client([
-                    'base_url' => '',
+                    'base_url' => "https://docs.google.com/spreadsheets/d/{$matches[1]}/",
                 ]);
+                $method = 'GET';
+                $uri = "export?format=csv";
+                $options = [];
+                $response = $client->request($method, $uri, $options);
+
+                dd($response->getBody()->getContents());
 
 
                 \setlocale(LC_ALL, 'ja_JP.UTF-8');

@@ -150,7 +150,7 @@ class ManageBulkRegistrationController extends Controller
         try {
             \DB::transaction(function () use($request) {
                 $matches = null;
-                preg_match('/^https:\/\/docs\.google\.com\/spreadsheets\/d\/(.+)\/edit.+$/u', $matches);
+                preg_match('/^https:\/\/docs\.google\.com\/spreadsheets\/d\/(.+)\/edit.+$/u', $request->url, $matches);
                 dd($matches);
 
                 $client = new Client([

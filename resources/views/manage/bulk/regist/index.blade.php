@@ -20,6 +20,16 @@
                         </div>
                         {{ Form::submit('送信', ['class'=>'form-control']) }}
                     {{ Form::close() }}
+
+                    <h3>Googleスプレッドシート</h3>
+                    {{ Form::open(['route'=>['manage.bulk.regist.gss'], 'method'=>'POST', 'class'=>'form-inline']) }}
+                        <div class="form-group">
+                        {{ Form::text('url', null, ['class'=>'form-control-file'.ViewUtil::hasErrorClass($errors, 'url'), 'placeholder'=>'https://docs.google.com/spreadsheets/d/XXXXXXXXXX/edit?usp=sharing']) }}
+                        <p class="help-block">※GoogleスプレッドシートのURLを貼り付けてください。</p>
+                        @include('layouts.parts.error_message', ['key'=>'url'])
+                        </div>
+                        {{ Form::submit('送信', ['class'=>'form-control']) }}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

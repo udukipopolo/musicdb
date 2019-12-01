@@ -16,6 +16,7 @@
                         <div class="form-group">
                         {{ Form::file('csv_file', ['class'=>'form-control-file'.ViewUtil::hasErrorClass($errors, 'csv_file')]) }}
                         <p class="help-block">※文字エンコーディングはUTF-8にしてください。</p>
+                        <p class="help-block">サンプルは<a href="/sample/音楽DB一括登録用フォーマット-サンプル.csv" target="_blank">こちら</a></p>
                         @include('layouts.parts.error_message', ['key'=>'csv_file'])
                         </div>
                         {{ Form::submit('送信', ['class'=>'form-control']) }}
@@ -27,6 +28,7 @@
                         {{ Form::text('url', null, ['class'=>'form-control-file'.ViewUtil::hasErrorClass($errors, 'url'), 'placeholder'=>'https://docs.google.com/spreadsheets/d/XXXXXXXXXX/edit?usp=sharing']) }}
                         <p class="help-block">※GoogleスプレッドシートのURLを貼り付けてください。</p>
                         <p class="help-block">※共有で、リンクを知っている全員が編集または閲覧可にしてください。</p>
+                        <p class="help-block">サンプルは<a href="https://docs.google.com/spreadsheets/d/1yQ2Q-hUYfuE1HRKCE7Jj-PHlFn41uwd1yX-EjKH0Yo0/edit#gid=0" target="_blank">こちら</a></p>
                         @include('layouts.parts.error_message', ['key'=>'url'])
                         </div>
                         {{ Form::submit('送信', ['class'=>'form-control']) }}

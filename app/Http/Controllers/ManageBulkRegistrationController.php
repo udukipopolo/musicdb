@@ -117,6 +117,7 @@ class ManageBulkRegistrationController extends Controller
                 }
             });
         } catch(\Exception $e) {
+            \Log::debug($e->getMessage());
             $validator->after(function($validator) {
                 $validator->errors()->add('csv_file', 'データの登録に失敗しました。');
             });

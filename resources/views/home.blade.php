@@ -54,6 +54,22 @@
                 </div>
             </div>
         </div>
+
+        @if(config('app.debug'))
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <p>※注意事項</p>
+                    <ul>
+                        <li>現在α版としての公開となります。予告なく変更・データの削除等が行われる場合がございます。</li>
+                        <li>本番運用に際しては、ドメイン（URL）が変わる予定です。</li>
+                        <li>現段階ではサロン外への公開は禁止とさせていただきます。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @endif
+
     </div>
 </div>
 @endsection

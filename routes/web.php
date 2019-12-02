@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('search/music', 'SearchMusicController@index')->name('search.music.index');
 Route::get('search/music/{music}', 'SearchMusicController@show')->name('search.music.show');

@@ -12,6 +12,7 @@
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     {{ Html::script('js/bootstrap.min.js') }}
+    {{ Html::script('js/jquery.easy-autocomplete.min.js') }}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,9 +21,53 @@
 
     <!-- Styles -->
     {{ Html::style('css/bootstrap.min.css') }}
+    {{ Html::style('css/easy-autocomplete.min.css') }}
+    {{ Html::style('css/easy-autocomplete.themes.min.css') }}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 @yield('head')
+
+<!--
+
+                                                                                               ```.`.``     ``````.``    ```.`.```  ``````
+                                                                                           ``  `````..```    `.`.`..``   `.````.``  ``.....```
+                                                                                       ```````  ````.`````    `..``````  `.```.```  ``````.``
+                                                                                        ``.`.``   `..``.```   `````...````````````  ``````.``
+                                                                           `             `....``   `..`.`.```  `.``...`.``.```..``  `````````
+                                                                         ````````        `````      ``.`.```````````...`.````.`.``  ```.````
+                                                          ``````````````````.````````     ``   ``    ``.`.``....```.`.....`......`   ````    `````
+                                                              ``````.````````                ```.```  ``....``````.``...``````..```      ````.``.``
+                                                                   ````````                 ``..``.``` ``.`````....````    ```````.`  `````..``...``
+                                                                        `                `  ``....``.`````...`````    ````.`..````..``.`.`.`````````
+                                                                                        ````  `````..`.``..```    `````..````   ``.``..`````...``
+                                                                                       ``..```  ````..```.```````.```.`.`  ```````.``.````..```
+                                                                                      ``````````  ```...```.```.`.``.`.`  `....`.```````````
+                                                                                          ````````  ````.``.```.````..`` ``````````````.`    ``
+                                                                                             ``..```  ``..```````````.`  `````````````.`   ``.``
+                                                                                              `....```  `````````````````...`````..`..``  ```.```
+                                                                                               ``.``.```  ````..````.`..````.``..``.``   `..```
+                                                                                               `..``.`.```  `````.``.``.....`..````    ````
+                                                                                               `.``````..```  ```...```.`````       `````
+                                                                                               `````.````..```  ``````        `````````
+                                                                                                `     ``````````       ````````....```
+                                                                                                            ``..`````````````````````
+                                                                                                              ````````
+                                                                                                               ````                  .+`+`
+                                                                                                                                    .:--`////-
+                                                                                       `////////////++/.       :shmNNNNNds:`     `//-::..    ...::`
+                --           `:.      `+:                                           `/+ds++++++//:.   .d-    /mMMN:dMMMMMMMm/    ..`../+///:-.- .`/.
+                 +hho  :y:s/++yo`     .Nd         sh-                       oy-    `h-          `./o.  /o   sMMMN: `dMMMMMMMMs`  `h`./-     -/:.--`.
+                    -..o+-NN/-MN-:` -+oNm:-.`   +hNMyo+: -- :yyssssd++` ::::dMs::-` ./oo/:::::::+syo+/:oo  /MMMMy-  `dMMMMMMMMs  /s :+/     //. `o
+                    /h+mNo+Mm+MN:NN:-oyMNddmy   .:mMhoo+`mN..ssssyydsm.`hdddmMNddd:   +:       -o+s:   :s  dMMMmy+   .mMMMMMMMN` o- ```     .-`  y
+            ./++dy+-.ys:dMdNMNmN/yso/ .Nm:+++: `  -hNms``mM.-hdNMmd:  `   -sNMh       +:          .    :o `mdhy::`    -mmMMMMMN. y`              y
+              `:-   :odMmNhyyyydNmMNy..NN/ooo/.dmms .dMs`mMo++`hM: .ymN:.dNhsMd       o:          `    :o  y:      `/: -ohNmydd  y`  .-:::::-.  `y
+                   `/yhsdMNMMoNMMNo+` `NN`hmmm:  oy`omh- shyys`:Nh `:+N. -. .md`      o/        ./y`   /o  -s     :+.-o. .s.`y/  /: yo/:----:+o :s
+                      sMhsmMMNNdyss+`  -++o/-..  `:- ...o  .+  `-. `` ..-+.+ ..`      +s   :////-`.:   s+   :s:   :o:/o.   :s:   `y-:/.`   `-+..h`
+                      -+oyysssshm/       oN`ohys/oo/-yo-d+o.s  :N+:hys/ysy.o+ddd.     `hy+/:::::::////sh.    `:o+/-.-..-//+-      `oso+/////-:oy.
+                          `/.            ``                                             `.----------..`          `.----.`            ./oooooo/`
+                                                                                                       `-.--...-``-``...:.- .-..`..:-...:.-...:.-
+                                                                                                        `````-`.``` ``````.``````  `````````````.
+-->
 
 </head>
 <body>
@@ -70,6 +115,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     {{ Html::linkRoute('manage.album.index', 'アルバム管理', [], ['class'=>'dropdown-item']) }}
                                     {{ Html::linkRoute('manage.artist.index', 'アーティスト管理', [], ['class'=>'dropdown-item']) }}
+                                    {{ Html::linkRoute('manage.bulk.regist.index', '一括登録', [], ['class'=>'dropdown-item']) }}
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

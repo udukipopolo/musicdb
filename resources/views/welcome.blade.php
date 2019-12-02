@@ -83,6 +83,17 @@
                     {{ config('app.name') }}
                 </div>
 
+                @if(config('app.debug'))
+                <div class="m-b-md">
+                    <p>※注意事項</p>
+                    <ul>
+                        <li>現在α版としての公開となります。予告なく変更・データの削除等が行われる場合がございます。</li>
+                        <li>本番運用に際しては、ドメイン（URL）が変わる予定です。</li>
+                        <li>現段階ではサロン外への公開は禁止とさせていただきます。</li>
+                    </ul>
+                </div>
+                @endif
+
                 <div class="links">
                     <a href="/home">HOME</a>
                 </div>

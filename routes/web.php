@@ -33,5 +33,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('bulk/regist', 'ManageBulkRegistrationController@index')->name('bulk.regist.index');
         Route::post('bulk/regist/csv', 'ManageBulkRegistrationController@csv')->name('bulk.regist.csv');
+        Route::post('bulk/regist/gss', 'ManageBulkRegistrationController@googlespreadsheet')->name('bulk.regist.gss');
     });
 });

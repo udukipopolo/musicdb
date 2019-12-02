@@ -5,17 +5,6 @@
 {{ Html::script('js/select2.min.js') }}
 <script>
 $(document).ready(function(){
-    $('.js-select2').select2()
-        .on('select2:select', function(e) {
-            var name_id = '#'+$(this).attr('id')+'_name';
-            let id = e.params.data.id;
-            let name = e.params.data.text;
-            if (id != '') {
-                $(name_id).val(name);
-            } else {
-                $(name_id).val('');
-            }
-        });
     $('#add_row').click(function() {
         var track_no = parseInt($('#max_num').val()) + 1;
 
@@ -25,6 +14,18 @@ $(document).ready(function(){
 
         $('#max_num').val(track_no);
     });
+
+    var options = {
+        url: "/api/artist/list",
+        getValue: "name",
+        list: {
+            match: {
+                enabled: true
+            }
+        }
+    };
+
+    $("#album_artist").easyAutocomplete(options);
 });
 </script>
 
@@ -43,7 +44,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('title', $album->title, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'title')]) }}
+                        {{ Form::text('title', $album->title, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'title'), 'placeholder'=>'Q-MHz']) }}
                         @include('layouts.parts.error_message', ['key'=>'title'])
                     </div>
                 </div>
@@ -51,14 +52,17 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
-                        {{ Form::select('artist_id', [''=>'新規登録']+$artists->toArray(), $album->artist_id, ['class'=>'form-control js-select2'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist']) }}
+                        {{ Form::text('artist_id', $album->artist->name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist', 'placeholder'=>'Q-MHz']) }}
+                        <span class="help-block">※アーティスト名を入力してください。</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
                     </div>
                     <div class="col-md-4">
-                        {{ Form::text('artist_name', $album->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name']) }}
+                        {{ Form::text('artist_name', $album->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name', 'placeholder'=>'別名義']) }}
+                        <span class="help-block">※別名義で登録したい場合は、こちらに入力</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_name'])
                     </div>
                 </div>
+
 
                 <div class="form-group row">
                     {{ Form::label('musics', '楽曲', ['class'=>'col-form-label col-md-4'])}}
@@ -83,7 +87,7 @@ $(document).ready(function(){
                                 <tr>
                                     <td>{{ $no }}</td>
                                     <td>
-                                        {{ Form::text("musics[{$no}]", old('musics.'.$no) ?: ($music = $musics->firstWhere('track_no', $no)) ? $music->title : null, ['class'=>'form-control']) }}
+                                        {{ Form::text("musics[{$no}]", old('musics.'.$no) ?: ($music = $musics->firstWhere('track_no', $no)) ? $music->title : null, ['class'=>'form-control']+(($no==1) ? ['placeholder'=>'LiVE DiVE MHz!!'] : [])) }}
                                     </td>
                                 </tr>
                                 @endfor

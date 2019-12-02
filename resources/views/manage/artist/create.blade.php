@@ -13,7 +13,7 @@
                 <div class="form-group row">
                     {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'name')]) }}
+                        {{ Form::text('name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'name'), 'placeholder'=>'Q-MHz']) }}
                         @include('layouts.parts.error_message', ['key'=>'name'])
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                 <div class="form-group row">
                     {{ Form::label('belonging', '所属事務所', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::textarea('belonging', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'belonging'), 'cols'=>'6']) }}
+                        {{ Form::textarea('belonging', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'belonging'), 'rows'=>'6']) }}
                         <p class="help-block">※複数ある場合、もしくは変更する場合は改行で追記してください。</p>
                         @include('layouts.parts.error_message', ['key'=>'belonging'])
                     </div>

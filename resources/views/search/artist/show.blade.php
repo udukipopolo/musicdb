@@ -11,6 +11,13 @@
                 <div class="card-body">
                     <h2>{{ $artist->name }}</h2>
 
+                    <h3>所属事務所</h3>
+
+                    <div class="col-md-12">
+                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'rows'=>'4', 'readonly']) }}
+                    </div>
+
+
                     <h3>担当楽曲一覧</h3>
 
                     <div class="col-md-12">

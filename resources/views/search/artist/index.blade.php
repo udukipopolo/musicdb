@@ -20,7 +20,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
+                                {{ Form::submit('検索', ['class'=>'btn btn-primary']) }}
+                                {{ Html::linkRoute('search.artist.index', 'クリア', [], ['class'=>'btn btn-light']) }}
                             </div>
                         </div>
                     {{ Form::close() }}

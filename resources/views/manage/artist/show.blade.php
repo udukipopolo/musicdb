@@ -6,8 +6,10 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="mr-auto p-3">アーティスト詳細</h3>
-                <div class="btn-group float-right" role="group">
-                    <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success">編集</a>
+                <div class="btn-toolbar float-right" role="toolbar">
+                    <div class="btn-group" role="group">
+                        <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success">編集</a>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -24,7 +26,7 @@
                 <div class="form-group row">
                     {{ Form::label('belonging', '所属事務所', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'cols'=>'6', 'readonly']) }}
+                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
                     </div>
                 </div>
 

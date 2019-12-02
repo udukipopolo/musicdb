@@ -141,6 +141,20 @@ class ManageArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-        //
+        $artist->parts()->dissociate();
+        $artist->album()->dissociate();
+        $artist->delete();
+
+        return redirect()->route('manage.artist.index')->with('message', 'アーティストを削除しました。');
+    }
+
+    public function apiArtistList(Request $request)
+    {
+        $artists = Artist::query();
+        $artists->select(['name', 'id']);
+        if ($request->filled('q')) {
+            $artists->where('name', 'LIKE', '%'.$request->q.'%');
+        }
+        return $artists->get()->toJson();
     }
 }

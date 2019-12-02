@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Music;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ManageAlbumController extends Controller
 {
@@ -57,9 +58,15 @@ class ManageAlbumController extends Controller
     {
         $request->validate(
             [
-                'title' => 'required|max:255',
-                'artist_id' => '',
-                'artist_name' => 'required|max:255',
+                'title' => [
+                    'required',
+                    'max:255',
+                    Rule::unique('albums')->where(function($query) use($request) {
+                        return $query->where('artist_name', $request->artist_name);
+                    }),
+                ],
+                'artist_id' => 'required|max:255',
+                'artist_name' => 'max:255',
                 'musics' => 'array',
                 'musics.*' => 'max:255',
                 'description' => '',
@@ -67,8 +74,8 @@ class ManageAlbumController extends Controller
             [],
             [
                 'title' => 'アルバムタイトル',
-                'artist_id' => '',
-                'artist_name' => 'アーティスト名',
+                'artist_id' => 'アーティスト名',
+                'artist_name' => '別名義',
                 'musics.*' => '楽曲名',
                 'description' => '詳細・アルバムに携わった人等',
             ]
@@ -77,18 +84,24 @@ class ManageAlbumController extends Controller
         $album = null;
 
         \DB::transaction(function () use($request, &$album) {
-            $artist = Artist::find($request->input('artist_id'));
+            $artist = Artist::where('name', $request->input('artist_id'))->first();
             if (!$artist) {
                 $artist = Artist::create([
-                    'name' => $request->artist_name,
+                    'name' => $request->artist_id,
                     'belonging' => '',
                 ]);
+            }
+
+            if ($request->filled('artist_name')) {
+                $artist_name = $request->artist_name;
+            } else {
+                $artist_name = $artist->name;
             }
 
             $album = Album::create([
                 'title' => $request->title,
                 'artist_id' => $artist->id,
-                'artist_name' => $request->artist_name,
+                'artist_name' => $artist_name,
                 'description' => ($request->filled('description')) ? $request->description : '',
             ]);
 
@@ -148,9 +161,15 @@ class ManageAlbumController extends Controller
     {
         $request->validate(
             [
-                'title' => 'required|max:255',
-                'artist_id' => '',
-                'artist_name' => 'required|max:255',
+                'title' => [
+                    'required',
+                    'max:255',
+                    Rule::unique('albums')->where(function($query) use($request) {
+                        return $query->where('artist_name', $request->artist_name);
+                    })->ignore($album->id),
+                ],
+                'artist_id' => 'required|max:255',
+                'artist_name' => 'max:255',
                 'musics' => 'array',
                 'musics.*' => 'max:255',
                 'description' => '',
@@ -158,25 +177,31 @@ class ManageAlbumController extends Controller
             [],
             [
                 'title' => 'アルバムタイトル',
-                'artist_id' => '',
-                'artist_name' => 'アーティスト名',
+                'artist_id' => 'アーティスト名',
+                'artist_name' => '別名義',
                 'musics.*' => '楽曲名',
                 'description' => '詳細・アルバムに携わった人等',
             ]
         );
 
         \DB::transaction(function () use($request, &$album) {
-            $artist = Artist::find($request->input('artist_id'));
+            $artist = Artist::where('name', $request->input('artist_id'))->first();
             if (!$artist) {
                 $artist = Artist::create([
-                    'name' => $request->artist_name,
+                    'name' => $request->artist_id,
                     'belonging' => '',
                 ]);
             }
 
+            if ($request->filled('artist_name')) {
+                $artist_name = $request->artist_name;
+            } else {
+                $artist_name = $artist->name;
+            }
+
             $album->title = $request->title;
             $album->artist_id = $artist->id;
-            $album->artist_name = $request->artist_name;
+            $album->artist_name = $artist_name;
             $album->description = ($request->filled('description')) ? $request->description : '';
             $album->save();
 
@@ -213,7 +238,13 @@ class ManageAlbumController extends Controller
      */
     public function destroy(Album $album)
     {
-        //
+        foreach($album->musics as $music) {
+            $music->parts()->delete();
+            $music->delete();
+        }
+        $album->delete();
+
+        return redirect()->route('manage.album.index')->with('message', 'アルバム情報を削除しました。');
     }
 
     public function editMusic(Album $album, Music $music)
@@ -240,22 +271,25 @@ class ManageAlbumController extends Controller
         $validator = \Validator::make(
             $request->all(),
             [
-                'edit_artist_id' => '',
+                'edit_artist_id' => 'max:255',
                 'edit_artist_name.*' => 'max:255',
                 'edit_part_name.*' => 'required_with:edit_artist_name.*|max:255',
-                'add_artist_id' => '',
+                'add_artist_id' => 'max:255',
                 'add_artist_name.*' => 'max:255',
                 'add_part_name.*' => 'required_with:add_artist_name.*|max:255',
             ],
             [],
             [
-                'edit_artist_name.*' => 'アーティスト名',
+                'edit_artist_id.*' => 'アーティスト名',
+                'edit_artist_name.*' => '別名義',
                 'edit_part_name.*' => 'パート名',
-                'add_artist_name.*' => 'アーティスト名',
+                'add_artist_id.*' => 'アーティスト名',
+                'add_artist_name.*' => '別名義',
                 'add_part_name.*' => 'パート名',
             ]
         );
 
+        /*
         $validator->after(function($validator) use($request) {
             if ($request->filled('edit_artist_id')) {
                 foreach($request->edit_artist_id as $part_id=>$artist_id) {
@@ -276,6 +310,7 @@ class ManageAlbumController extends Controller
                 }
             }
         });
+        */
 
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
@@ -284,16 +319,19 @@ class ManageAlbumController extends Controller
         \DB::transaction(function () use($request, $album, $music) {
             // 更新
             foreach($music->parts as $part) {
-                if ($request->filled('edit_artist_name.'.$part->id)) {
-                    if ($request->filled('edit_artist_id.'.$part->id)) {
-                        $artist = Artist::find($request->input('edit_artist_id.'.$part->id));
+                if ($request->filled('edit_artist_id.'.$part->id)) {
+                    $artist = Artist::firstOrCreate([
+                        'name' => $request->input('edit_artist_id.'.$part->id),
+                    ]);
+
+                    if ($request->filled('edit_artist_name.'.$part->id)) {
+                        $artist_name = $request->input('edit_artist_name.'.$part->id);
                     } else {
-                        $artist = Artist::firstOrCreate([
-                            'name' => $request->input('edit_artist_name.'.$part->id),
-                        ]);
+                        $artist_name = $artist->name;
                     }
+
                     $part->artist_id = $artist->id;
-                    $part->artist_name = $request->input('edit_artist_name.'.$part->id);
+                    $part->artist_name = $artist_name;
                     $part->part_name = $request->input('edit_part_name.'.$part->id);
                     $part->save();
                 } else {
@@ -304,19 +342,23 @@ class ManageAlbumController extends Controller
             // 新規登録
             if ($request->filled('add_artist_name')) {
                 foreach($request->add_artist_name as $no=>$artist_name) {
-                    if (!$request->filled('add_artist_name.'.$no)) {
+                    if (!$request->filled('add_artist_id.'.$no)) {
                         continue;
                     }
-                    if ($request->filled('add_artist_id.'.$no)) {
-                        $artist = Artist::find($request->input('add_artist_id.'.$no));
+
+                    $artist = Artist::firstOrCreate([
+                        'name' => $request->input('add_artist_id.'.$no),
+                    ]);
+
+                    if ($request->filled('add_artist_name.'.$no)) {
+                        $artist_name = $request->input('add_artist_name.'.$no);
                     } else {
-                        $artist = Artist::firstOrCreate([
-                            'name' => $request->input('add_artist_name.'.$no),
-                        ]);
+                        $artist_name = $artist->name;
                     }
+
                     $music->parts()->create([
                         'artist_id' => $artist->id,
-                        'artist_name' => $request->input('add_artist_name.'.$no),
+                        'artist_name' => $artist_name,
                         'part_name' => $request->input('add_part_name.'.$no)
                     ]);
                 }

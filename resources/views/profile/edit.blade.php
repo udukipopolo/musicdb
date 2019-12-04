@@ -14,7 +14,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                {{ Form::text('name', Auth::user()->name, ['class'=>"from-control".ViewUtil::hasErrorClass($errors, 'name')]) }}
+                                {{ Form::text('name', Auth::user()->name, ['class'=>"form-control".ViewUtil::hasErrorClass($errors, 'name')]) }}
                                 @include('layouts.parts.error_message', ['key'=>'name'])
                             </div>
                         </div>
@@ -23,7 +23,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                {{ Form::text('email', Auth::user()->email, ['class'=>"from-control".ViewUtil::hasErrorClass($errors, 'email')]) }}
+                                {{ Form::text('email', Auth::user()->email, ['class'=>"form-control".ViewUtil::hasErrorClass($errors, 'email')]) }}
                                 @include('layouts.parts.error_message', ['key'=>'email'])
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                {{ Form::password('password', ['class'=>"from-control".ViewUtil::hasErrorClass($errors, 'password')]) }}
+                                {{ Form::password('password', ['class'=>"form-control".ViewUtil::hasErrorClass($errors, 'password')]) }}
                                 <p class="help-block">※変更する場合のみ入力してください。</p>
                                 @include('layouts.parts.error_message', ['key'=>'password'])
                             </div>

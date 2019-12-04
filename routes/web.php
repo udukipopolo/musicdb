@@ -15,20 +15,32 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+// 楽曲検索
 Route::get('search/music', 'SearchMusicController@index')->name('search.music.index');
 Route::get('search/music/{music}', 'SearchMusicController@show')->name('search.music.show');
+
+// アーティスト検索
 Route::get('search/artist', 'SearchArtistController@index')->name('search.artist.index');
 Route::get('search/artist/{artist}', 'SearchArtistController@show')->name('search.artist.show');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'manage', 'as'=>'manage.'], function () {
+        // アルバム管理
         Route::resource('album', 'ManageAlbumController');
         Route::get('album/{album}/music/{music}', 'ManageAlbumController@editMusic')->name('album.music.edit');
         Route::put('album/{album}/music/{music}', 'ManageAlbumController@updateMusic')->name('album.music.update');
+
+        // アーティスト管理
         Route::resource('artist', 'ManageArtistController');
 
+        // 一括登録
         Route::get('bulk/regist', 'ManageBulkRegistrationController@index')->name('bulk.regist.index');
         Route::post('bulk/regist/csv', 'ManageBulkRegistrationController@csv')->name('bulk.regist.csv');
         Route::post('bulk/regist/gss', 'ManageBulkRegistrationController@googlespreadsheet')->name('bulk.regist.gss');
     });
+
+    // プロフィール
+    Route::get('profile', 'ProfileController@index')->name('profile.index');
+    Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::put('profile/edit', 'ProfileController@update')->name('profile.update');
 });

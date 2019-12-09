@@ -405,6 +405,7 @@ class ManageAlbumController extends Controller
         ];
         $album_data = $phg->getLookup($query);
 
+
         $params = [];
 
         return view('manage.album.create_phg', $params);

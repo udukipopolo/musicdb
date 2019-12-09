@@ -51,7 +51,7 @@
                         @foreach($artist->albums as $album)
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="card">
-                                {{ Html::linkRoute('search.album.index', $album->title, ['album_title'=>$album->title]) }}
+                                {{ Html::linkRoute('search.music.index', $album->title, ['album_title'=>$album->title]) }}
                             </div>
                         </div>
                         @endforeach

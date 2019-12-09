@@ -19,6 +19,8 @@ class CreateAlbumsTable extends Migration
             $table->bigInteger('artist_id')->unsigned()->index()->comment('アーティストID');
             $table->string('artist_name')->comment('アーティスト名');
             $table->text('description')->comment('詳細・アルバムスタッフ等');
+            $table->string('affi_apple_music')->nullable()->comment('apple music アフィリエイト	');
+            $table->string('affi_amazon')->nullable()->comment('amazonアフィリエイト');
             $table->timestamps();
         });
     }

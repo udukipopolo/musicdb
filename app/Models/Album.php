@@ -11,6 +11,8 @@ class Album extends Model
         'artist_id',
         'artist_name',
         'description',
+        'affi_apple_music',
+        'affi_amazon',
     ];
 
     public function musics() {

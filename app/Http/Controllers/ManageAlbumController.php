@@ -370,7 +370,7 @@ class ManageAlbumController extends Controller
         return redirect()->route('manage.album.show', $album->id)->with('message', '更新しました。');
     }
 
-    public function createFromPht(Request $request)
+    public function createFromPhg(Request $request)
     {
         $validator = \Validator::make(
             $request->all(),

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Music;
+use App\Services\PhgService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -367,5 +368,45 @@ class ManageAlbumController extends Controller
         });
 
         return redirect()->route('manage.album.show', $album->id)->with('message', '更新しました。');
+    }
+
+    public function createFromPht(Request $request)
+    {
+        $validator = \Validator::make(
+            $request->all(),
+            [
+                'phg_url' => [
+                    'required',
+                    'active_url',
+                ]
+            ],
+            [],
+            [
+                'phg_url' => 'Apple Music URL',
+            ]
+        );
+
+        $validator->after(function($validator) use($request) {
+            if (strpos($request->phg_url, 'https://music.apple.com/') !== 0) {
+                $validator->errors()->add('phg_url', 'Apple MusicのURLを指定してください。');
+            }
+        });
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
+
+        $phg = new PhgService();
+        $phg_album_id = $phg->getId($request->phg_url);
+
+        $query = [
+            'id' => $phg_album_id,
+            'entity' => 'song'
+        ];
+        $album_data = $phg->getLookup($query);
+
+        $params = [];
+
+        return view('manage.album.create_phg', $params);
     }
 }

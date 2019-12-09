@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('album', 'ManageAlbumController');
         Route::get('album/{album}/music/{music}', 'ManageAlbumController@editMusic')->name('album.music.edit');
         Route::put('album/{album}/music/{music}', 'ManageAlbumController@updateMusic')->name('album.music.update');
+        Route::post('album/create/phg', 'ManageAlbumController@createFromPhg')->name('album.create.phg');
 
         // アーティスト管理
         Route::resource('artist', 'ManageArtistController');

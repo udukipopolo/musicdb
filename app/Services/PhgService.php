@@ -48,8 +48,6 @@ class PhgService
             ]
         )->getBody()->getContents();
 
-        \Log::debug($response);
-
         $response = json_decode($response);
 
         return $response;

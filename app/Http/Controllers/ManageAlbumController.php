@@ -405,8 +405,32 @@ class ManageAlbumController extends Controller
         ];
         $album_data = $phg->getLookup($query);
 
-
         $params = [];
+        $album = [];
+        $musics = [];
+        if (isset($album_data['resultCount']) && $album_data['resultCount'] > 0) {
+            foreach ($album_data['results'] as $music_data) {
+                switch($music_data['wrapperType']) {
+                    case 'collection':
+                        // アルバム情報
+                        $album = [
+                            'title' => $music_data['collectionName'],
+                            'artist_id' => $music_data['artistName'],
+                        ];
+                    break;
+                    case 'track':
+                        // 楽曲情報
+                        $musics[] = [
+                            'track_no' => $music_data['trackNumber'],
+                            'title' => $music_data['trackName'],
+                        ];
+                    break;
+                    default:
+                }
+            }
+        }
+        $params['album'] = $album;
+        $params['musics'] = collect($musics);
 
         return view('manage.album.create_phg', $params);
     }

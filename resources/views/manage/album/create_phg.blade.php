@@ -42,7 +42,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('title', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'title'), 'placeholder'=>'Q-MHz']) }}
+                        {{ Form::text('title', @$album['title'], ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'title'), 'placeholder'=>'Q-MHz']) }}
                         @include('layouts.parts.error_message', ['key'=>'title'])
                     </div>
                 </div>
@@ -50,7 +50,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
-                        {{ Form::text('artist_id', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist', 'placeholder'=>'Q-MHz']) }}
+                        {{ Form::text('artist_id', @$album['artist_id'], ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist', 'placeholder'=>'Q-MHz']) }}
                         <span class="help-block">※アーティスト名を入力してください。</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
                     </div>
@@ -76,14 +76,14 @@ $(document).ready(function(){
                                 if (old('musics') && count(old('musics')) > 10) {
                                     $max = count(old('musics'));
                                 } else {
-                                    $max = 10;
+                                    $max = $musics->max('track_no');
                                 }
                                 @endphp
                                 @for($no = 1; $no <= $max; $no++)
                                 <tr>
                                     <td>{{ $no }}</td>
                                     <td>
-                                        {{ Form::text("musics[{$no}]", old('musics.'.$no), ['class'=>'form-control']+(($no==1) ? ['placeholder'=>'LiVE DiVE MHz!!'] : [])) }}
+                                        {{ Form::text("musics[{$no}]", old('musics.'.$no) ?: ($music = $musics->firstWhere('track_no', $no)) ? $music['title'] : null, ['class'=>'form-control']+(($no==1) ? ['placeholder'=>'LiVE DiVE MHz!!'] : [])) }}
                                     </td>
                                 </tr>
                                 @endfor

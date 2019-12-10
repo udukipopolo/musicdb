@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use App\Models\Music;
 use Illuminate\Http\Request;
 
 class SearchArtistController extends Controller
@@ -39,5 +40,19 @@ class SearchArtistController extends Controller
         ];
 
         return view('search.artist.show', $params);
+    }
+
+    public function showAlbumArtist(Artist $artist)
+    {
+        $params = [
+            'artist' => $artist,
+        ];
+
+        $musics = Music::whereHas('album', functioN($query) use($artist) {
+            $query->where('artist_id', $artist->id);
+        })->paginate(20);
+        $params['musics'] = $musics;
+
+        return view('search.artist.album_artist', $params);
     }
 }

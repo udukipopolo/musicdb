@@ -22,6 +22,7 @@ Route::get('search/music/{music}', 'SearchMusicController@show')->name('search.m
 // アーティスト検索
 Route::get('search/artist', 'SearchArtistController@index')->name('search.artist.index');
 Route::get('search/artist/{artist}', 'SearchArtistController@show')->name('search.artist.show');
+Route::get('search/album_artist/{artist}', 'SearchArtistController@showAlbumArtist')->name('search.album_artist.show');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'manage', 'as'=>'manage.'], function () {

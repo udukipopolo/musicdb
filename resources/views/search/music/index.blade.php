@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <h4 class="col-md-12">詳細検索</h4>
+                            <h4 class="col-md-12">絞り込み</h4>
                             <div class="col-md-4">
                                 <label class="sr-only" form="album_artist">アルバムアーティスト</label>
                                 {{ Form::text('album_artist', @$input['album_artist'], ['class'=>'form-control', 'placeholder'=>'アルバムアーティスト']) }}
@@ -71,7 +71,7 @@
                             @foreach($musics as $music)
                             <tr>
                                 <td>{{ $music->album->title }}</td>
-                                <td>{{ Html::linkRoute('search.artist.show', $music->album->artist_name, [$music->album->artist_id]) }}</td>
+                                <td>{{ Html::linkRoute('search.album_artist.show', $music->album->artist_name, [$music->album->artist_id]) }}</td>
                                 <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>
                             </tr>
                             @endforeach

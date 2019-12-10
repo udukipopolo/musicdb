@@ -92,6 +92,6 @@ class SearchMusicController extends Controller
             'album' => $album,
         ];
 
-        return view('search.album.show', $params);
+        return view('search.music.album', $params);
     }
 }

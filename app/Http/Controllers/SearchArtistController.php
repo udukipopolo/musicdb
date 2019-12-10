@@ -50,7 +50,10 @@ class SearchArtistController extends Controller
 
         $musics = Music::whereHas('album', functioN($query) use($artist) {
             $query->where('artist_id', $artist->id);
-        })->paginate(20);
+        })
+        ->orderBy('album_id', 'ASC')
+        ->orderBy('track_no', 'ASC')
+        ->paginate(20);
         $params['musics'] = $musics;
 
         return view('search.artist.album_artist', $params);

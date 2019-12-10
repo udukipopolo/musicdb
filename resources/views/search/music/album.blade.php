@@ -29,7 +29,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($music->album->musics->sortBy('track_no') as $music)
+                                @foreach($album->musics->sortBy('track_no') as $music)
                                     <tr>
                                         <td>{{ $music->track_no }}</td>
                                         <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>

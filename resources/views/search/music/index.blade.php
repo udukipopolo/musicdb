@@ -70,7 +70,7 @@
                         <tbody>
                             @foreach($musics as $music)
                             <tr>
-                                <td>{{ $music->album->title }}</td>
+                                <td>{{ Html::linkRoute('search.album.show', $music->album->title, [$music->album->id]) }}</td>
                                 <td>{{ Html::linkRoute('search.album_artist.show', $music->album->artist_name, [$music->album->artist_id]) }}</td>
                                 <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>
                             </tr>

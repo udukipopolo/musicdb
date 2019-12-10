@@ -26,14 +26,16 @@
                                 <tr>
                                     <th>アルバム</th>
                                     <th>名義</th>
+                                    <th>Track No</th>
                                     <th>曲名</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($musics as $music)
                                 <tr>
-                                    <td>{{ $music->album->title }}</td>
+                                    <td>{{ Html::linkRoute('search.album.show', $music->album->title, [$music->album->id]) }}</td>
                                     <td>{{ $music->album->artist_name }}</td>
+                                    <td>{{ $music->track_no }}</td>
                                     <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>
                                 </tr>
                                 @endforeach

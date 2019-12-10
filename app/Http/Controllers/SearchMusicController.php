@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\Artist;
 use App\Models\Music;
 use Illuminate\Http\Request;
@@ -83,5 +84,14 @@ class SearchMusicController extends Controller
         ];
 
         return view('search.music.show', $params);
+    }
+
+    public function album(Album $album)
+    {
+        $params = [
+            'album' => $album,
+        ];
+
+        return view('search.album.show', $params);
     }
 }

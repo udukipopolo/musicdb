@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index')->name('home');
 // 楽曲検索
 Route::get('search/music', 'SearchMusicController@index')->name('search.music.index');
 Route::get('search/music/{music}', 'SearchMusicController@show')->name('search.music.show');
+Route::get('search/album/{album}', 'SearchMusicController@album')->name('search.album.show');
 
 // アーティスト検索
 Route::get('search/artist', 'SearchArtistController@index')->name('search.artist.index');

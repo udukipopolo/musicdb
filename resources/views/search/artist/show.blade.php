@@ -25,6 +25,7 @@
                             <thead>
                                 <tr>
                                     <th>アルバム</th>
+                                    <th>アルバムアーティスト</th>
                                     <th>曲名</th>
                                     <th>名義</th>
                                     <th>パート</th>
@@ -33,7 +34,8 @@
                             <tbody>
                                 @foreach($parts as $part)
                                 <tr>
-                                    <td>{{ $part->music->album->title }}</td>
+                                    <td>{{ Html::linkRoute('search.album.show', $part->music->album->title, [$part->music->album->id]) }}</td>
+                                    <td>{{ Html::linkRoute('search.album_artist.show', $part->music->album->artist_name, [$part->music->album->artist_id]) }}</td>
                                     <td>{{ Html::linkRoute('search.music.show', $part->music->title, [$part->music->id]) }}</td>
                                     <td>{{ $part->artist_name }}</td>
                                     <td>{{ $part->part_name }}</td>
@@ -52,7 +54,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                {{ Html::linkRoute('search.music.index', $album->title, ['album_title'=>$album->title, 'artist_name'=>$album->artist_name]) }}
+                                {{ Html::linkRoute('search.album.show', $album->title, [$album->id]) }}
                                 </div>
                             </div>
                         </div>

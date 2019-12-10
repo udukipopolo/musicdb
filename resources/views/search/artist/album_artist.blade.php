@@ -43,6 +43,9 @@
 
                     {{ $musics->appends(Request::input())->links() }}
 
+                    <div class="col-12 text-right">
+                        <p>{{ Html::linkRoute('search.artist.show', 'アーティスト担当楽曲を見る', [$artist->id]) }}</p>
+                    </div>
 
                 </div>
             </div>

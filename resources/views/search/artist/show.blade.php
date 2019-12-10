@@ -58,8 +58,9 @@
                         </div>
                         @endforeach
                     </div>
+
                     <div class="row">
-                        <div class="text-right">
+                        <div class="col-12 text-right">
                             <p>{{ Html::linkRoute('search.album_artist.show', '楽曲一覧を見る', [$artist->id]) }}</p>
                         </div>
                     </div>

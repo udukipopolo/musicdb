@@ -142,7 +142,7 @@ class ManageArtistController extends Controller
     public function destroy(Artist $artist)
     {
         $artist->parts()->dissociate();
-        $artist->album()->dissociate();
+        $artist->albums()->dissociate();
         $artist->delete();
 
         return redirect()->route('manage.artist.index')->with('message', 'アーティストを削除しました。');

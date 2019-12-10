@@ -45,6 +45,20 @@
 
                     {{ $parts->appends(Request::input())->links() }}
 
+                    <h3>アルバム一覧</h3>
+
+                    <div class="row">
+                        @foreach($artist->albums as $album)
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                {{ Html::linkRoute('search.music.index', $album->title, ['album_title'=>$album->title, 'artist_name'=>$album->artist_name]) }}
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+
                 </div>
             </div>
         </div>

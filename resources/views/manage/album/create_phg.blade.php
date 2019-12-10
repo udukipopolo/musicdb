@@ -125,7 +125,7 @@ $(document).ready(function(){
                             <div class="form-group row">
                                 {{ Form::label('phg_url', 'Apple Music URL', ['class'=>'col-form-label col-md-4'])}}
                                 <div class="col-md-8">
-                                    {{ Form::text('phg_url', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'phg_url'), 'placeholder'=>'https://music.apple.com/jp/****']) }}
+                                    {{ Form::text('phg_url', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'phg_url'), 'placeholder'=>'https://music.apple.com/jp/album/q-mhz/1077652251']) }}
                                     @include('layouts.parts.error_message', ['key'=>'phg_url'])
                                 </div>
                             </div>

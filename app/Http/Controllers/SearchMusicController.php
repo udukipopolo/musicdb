@@ -59,13 +59,13 @@ class SearchMusicController extends Controller
                         $music_artists = Artist::where('name', 'LIKE', '%'.$request->music_artist.'%')
                         ->get()
                         ->pluck('id');
-                        $parts->where(function($group) use($request, $music_artists) {
+                        $parts = $parts->where(function($group) use($request, $music_artists) {
                             $group->where('artist_name', 'LIKE', '%'.$request->music_artist.'%')
                             ->orWhereIn('artist_id', $music_artists);
                         });
                     }
                     if ($request->filled('music_part')) {
-                        $parts->where('part_name', $request->music_part);
+                        $parts = $parts->where('part_name', $request->music_part);
                     }
                 });
             }

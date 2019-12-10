@@ -27,6 +27,21 @@
                             </div>
                         </div>
                         <div class="row">
+                            <h4 class="col-md-12">詳細検索</h4>
+                            <div class="col-md-4">
+                                <label class="sr-only" form="album_artist">アルバムアーティスト</label>
+                                {{ Form::text('album_artist', @$input['album_artist'], ['class'=>'form-control', 'placeholder'=>'アルバムアーティスト']) }}
+                            </div>
+                            <div class="col-md-4">
+                                <label class="sr-only" form="music_artist">楽曲アーティスト</label>
+                                {{ Form::text('music_artist', @$input['music_artist'], ['class'=>'form-control', 'placeholder'=>'楽曲アーティスト']) }}
+                            </div>
+                            <div class="col-md-4">
+                                <label class="sr-only" form="music_part">パート</label>
+                                {{ Form::text('music_part', @$input['music_part'], ['class'=>'form-control', 'placeholder'=>'パート']) }}
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
                                 {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
                                 {{ Html::linkRoute('search.music.index', 'クリア', [], ['class'=>'btn btn-light']) }}

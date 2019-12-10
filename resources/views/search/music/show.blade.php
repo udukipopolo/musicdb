@@ -14,7 +14,7 @@
                     <div class="form-group row">
                         {{ Form::label('album_title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                         <div class="col-md-8">
-                            <p class="form-control-plaintext">{{ $music->album->title }}</p>
+                            <p class="form-control-plaintext">{{ Html::linkRoute('search.album.show', $music->album->title, [$music->album->id]) }}</p>
                         </div>
                     </div>
 

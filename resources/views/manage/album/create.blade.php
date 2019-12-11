@@ -101,6 +101,25 @@ $(document).ready(function(){
                     </div>
                 </div>
 
+                <h4>アフィリエイト</h4>
+
+                <div class="form-group row">
+                    {{ Form::label('affi_apple_music', 'Apple Music URL', ['class'=>'col-form-label col-md-4'])}}
+                    <div class="col-md-8">
+                        {{ Form::text('affi_apple_music', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'affi_apple_music'), 'placeholder'=>'https://music.apple.com/****']) }}
+                        @include('layouts.parts.error_message', ['key'=>'affi_apple_music'])
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    {{ Form::label('affi_amazon', 'Amazon URL', ['class'=>'col-form-label col-md-4'])}}
+                    <div class="col-md-8">
+                        {{ Form::text('affi_amazon', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'affi_amazon'), 'placeholder'=>'https://www.amazon.co.jp/****']) }}
+                        @include('layouts.parts.error_message', ['key'=>'affi_amazon'])
+                    </div>
+                </div>
+
+
                 <div class="form-group row">
                     <div class="col-md-12">
                         {{ Form::submit('登録', ['class'=>'btn btn-primary']) }}

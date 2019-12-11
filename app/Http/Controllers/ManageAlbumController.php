@@ -57,7 +57,8 @@ class ManageAlbumController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
+        $validator = \Validator::make(
+            $request->all(),
             [
                 'title' => [
                     'required',
@@ -71,6 +72,8 @@ class ManageAlbumController extends Controller
                 'musics' => 'array',
                 'musics.*' => 'max:255',
                 'description' => '',
+                'affi_apple_music' => 'nullable|active_url',
+                'affi_amazon' => 'nullable|active_url',
             ],
             [],
             [
@@ -79,8 +82,25 @@ class ManageAlbumController extends Controller
                 'artist_name' => '別名義',
                 'musics.*' => '楽曲名',
                 'description' => '詳細・アルバムに携わった人等',
+                'affi_apple_music' => 'Apple Music URL',
+                'affi_amazon' => 'Amazon URL',
             ]
         );
+
+        $validator->after(function($validator) use($request) {
+            if ($request->filled('affi_apple_music') && strpos($request->phg_url, 'https://music.apple.com/') !== 0) {
+                $validator->errors()->add('affi_apple_music', 'Apple MusicのURLを指定してください。');
+            }
+            if ($request->filled('affi_amazon') && strpos($request->phg_url, 'https://www.amazon.co.jp/') !== 0) {
+                $validator->errors()->add('affi_amazon', 'AmazonのURLを指定してください。');
+            }
+        });
+
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
+
 
         $album = null;
 
@@ -104,6 +124,8 @@ class ManageAlbumController extends Controller
                 'artist_id' => $artist->id,
                 'artist_name' => $artist_name,
                 'description' => ($request->filled('description')) ? $request->description : '',
+                'affi_apple_music' => $this->transAffiliateTag('phg', $request->affi_apple_music),
+                'affi_amazon' => $this->transAffiliateTag('amazon', $request->affi_amazon),
             ]);
 
             foreach ($request->musics AS $no=>$title) {
@@ -160,7 +182,8 @@ class ManageAlbumController extends Controller
      */
     public function update(Request $request, Album $album)
     {
-        $request->validate(
+        $validator = \Validator::make(
+            $request->all(),
             [
                 'title' => [
                     'required',
@@ -174,6 +197,8 @@ class ManageAlbumController extends Controller
                 'musics' => 'array',
                 'musics.*' => 'max:255',
                 'description' => '',
+                'affi_apple_music' => 'nullable|active_url',
+                'affi_amazon' => 'nullable|active_url',
             ],
             [],
             [
@@ -182,8 +207,24 @@ class ManageAlbumController extends Controller
                 'artist_name' => '別名義',
                 'musics.*' => '楽曲名',
                 'description' => '詳細・アルバムに携わった人等',
+                'affi_apple_music' => 'Apple Music URL',
+                'affi_amazon' => 'Amazon URL',
             ]
         );
+
+        $validator->after(function($validator) use($request) {
+            if ($request->filled('affi_apple_music') && strpos($request->phg_url, 'https://music.apple.com/') !== 0) {
+                $validator->errors()->add('affi_apple_music', 'Apple MusicのURLを指定してください。');
+            }
+            if ($request->filled('affi_amazon') && strpos($request->phg_url, 'https://www.amazon.co.jp/') !== 0) {
+                $validator->errors()->add('affi_amazon', 'AmazonのURLを指定してください。');
+            }
+        });
+
+
+        if ($validator->fails()) {
+            return back()->withInput()->withErrors($validator);
+        }
 
         \DB::transaction(function () use($request, &$album) {
             $artist = Artist::where('name', $request->input('artist_id'))->first();
@@ -204,6 +245,8 @@ class ManageAlbumController extends Controller
             $album->artist_id = $artist->id;
             $album->artist_name = $artist_name;
             $album->description = ($request->filled('description')) ? $request->description : '';
+            $album->affi_apple_music = $this->transAffiliateTag('phg', $request->affi_apple_music);
+            $album->affi_amazon = $this->transAffiliateTag('amazon', $request->affi_amazon);
             $album->save();
 
             foreach ($request->musics AS $no=>$title) {
@@ -431,7 +474,29 @@ class ManageAlbumController extends Controller
         }
         $params['album'] = $album;
         $params['musics'] = collect($musics);
+        $params['affi_apple_music'] = $request->phg_url;
 
         return view('manage.album.create_phg', $params);
+    }
+
+    private function transAffiliateTag($type, $url)
+    {
+        if (empty($url)) {
+            return null;
+        }
+
+        $parse = parse_url($url);
+        parse_str($parse['query'], $query);
+
+        switch($type) {
+            case 'phg':
+                $query['at'] = config('const.affiliate.phg.tag');
+            break;
+            case 'amazon':
+                $query['tag'] = config('const.affiliate.amazon.tag');
+            break;
+        }
+
+        return $parse['scheme'].'://'.$parse['host'].$parse['path'].'?'.http_build_query($query);
     }
 }

@@ -67,6 +67,22 @@
                     </div>
                 </div>
 
+                <h4>アフィリエイト</h4>
+
+                <div class="form-group row">
+                    {{ Form::label('affi_apple_music', 'Apple Music URL', ['class'=>'col-form-label col-md-4'])}}
+                    <div class="col-md-8">
+                        {{ Form::text('affi_apple_music', $album->affi_apple_music, ['class'=>'form-control-plaintext', 'readonly']) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    {{ Form::label('affi_amazon', 'Amazon URL', ['class'=>'col-form-label col-md-4'])}}
+                    <div class="col-md-8">
+                        {{ Form::text('affi_amazon', $album->affi_amazon, ['class'=>'form-control-plaintext', 'readonly']) }}
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

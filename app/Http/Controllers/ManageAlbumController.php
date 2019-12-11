@@ -486,7 +486,12 @@ class ManageAlbumController extends Controller
         }
 
         $parse = parse_url($url);
-        parse_str($parse['query'], $query);
+
+        if (isset($parse['query']) && is_array($parse['query'])) {
+            parse_str($parse['query'], $query);
+        } else {
+            $query = [];
+        }
 
         switch($type) {
             case 'phg':

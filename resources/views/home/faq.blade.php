@@ -41,7 +41,7 @@
                                     </button>
                                 </h5>
                             </div>
-                            <div id="c-2" class="collapse show" aria-labelledby="h-2" data-parent="#accordionFAQ">
+                            <div id="c-2" class="collapse" aria-labelledby="h-2" data-parent="#accordionFAQ">
                                 <div class="card-body">
                                     A.ポチポチやって
                                 </div>

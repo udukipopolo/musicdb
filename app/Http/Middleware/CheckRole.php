@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class DebugbarView
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -13,12 +13,10 @@ class DebugbarView
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role)
     {
-        if (config('app.debug') && \Auth::check() && \Auth::user()->role_develop) {
-            \Debugbar::enable();
-        } else {
-            \Debugbar::disable();
+        if (!\Auth::user()->{'role_'.$role}) {
+            return redirect('/');
         }
 
         return $next($request);

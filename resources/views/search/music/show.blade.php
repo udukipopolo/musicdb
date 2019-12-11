@@ -76,6 +76,18 @@
                         </div>
                     </div>
 
+                    <h4>商品LINK</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if ($music->album->affi_apple_music)
+                            {{ Html::link($music->album->affi_apple_music, 'Apple Music', ['class'=>'btn btn-light', 'target'=>'_blank']) }}
+                            @endif
+                            @if ($music->album->affi_amazon)
+                            {{ Html::link($music->album->affi_amazon, 'Amazon', ['class'=>'btn btn-light', 'target'=>'_blank']) }}
+                            @endif
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

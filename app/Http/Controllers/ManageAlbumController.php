@@ -88,10 +88,10 @@ class ManageAlbumController extends Controller
         );
 
         $validator->after(function($validator) use($request) {
-            if ($request->filled('affi_apple_music') && strpos($request->phg_url, 'https://music.apple.com/') !== 0) {
+            if ($request->filled('affi_apple_music') && strpos($request->affi_apple_music, 'https://music.apple.com/') !== 0) {
                 $validator->errors()->add('affi_apple_music', 'Apple MusicのURLを指定してください。');
             }
-            if ($request->filled('affi_amazon') && strpos($request->phg_url, 'https://www.amazon.co.jp/') !== 0) {
+            if ($request->filled('affi_amazon') && strpos($request->affi_amazon, 'https://www.amazon.co.jp/') !== 0) {
                 $validator->errors()->add('affi_amazon', 'AmazonのURLを指定してください。');
             }
         });
@@ -213,10 +213,10 @@ class ManageAlbumController extends Controller
         );
 
         $validator->after(function($validator) use($request) {
-            if ($request->filled('affi_apple_music') && strpos($request->phg_url, 'https://music.apple.com/') !== 0) {
+            if ($request->filled('affi_apple_music') && strpos($request->affi_apple_music, 'https://music.apple.com/') !== 0) {
                 $validator->errors()->add('affi_apple_music', 'Apple MusicのURLを指定してください。');
             }
-            if ($request->filled('affi_amazon') && strpos($request->phg_url, 'https://www.amazon.co.jp/') !== 0) {
+            if ($request->filled('affi_amazon') && strpos($request->affi_amazon, 'https://www.amazon.co.jp/') !== 0) {
                 $validator->errors()->add('affi_amazon', 'AmazonのURLを指定してください。');
             }
         });

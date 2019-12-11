@@ -93,6 +93,9 @@
                                 {{ Html::linkRoute('search.artist.index', 'アーティスト検索', [], ['class'=>'dropdown-item']) }}
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home.faq') }}">{{ __('messages.faq') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

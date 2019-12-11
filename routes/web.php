@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('faq', 'HomeController@faq')->name('home.faq');
 
 // 楽曲検索
 Route::get('search/music', 'SearchMusicController@index')->name('search.music.index');

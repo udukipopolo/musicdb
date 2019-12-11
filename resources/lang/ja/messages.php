@@ -8,4 +8,5 @@ return [
     'register' => '会員登録',
     'search' => '検索',
     'management' => '管理',
+    'faq' => 'FAQ',
 ];

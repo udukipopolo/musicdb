@@ -18,6 +18,8 @@ class CreateArtistsTable extends Migration
             $table->string('name')->unique()->comment('アーティスト名');
             $table->text('belonging')->comment('所属');
             $table->timestamps();
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->bigInteger('updated_by')->nullable()->unsigned();
         });
     }
 

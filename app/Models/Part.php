@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\AuthorObservable;
 use Illuminate\Database\Eloquent\Model;
 
 class Part extends Model
 {
+    use AuthorObservable;
+
     protected $fillable = [
         'music_id',
         'artist_id',

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\AuthorObservable;
 use Illuminate\Database\Eloquent\Model;
 
 class Music extends Model
 {
+    use AuthorObservable;
+
     protected $fillable = [
         'title',
         'album_id',

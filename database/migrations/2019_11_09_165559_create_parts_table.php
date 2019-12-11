@@ -20,6 +20,8 @@ class CreatePartsTable extends Migration
             $table->string('artist_name')->comment('アーティスト名(表示名)');
             $table->string('part_name')->comment('パート');
             $table->timestamps();
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->bigInteger('updated_by')->nullable()->unsigned();
         });
     }
 

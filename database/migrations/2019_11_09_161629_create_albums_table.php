@@ -22,6 +22,8 @@ class CreateAlbumsTable extends Migration
             $table->string('affi_apple_music', 1000)->nullable()->comment('apple music アフィリエイト	');
             $table->string('affi_amazon', 1000)->nullable()->comment('amazonアフィリエイト');
             $table->timestamps();
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->bigInteger('updated_by')->nullable()->unsigned();
         });
     }
 

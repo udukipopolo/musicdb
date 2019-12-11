@@ -19,6 +19,8 @@ class CreateMusicsTable extends Migration
             $table->string('title')->comment('曲名');
             $table->integer('track_no')->unsigned()->comment('トラックNO');
             $table->timestamps();
+            $table->bigInteger('created_by')->nullable()->unsigned();
+            $table->bigInteger('updated_by')->nullable()->unsigned();
         });
     }
 

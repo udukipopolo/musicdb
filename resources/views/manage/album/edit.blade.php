@@ -53,13 +53,13 @@ $(document).ready(function(){
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
                         {{ Form::text('artist_id', $album->artist->name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist', 'placeholder'=>'Q-MHz']) }}
-                        <span class="help-block">※アーティスト名を入力してください。</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
+                        <span class="help-block">※アーティスト名を入力してください。</span>
                     </div>
                     <div class="col-md-4">
                         {{ Form::text('artist_name', $album->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name', 'placeholder'=>'別名義']) }}
-                        <span class="help-block">※別名義で登録したい場合は、こちらに入力</span>
                         @include('layouts.parts.error_message', ['key'=>'artist_name'])
+                        <span class="help-block">※別名義で登録したい場合は、こちらに入力</span>
                     </div>
                 </div>
 

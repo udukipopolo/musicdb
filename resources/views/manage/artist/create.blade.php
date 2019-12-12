@@ -22,8 +22,8 @@
                     {{ Form::label('belonging', '所属事務所', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
                         {{ Form::textarea('belonging', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'belonging'), 'rows'=>'6']) }}
-                        <p class="help-block">※複数ある場合、もしくは変更する場合は改行で追記してください。</p>
                         @include('layouts.parts.error_message', ['key'=>'belonging'])
+                        <p class="help-block">※複数ある場合、もしくは変更する場合は改行で追記してください。</p>
                     </div>
                 </div>
 

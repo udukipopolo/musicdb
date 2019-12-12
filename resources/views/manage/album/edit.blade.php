@@ -42,10 +42,10 @@ $(document).ready(function(){
                 {{ Form::open(['route'=>['manage.album.update', $album->id], 'method'=>'PUT', 'class'=>'']) }}
 
                 <div class="form-group row">
-                    {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
+                    {{ Form::label('album_title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('title', $album->title, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'title'), 'placeholder'=>'Q-MHz']) }}
-                        @include('layouts.parts.error_message', ['key'=>'title'])
+                        {{ Form::text('album_title', $album->title, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'album_title'), 'placeholder'=>'Q-MHz']) }}
+                        @include('layouts.parts.error_message', ['key'=>'album_title'])
                     </div>
                 </div>
 

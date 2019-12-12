@@ -67,9 +67,9 @@ $(document).ready(function(){
                 {{ Form::open(['route'=>['manage.album.music.update', $album->id, $music->id], 'method'=>'PUT', 'class'=>'']) }}
 
                 <div class="form-group row">
-                    {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
+                    {{ Form::label('album_title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('title', $album->title, ['class'=>'form-control-plaintext', 'readonly']) }}
+                        {{ Form::text('album_title', $album->title, ['class'=>'form-control-plaintext', 'readonly']) }}
                     </div>
                 </div>
 

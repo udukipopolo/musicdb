@@ -60,11 +60,11 @@ class ManageAlbumController extends Controller
         $validator = \Validator::make(
             $request->all(),
             [
-                'title' => [
+                'album_title' => [
                     'required',
                     'max:255',
-                    Rule::unique('albums')->where(function($query) use($request) {
-                        return $query->where('artist_name', $request->artist_name);
+                    Rule::unique('albums', 'title')->where(function($query) use($request) {
+                        return $query->where('artist_name', $request->artist_id);
                     }),
                 ],
                 'artist_id' => 'required|max:255',
@@ -77,7 +77,7 @@ class ManageAlbumController extends Controller
             ],
             [],
             [
-                'title' => 'アルバムタイトル',
+                'album_title' => 'アルバムタイトル',
                 'artist_id' => 'アーティスト名',
                 'artist_name' => '別名義',
                 'musics.*' => '楽曲名',
@@ -120,7 +120,7 @@ class ManageAlbumController extends Controller
             }
 
             $album = Album::create([
-                'title' => $request->title,
+                'title' => $request->album_title,
                 'artist_id' => $artist->id,
                 'artist_name' => $artist_name,
                 'description' => ($request->filled('description')) ? $request->description : '',
@@ -185,11 +185,11 @@ class ManageAlbumController extends Controller
         $validator = \Validator::make(
             $request->all(),
             [
-                'title' => [
+                'album_title' => [
                     'required',
                     'max:255',
-                    Rule::unique('albums')->where(function($query) use($request) {
-                        return $query->where('artist_name', $request->artist_name);
+                    Rule::unique('albums', 'title')->where(function($query) use($request) {
+                        return $query->where('artist_name', $request->artist_id);
                     })->ignore($album->id),
                 ],
                 'artist_id' => 'required|max:255',
@@ -202,7 +202,7 @@ class ManageAlbumController extends Controller
             ],
             [],
             [
-                'title' => 'アルバムタイトル',
+                'album_title' => 'アルバムタイトル',
                 'artist_id' => 'アーティスト名',
                 'artist_name' => '別名義',
                 'musics.*' => '楽曲名',
@@ -241,7 +241,7 @@ class ManageAlbumController extends Controller
                 $artist_name = $artist->name;
             }
 
-            $album->title = $request->title;
+            $album->title = $request->album_title;
             $album->artist_id = $artist->id;
             $album->artist_name = $artist_name;
             $album->description = ($request->filled('description')) ? $request->description : '';

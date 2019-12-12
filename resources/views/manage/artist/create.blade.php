@@ -11,10 +11,10 @@
                 {{ Form::open(['route'=>['manage.artist.store'], 'method'=>'POST', 'class'=>'']) }}
 
                 <div class="form-group row">
-                    {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
+                    {{ Form::label('artist_name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'name'), 'placeholder'=>'Q-MHz']) }}
-                        @include('layouts.parts.error_message', ['key'=>'name'])
+                        {{ Form::text('artist_name', null, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'placeholder'=>'Q-MHz']) }}
+                        @include('layouts.parts.error_message', ['key'=>'artist_name'])
                     </div>
                 </div>
 

@@ -23,6 +23,9 @@ class CreatePartsTable extends Migration
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
         });
+
+        \DB::statement('ALTER TABLE `parts` ADD FULLTEXT INDEX ft_artist_name (`artist_name`) WITH PARSER ngram');
+        \DB::statement('ALTER TABLE `parts` ADD FULLTEXT INDEX ft_part_name (`part_name`) WITH PARSER ngram');
     }
 
     /**

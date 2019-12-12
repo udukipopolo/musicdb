@@ -25,6 +25,10 @@ class CreateAlbumsTable extends Migration
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
         });
+
+        \DB::statement('ALTER TABLE `albums` ADD FULLTEXT INDEX ft_title (`title`) WITH PARSER ngram');
+        \DB::statement('ALTER TABLE `albums` ADD FULLTEXT INDEX ft_artist_name (`artist_name`) WITH PARSER ngram');
+
     }
 
     /**

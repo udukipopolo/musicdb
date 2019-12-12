@@ -22,6 +22,8 @@ class CreateMusicsTable extends Migration
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
         });
+
+        \DB::statement('ALTER TABLE `musics` ADD FULLTEXT INDEX ft_title (`title`) WITH PARSER ngram');
     }
 
     /**

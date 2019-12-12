@@ -21,6 +21,9 @@ class CreateArtistsTable extends Migration
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
         });
+
+        \DB::statement('ALTER TABLE `artists` ADD FULLTEXT INDEX ft_name (`name`) WITH PARSER ngram');
+
     }
 
     /**

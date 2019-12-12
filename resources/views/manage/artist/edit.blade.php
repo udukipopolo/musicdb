@@ -11,10 +11,10 @@
                 {{ Form::open(['route'=>['manage.artist.update', $artist->id], 'method'=>'PUT', 'class'=>'']) }}
 
                 <div class="form-group row">
-                    {{ Form::label('artist_name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
+                    {{ Form::label('artist_id', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('artist_name', $artist->name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'placeholder'=>'Q-MHz']) }}
-                        @include('layouts.parts.error_message', ['key'=>'artist_name'])
+                        {{ Form::text('artist_id', $artist->name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'placeholder'=>'Q-MHz']) }}
+                        @include('layouts.parts.error_message', ['key'=>'artist_id'])
                     </div>
                 </div>
 

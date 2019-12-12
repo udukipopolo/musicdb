@@ -53,13 +53,13 @@ class ManageArtistController extends Controller
     {
         $request->validate(
             [
-                'artist_name' => 'required|max:255|unique:artists,name',
+                'artist_id' => 'required|max:255|unique:artists,name',
                 'belonging' => '',
             ]
         );
 
         $artist = Artist::create([
-            'name' => $request->artist_name,
+            'name' => $request->artist_id,
             'belonging' => ($request->filled('belonging')) ? $request->input('belonging') : '',
         ]);
 
@@ -107,7 +107,7 @@ class ManageArtistController extends Controller
     {
         $request->validate(
             [
-                'artist_name' => [
+                'artist_id' => [
                     'required',
                     'max:255',
                     Rule::unique('artists', 'name')->ignore($artist->id),
@@ -116,7 +116,7 @@ class ManageArtistController extends Controller
             ]
         );
 
-        $artist->name = $request->artist_name;
+        $artist->name = $request->artist_id;
         $artist->belonging = ($request->filled('belonging')) ? $request->input('belonging') : '';
         $artist->save();
 

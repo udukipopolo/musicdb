@@ -33,4 +33,16 @@ return [
     'manage_artist' => 'アーティスト管理',
     'manage_album' => 'アルバム管理',
     'manage_bulk_regist' => '一括登録',
+
+    'artist_name' => 'アーティスト名',
+    'belonging' => '所属事務所',
+    'album_title' => 'アルバムタイトル',
+    'artist_id' => 'アーティスト名',
+    'artist_name' => '別名義',
+    'music_title' => '楽曲名',
+    'description' => '詳細・アルバムに携わった人等',
+    'affi_apple_music' => 'Apple Music URL',
+    'affi_amazon' => 'Amazon URL',
+    'phg_url' => 'Apple Music URL',
+    'gs_url' => 'Googleスプレッドシート URL',
 ];

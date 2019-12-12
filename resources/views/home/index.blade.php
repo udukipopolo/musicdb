@@ -5,27 +5,27 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">楽曲検索</div>
+                <div class="card-header">@lang('messages.search_music')</div>
 
                 <div class="card-body">
                     {{ Form::open(['route'=>['search.music.index'], 'method'=>'GET', 'class'=>'']) }}
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="sr-only" form="name">アルバムタイトル</label>
-                                {{ Form::text('album_title', @$input['album_title'], ['class'=>'form-control', 'placeholder'=>'アルバムタイトル']) }}
+                                <label class="sr-only" form="name">@lang('messages.album_title')</label>
+                                {{ Form::text('album_title', @$input['album_title'], ['class'=>'form-control', 'placeholder'=>__('messages.album_title')]) }}
                             </div>
                             <div class="col-md-4">
-                                <label class="sr-only" form="music_title">楽曲名</label>
-                                {{ Form::text('music_title', @$input['music_title'], ['class'=>'form-control', 'placeholder'=>'楽曲名']) }}
+                                <label class="sr-only" form="music_title">@lang('messages.music_title')</label>
+                                {{ Form::text('music_title', @$input['music_title'], ['class'=>'form-control', 'placeholder'=>__('messages.music_title')]) }}
                             </div>
                             <div class="col-md-4">
-                                <label class="sr-only" form="artist_name">アーティスト名</label>
-                                {{ Form::text('artist_name', @$input['artist_name'], ['class'=>'form-control', 'placeholder'=>'アーティスト名']) }}
+                                <label class="sr-only" form="artist_name">@lang('messages.artist_id')</label>
+                                {{ Form::text('artist_name', @$input['artist_name'], ['class'=>'form-control', 'placeholder'=>__('messages.artist_id')]) }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
+                                {{ Form::submit(__('messages.search'), ['class'=>'btn btn-light']) }}
                             </div>
                         </div>
                     {{ Form::close() }}
@@ -35,19 +35,19 @@
 
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">アーティスト検索</div>
+                <div class="card-header">@lang('messages.search_artist')</div>
 
                 <div class="card-body">
                     {{ Form::open(['route'=>['search.artist.index'], 'method'=>'GET', 'class'=>'']) }}
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="sr-only" form="artist_name">アーティスト名</label>
-                                {{ Form::text('artist_name', @$input['artist_name'], ['class'=>'form-control', 'placeholder'=>'アーティスト名']) }}
+                                <label class="sr-only" form="artist_name">@lang('messages.artist_id')</label>
+                                {{ Form::text('artist_name', @$input['artist_name'], ['class'=>'form-control', 'placeholder'=>__('messages.artist_id')]) }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
+                                {{ Form::submit(__('messages.search'), ['class'=>'btn btn-light']) }}
                             </div>
                         </div>
                     {{ Form::close() }}

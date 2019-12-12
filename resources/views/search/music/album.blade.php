@@ -7,6 +7,13 @@
             <div class="card">
                 <div class="card-header">
                     アルバム詳細
+                    @auth
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <a href="{{ route('manage.album.edit', [$album->id]) }}" class="btn btn-success">編集</a>
+                        </div>
+                    </div>
+                    @endauth
                 </div>
                 <div class="card-body">
                     <h2>{{ $album->title }}</h2>

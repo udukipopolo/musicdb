@@ -6,7 +6,14 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    詳細
+                    アルバムアーティスト詳細
+                    @auth
+                    <div class="btn-toolbar float-right" role="toolbar">
+                        <div class="btn-group" role="group">
+                            <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success">編集</a>
+                        </div>
+                    </div>
+                    @endauth
                 </div>
                 <div class="card-body">
                     <h2>{{ $artist->name }}</h2>

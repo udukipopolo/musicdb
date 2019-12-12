@@ -19,12 +19,18 @@ class SearchArtistController extends Controller
 
             if ($request->filled('artist_name')) {
                 $artists->where(function($query) use($request) {
-                    $query->where('name', 'LIKE', '%'.$request->artist_name.'%')
-                        ->orWhereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);
+                    if (mb_strlen($request->artist_name) > 2) {
+                        $query->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);
+                    } else {
+                        $query->where('name', 'LIKE', '%'.$request->artist_name.'%');
+                    }
                 })
                 ->orWhereHas('parts', function($parts) use($request) {
-                    $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%')
-                        ->orWhereRaw("MATCH(artist_name) AGAINST( ? )",[$request->artist_name]);
+                    if (mb_strlen($request->artist_name) > 2) {
+                        $parts->whereRaw("MATCH(artist_name) AGAINST( ? )", [$request->artist_name]);
+                    } else {
+                        $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%');
+                    }
                 });
             }
 

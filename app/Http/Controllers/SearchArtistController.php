@@ -18,10 +18,10 @@ class SearchArtistController extends Controller
             $artists = Artist::query();
 
             if ($request->filled('artist_name')) {
-                $artists->whereRaw(\DB::raw("MATCH(name) AGAINST( ? )")->setBindings([$request->artist_name]))
+                $artists->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name])
                     //->where('name', 'LIKE', '%'.$request->artist_name.'%')
                     ->orWhereHas('parts', function($parts) use($request) {
-                        $parts->whereRaw(\DB::raw("MATCH(artist_name) AGAINST( ? )")->setBindings([$request->artist_name]));
+                        $parts->whereRaw("MATCH(artist_name) AGAINST( ? )",[$request->artist_name]);
                             //->where('artist_name', 'LIKE', '%'.$request->artist_name.'%');
                     });
             }

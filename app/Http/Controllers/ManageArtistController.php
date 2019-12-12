@@ -55,11 +55,6 @@ class ManageArtistController extends Controller
             [
                 'artist_name' => 'required|max:255|unique:artists,name',
                 'belonging' => '',
-            ],
-            [],
-            [
-                'artist_name' => 'アーティスト名',
-                'belonging' => '所属事務所',
             ]
         );
 
@@ -68,7 +63,7 @@ class ManageArtistController extends Controller
             'belonging' => ($request->filled('belonging')) ? $request->input('belonging') : '',
         ]);
 
-        return redirect()->route('manage.artist.index')->with('message', 'アーティストを登録しました。');
+        return redirect()->route('manage.artist.index')->with('message', __('messages.registered'));
     }
 
     /**
@@ -118,11 +113,6 @@ class ManageArtistController extends Controller
                     Rule::unique('artists', 'name')->ignore($artist->id),
                 ],
                 'belonging' => '',
-            ],
-            [],
-            [
-                'artist_name' => 'アーティスト名',
-                'belonging' => '所属事務所',
             ]
         );
 
@@ -130,7 +120,7 @@ class ManageArtistController extends Controller
         $artist->belonging = ($request->filled('belonging')) ? $request->input('belonging') : '';
         $artist->save();
 
-        return redirect()->route('manage.artist.show', $artist->id)->with('message', '更新しました。');
+        return redirect()->route('manage.artist.show', $artist->id)->with('message', __('messages.updated'));
     }
 
     /**
@@ -145,7 +135,7 @@ class ManageArtistController extends Controller
         $artist->albums()->dissociate();
         $artist->delete();
 
-        return redirect()->route('manage.artist.index')->with('message', 'アーティストを削除しました。');
+        return redirect()->route('manage.artist.index')->with('message', __('messages.deleted'));
     }
 
     public function apiArtistList(Request $request)

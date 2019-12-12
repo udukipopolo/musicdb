@@ -127,8 +127,11 @@ return [
     */
 
     'custom' => [
-        '属性名' => [
-            'ルール名' => 'カスタムメッセージ',
+        'csv_file' => [
+            'required'  => 'ファイルを選択してください。',
+            'file'      => 'ファイルアップロードに失敗しました。',
+            'mimetypes' => 'ファイル形式が不正です。',
+            'mimes'     => 'ファイル拡張子が異なります。',
         ],
     ],
 
@@ -143,6 +146,24 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'artist_name' => 'アーティスト名',
+        'belonging' => '所属事務所',
+        'album_title' => 'アルバムタイトル',
+        'artist_id' => 'アーティスト名',
+        'artist_name' => '別名義',
+        'musics.*' => '楽曲名',
+        'description' => '詳細・アルバムに携わった人等',
+        'affi_apple_music' => 'Apple Music URL',
+        'affi_amazon' => 'Amazon URL',
+        'edit_artist_id.*' => 'アーティスト名',
+        'edit_artist_name.*' => '別名義',
+        'edit_part_name.*' => 'パート名',
+        'add_artist_id.*' => 'アーティスト名',
+        'add_artist_name.*' => '別名義',
+        'add_part_name.*' => 'パート名',
+        'phg_url' => 'Apple Music URL',
+        'gs_url' => 'Googleスプレッドシート URL',
+    ],
 
 ];

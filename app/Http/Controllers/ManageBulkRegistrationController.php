@@ -26,14 +26,7 @@ class ManageBulkRegistrationController extends Controller
             $request->all(),
             [
                 'csv_file' => 'required|file|mimetypes:text/plain|mimes:csv,txt',
-            ],
-            [
-                'csv_file.required'  => 'ファイルを選択してください。',
-                'csv_file.file'      => 'ファイルアップロードに失敗しました。',
-                'csv_file.mimetypes' => 'ファイル形式が不正です。',
-                'csv_file.mimes'     => 'ファイル拡張子が異なります。',
-            ],
-            []
+            ]
         );
 
         if ($validator->fails()) {
@@ -120,7 +113,7 @@ class ManageBulkRegistrationController extends Controller
         } catch(\Exception $e) {
             \Log::debug($e->getMessage());
             $validator->after(function($validator) {
-                $validator->errors()->add('csv_file', 'データの登録に失敗しました。');
+                $validator->errors()->add('csv_file', __('messages.csv_file.failed'));
             });
         }
 
@@ -128,7 +121,7 @@ class ManageBulkRegistrationController extends Controller
             return back()->withErrors($validator);
         }
 
-        return redirect()->route('manage.bulk.regist.index')->with('message', 'CSV登録が完了しました。');
+        return redirect()->route('manage.bulk.regist.index')->with('message', __('messages.csv_file.complete'));
     }
 
     public function googlespreadsheet(Request $request)
@@ -136,15 +129,11 @@ class ManageBulkRegistrationController extends Controller
         $validator = \Validator::make(
             $request->all(),
             [
-                'url' => [
+                'gs_url' => [
                     'required',
                     'active_url',
                     'regex:/^https:\/\/docs\.google\.com\/spreadsheets\/.+$/u',
                 ],
-            ],
-            [],
-            [
-                'url' => 'Googleスプレッドシート URL',
             ]
         );
 
@@ -233,7 +222,7 @@ class ManageBulkRegistrationController extends Controller
             });
         } catch(\Exception $e) {
             $validator->after(function($validator) {
-                $validator->errors()->add('csv_file', 'データの登録に失敗しました。');
+                $validator->errors()->add('csv_file', __('messages.csv_file.failed'));
             });
         }
 
@@ -241,6 +230,6 @@ class ManageBulkRegistrationController extends Controller
             return back()->withErrors($validator);
         }
 
-        return redirect()->route('manage.bulk.regist.index')->with('message', 'Google スプレッドシートの登録が完了しました。');
+        return redirect()->route('manage.bulk.regist.index')->with('message', __('messages.csv_file.complete'));
     }
 }

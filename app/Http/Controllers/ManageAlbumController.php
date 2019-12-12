@@ -74,25 +74,15 @@ class ManageAlbumController extends Controller
                 'description' => '',
                 'affi_apple_music' => 'nullable|active_url',
                 'affi_amazon' => 'nullable|active_url',
-            ],
-            [],
-            [
-                'album_title' => 'アルバムタイトル',
-                'artist_id' => 'アーティスト名',
-                'artist_name' => '別名義',
-                'musics.*' => '楽曲名',
-                'description' => '詳細・アルバムに携わった人等',
-                'affi_apple_music' => 'Apple Music URL',
-                'affi_amazon' => 'Amazon URL',
             ]
         );
 
         $validator->after(function($validator) use($request) {
             if ($request->filled('affi_apple_music') && strpos($request->affi_apple_music, 'https://music.apple.com/') !== 0) {
-                $validator->errors()->add('affi_apple_music', 'Apple MusicのURLを指定してください。');
+                $validator->errors()->add('affi_apple_music', __('messages.affi_apple_music.url'));
             }
             if ($request->filled('affi_amazon') && strpos($request->affi_amazon, 'https://www.amazon.co.jp/') !== 0) {
-                $validator->errors()->add('affi_amazon', 'AmazonのURLを指定してください。');
+                $validator->errors()->add('affi_amazon', __('messages.affi_amazon.url'));
             }
         });
 
@@ -139,7 +129,7 @@ class ManageAlbumController extends Controller
             }
         });
 
-        return redirect()->route('manage.album.show', $album)->with('message', 'アルバムを登録しました。');
+        return redirect()->route('manage.album.show', $album)->with('message', __('messages.registered'));
     }
 
     /**
@@ -199,25 +189,15 @@ class ManageAlbumController extends Controller
                 'description' => '',
                 'affi_apple_music' => 'nullable|active_url',
                 'affi_amazon' => 'nullable|active_url',
-            ],
-            [],
-            [
-                'album_title' => 'アルバムタイトル',
-                'artist_id' => 'アーティスト名',
-                'artist_name' => '別名義',
-                'musics.*' => '楽曲名',
-                'description' => '詳細・アルバムに携わった人等',
-                'affi_apple_music' => 'Apple Music URL',
-                'affi_amazon' => 'Amazon URL',
             ]
         );
 
         $validator->after(function($validator) use($request) {
             if ($request->filled('affi_apple_music') && strpos($request->affi_apple_music, 'https://music.apple.com/') !== 0) {
-                $validator->errors()->add('affi_apple_music', 'Apple MusicのURLを指定してください。');
+                $validator->errors()->add('affi_apple_music', __('messages.affi_apple_music.url'));
             }
             if ($request->filled('affi_amazon') && strpos($request->affi_amazon, 'https://www.amazon.co.jp/') !== 0) {
-                $validator->errors()->add('affi_amazon', 'AmazonのURLを指定してください。');
+                $validator->errors()->add('affi_amazon', __('messages.affi_amazon.url'));
             }
         });
 
@@ -271,7 +251,7 @@ class ManageAlbumController extends Controller
 
         });
 
-        return redirect()->route('manage.album.show', $album)->with('message', 'アルバムを更新しました。');
+        return redirect()->route('manage.album.show', $album)->with('message', __('messages.updated'));
     }
 
     /**
@@ -288,7 +268,7 @@ class ManageAlbumController extends Controller
         }
         $album->delete();
 
-        return redirect()->route('manage.album.index')->with('message', 'アルバム情報を削除しました。');
+        return redirect()->route('manage.album.index')->with('message', __('messages.deleted'));
     }
 
     public function editMusic(Album $album, Music $music)
@@ -321,15 +301,6 @@ class ManageAlbumController extends Controller
                 'add_artist_id' => 'max:255',
                 'add_artist_name.*' => 'max:255',
                 'add_part_name.*' => 'required_with:add_artist_name.*|max:255',
-            ],
-            [],
-            [
-                'edit_artist_id.*' => 'アーティスト名',
-                'edit_artist_name.*' => '別名義',
-                'edit_part_name.*' => 'パート名',
-                'add_artist_id.*' => 'アーティスト名',
-                'add_artist_name.*' => '別名義',
-                'add_part_name.*' => 'パート名',
             ]
         );
 
@@ -410,7 +381,7 @@ class ManageAlbumController extends Controller
 
         });
 
-        return redirect()->route('manage.album.show', $album->id)->with('message', '更新しました。');
+        return redirect()->route('manage.album.show', $album->id)->with('message', __('messages.updated'));
     }
 
     public function createFromPhg(Request $request)
@@ -422,16 +393,12 @@ class ManageAlbumController extends Controller
                     'required',
                     'active_url',
                 ]
-            ],
-            [],
-            [
-                'phg_url' => 'Apple Music URL',
             ]
         );
 
         $validator->after(function($validator) use($request) {
             if (strpos($request->phg_url, 'https://music.apple.com/') !== 0) {
-                $validator->errors()->add('phg_url', 'Apple MusicのURLを指定してください。');
+                $validator->errors()->add('phg_url', __('messages.phg.url'));
             }
         });
 

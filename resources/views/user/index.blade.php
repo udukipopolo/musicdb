@@ -11,7 +11,7 @@
                 <div class="card-body">
                     @include('layouts.parts.message')
 
-                    {{ Form::open(['route'=>['search.artist.index'], 'method'=>'GET', 'class'=>'']) }}
+                    {{ Form::open(['route'=>['user.index'], 'method'=>'GET', 'class'=>'']) }}
                         <div class="row">
                             <div class="col-md-4">
                                 <label class="sr-only" form="user_name">@lang('messages.user_name')</label>
@@ -32,7 +32,6 @@
             </div>
         </div>
 
-        @isset($artists)
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -82,7 +81,6 @@
                 </div>
             </div>
         </div>
-        @endisset
     </div>
 </div>
 @endsection

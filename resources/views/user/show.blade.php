@@ -13,7 +13,7 @@
                         </div>
                         <div class="btn-group" role="group">
                             {{ Form::open(['route'=>['user.destroy', $user->id], 'method'=>'DELETE', 'onsubmit'=>'return confirm("削除しますか？");']) }}
-                            {{ Form::submit(__('messages.delete', ['class'=>'btn btn-danger'])) }}
+                            {{ Form::submit(__('messages.delete'), ['class'=>'btn btn-danger']) }}
                             {{ Form::close() }}
                         </div>
                     </div>

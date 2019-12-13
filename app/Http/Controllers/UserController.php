@@ -100,9 +100,9 @@ class UserController extends Controller
             ]
         );
 
-        $user->role_admin = $request->role_admin;
-        $user->role_develop = $request->role_develop;
-        $user->role_editor = $request->role_editor;
+        $user->role_admin = $request->filled('role_admin');
+        $user->role_develop = $request->filled('role_develop');
+        $user->role_editor = $request->filled('role_editor');
         $user->save();
 
         return redirect()->route('user.show', $user->id);

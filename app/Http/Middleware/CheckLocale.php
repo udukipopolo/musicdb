@@ -6,6 +6,8 @@ use Closure;
 
 class CheckLocale
 {
+    private $langs = ['ja', 'en'];
+
     /**
      * Handle an incoming request.
      *
@@ -30,7 +32,7 @@ class CheckLocale
             }
         }
         // 指定された言語が $langs に存在しなければ、フォールバック用言語を使う
-        if (!config('locale.'.$locale)) {
+        if (!in_array($locale, $this->langs, true)) {
             $locale = config('app.fallback_locale');
         }
         // 使用言語をセッションに保存する

@@ -11,7 +11,7 @@ class ViewUtil
     public static function myLocaleUrl($locale)
     {
         // URLをパースする
-        $urlParsed = parse_url(Request::fullUrl());
+        $urlParsed = parse_url(\Request::fullUrl());
         if (isset($urlParsed['query'])) {
             parse_str($urlParsed['query'], $params);
         }

@@ -24,7 +24,7 @@ class ViewUtil
         }
         $query = implode('&', $paramsJoined);
         // URL全体を整形する
-        $url = (App::environment('production') ? 'https' : $urlParsed['scheme']).'://'.
+        $url = (\App::environment('production') ? 'https' : $urlParsed['scheme']).'://'.
                $urlParsed['host']. // user と pass は扱わない
                (isset($urlParsed['port']) ? ':'.$urlParsed['port'] : '').
                (isset($urlParsed['path']) ? $urlParsed['path'] : '/').

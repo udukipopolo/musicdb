@@ -47,4 +47,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', 'ProfileController@index')->name('profile.index');
     Route::get('profile/edit', 'ProfileController@edit')->name('profile.edit');
     Route::put('profile/edit', 'ProfileController@update')->name('profile.update');
+
+    Route::group(['middleware' => 'check.role:admin'], function() {
+        // ユーザ管理
+        Route::resource('user', 'UserController')->except(['create', 'store']);
+    });
 });

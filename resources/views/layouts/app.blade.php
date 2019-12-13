@@ -119,6 +119,9 @@
                                     {{ Html::linkRoute('manage.album.index', __('messages.manage_album'), [], ['class'=>'dropdown-item']) }}
                                     {{ Html::linkRoute('manage.artist.index', __('messages.manage_artist'), [], ['class'=>'dropdown-item']) }}
                                     {{ Html::linkRoute('manage.bulk.regist.index', __('messages.manage_bulk_regist'), [], ['class'=>'dropdown-item']) }}
+                                    @if (Auth::user()->role_admin)
+                                    {{ Html::linkRoute('user.index', __('messages.manage_user'), [], ['class'=>'dropdown-item']) }}
+                                    @endif
                                 </div>
                             </li>
                             <li class="nav-item dropdown">

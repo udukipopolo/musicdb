@@ -1,5 +1,9 @@
 <?php
 return [
+    'locale' => [
+        'ja',
+        'en',
+    ],
     'affiliate' => [
         'phg' => [
             'tag' => env('AFFILIATE_PHG'),

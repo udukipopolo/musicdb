@@ -2,14 +2,14 @@
 return [
     'login' => 'Login',
     'logout' => 'Logout',
-    'profile' => 'プロフィール',
+    'profile' => 'Profile',
     'regist' => '登録',
     'edit' => '編集',
     'update' => '更新',
     'delete' => '削除',
     'register' => '会員登録',
     'search' => 'Search',
-    'clear' => 'クリア',
+    'clear' => 'Clear',
     'management' => '管理',
     'faq' => 'FAQ',
 

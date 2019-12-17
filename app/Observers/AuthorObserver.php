@@ -7,16 +7,31 @@ class AuthorObserver
 {
     public function creating(Model $model)
     {
-        $model->created_by = \Auth::user()->id;
+        if (\Auth::check()) {
+            $user_id = \Auth::user()->id;
+        } else {
+            $user_id = null;
+        }
+        $model->created_by = $user_id;
     }
 
     public function updating(Model $model)
     {
-        $model->updated_by = \Auth::user()->id;
+        if (\Auth::check()) {
+            $user_id = \Auth::user()->id;
+        } else {
+            $user_id = null;
+        }
+        $model->updated_by = $user_id;
     }
 
     public function saving(Model $model)
     {
-        $model->updated_by = \Auth::user()->id;
+        if (\Auth::check()) {
+            $user_id = \Auth::user()->id;
+        } else {
+            $user_id = null;
+        }
+        $model->updated_by = $user_id;
     }
 }

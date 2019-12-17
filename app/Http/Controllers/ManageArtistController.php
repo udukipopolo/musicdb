@@ -68,7 +68,7 @@ class ManageArtistController extends Controller
                 'locale' => 'ja',
             ],
             [
-                'name' => $artist->name,
+                'name' => $request->artist_id,
             ]
         );
         $artist->locale_text()->updateOrCreate(
@@ -77,7 +77,7 @@ class ManageArtistController extends Controller
                 'locale' => 'ja',
             ],
             [
-                'text' => $artist->belonging,
+                'text' => ($request->filled('belonging')) ? $request->input('belonging') : '',
             ]
         );
 
@@ -143,7 +143,7 @@ class ManageArtistController extends Controller
                 'locale' => 'ja',
             ],
             [
-                'name' => $artist->name,
+                'name' => $request->artist_id,
             ]
         );
         $artist->locale_text()->updateOrCreate(
@@ -152,7 +152,7 @@ class ManageArtistController extends Controller
                 'locale' => 'ja',
             ],
             [
-                'text' => $artist->belonging,
+                'text' => ($request->filled('belonging')) ? $request->input('belonging') : '',
             ]
         );
 

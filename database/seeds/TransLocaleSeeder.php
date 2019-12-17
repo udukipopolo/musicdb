@@ -2,6 +2,8 @@
 
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\Music;
+use App\Models\Part;
 use Illuminate\Database\Seeder;
 
 class TransLocaleSeeder extends Seeder

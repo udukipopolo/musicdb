@@ -27,6 +27,16 @@ class Album extends Model
         return $this->belongsTo(Artist::class);
     }
 
+    public function locale_name()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable');
+    }
+
+    public function locale_text()
+    {
+        return $this->morphMany('App\Models\LocaleText', 'localable');
+    }
+
     public function album_title()
     {
         return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'title');

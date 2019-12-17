@@ -26,6 +26,16 @@ class Part extends Model
         return $this->belongsTo(Artist::class);
     }
 
+    public function locale_name()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable');
+    }
+
+    public function locale_text()
+    {
+        return $this->morphMany('App\Models\LocaleText', 'localable');
+    }
+
     public function part_artist_name()
     {
         return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'artist_name');

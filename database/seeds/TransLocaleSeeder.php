@@ -20,58 +20,91 @@ class TransLocaleSeeder extends Seeder
 
         $artists = Artist::all();
         foreach($artists as $artist) {
-            $artist->artist_name()->create([
-                'column' => 'artist_name',
-                'locale' => 'ja',
-                'name' => $artist->name,
-            ]);
-            $artist->artist_belonging()->create([
-                'column' => 'belonging',
-                'locale' => 'ja',
-                'text' => $artist->belonging,
-            ]);
+            $artist->locale_name()->updateOrCreate(
+                [
+                    'column' => 'artist_name',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $artist->name,
+                ]
+            );
+            $artist->locale_text()->updateOrCreate(
+                [
+                    'column' => 'belonging',
+                    'locale' => 'ja',
+                    'text' => $artist->belonging,
+                ],
+                [
+                    'text' => $artist->belonging,
+                ]
+            );
         }
 
         $albums = Album::all();
         foreach($albums as $album) {
-            $album->album_title()->create([
-                'column' => 'title',
-                'locale' => 'ja',
-                'name' => $album->title,
-            ]);
-            $album->album_artist_name()->create([
-                'column' => 'artist_name',
-                'locale' => 'ja',
-                'name' => $album->artist_name,
-            ]);
-            $album->album_description()->create([
-                'column' => 'description',
-                'locale' => 'ja',
-                'text' => $album->description,
-            ]);
+            $album->locale_name()->updateOrCreate(
+                [
+                    'column' => 'title',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $album->title,
+                ]
+            );
+            $album->locale_name()->updateOrCreate(
+                [
+                    'column' => 'artist_name',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $album->artist_name,
+                ]
+            );
+            $album->locale_text()->updateOrCreate(
+                [
+                    'column' => 'description',
+                    'locale' => 'ja',
+                ],
+                [
+                    'text' => $album->description,
+                ]
+            );
         }
 
         $musics = Music::all();
         foreach($musics as $music) {
-            $music->music_title()->create([
-                'column' => 'title',
-                'locale' => 'ja',
-                'name' => $music->title,
-            ]);
+            $music->locale_name()->updateOrCreate(
+                [
+                    'column' => 'title',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $music->title,
+                ]
+            );
         }
 
         $parts = Part::all();
         foreach($parts as $part) {
-            $part->part_artist_name()->create([
-                'column' => 'artist_name',
-                'locale' => 'ja',
-                'name' => $part->artist_name,
-            ]);
-            $part->part_name()->create([
-                'column' => 'name',
-                'locale' => 'ja',
-                'name' => $part->name,
-            ]);
+            $part->locale_name()->updateOrCreate(
+                [
+                    'column' => 'artist_name',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $part->artist_name,
+                ]
+            );
+            $part->locale_name()->updateOrCreate(
+                [
+                    'column' => 'name',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $part->name,
+                ]
+            );
         }
     }
 }

@@ -28,7 +28,7 @@ class TransLocaleSeeder extends Seeder
             $artist->artist_belonging()->create([
                 'column' => 'belonging',
                 'locale' => 'ja',
-                'name' => $artist->belonging,
+                'text' => $artist->belonging,
             ]);
         }
 

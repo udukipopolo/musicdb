@@ -62,6 +62,16 @@ class ManageArtistController extends Controller
             'name' => $request->artist_id,
             'belonging' => ($request->filled('belonging')) ? $request->input('belonging') : '',
         ]);
+        $artist->artist_name()->create([
+            'column' => 'artist_name',
+            'locale' => 'ja',
+            'name' => $artist->name,
+        ]);
+        $artist->artist_belonging()->create([
+            'column' => 'belonging',
+            'locale' => 'ja',
+            'name' => $artist->belonging,
+        ]);
 
         return redirect()->route('manage.artist.index')->with('message', __('messages.registered'));
     }
@@ -118,6 +128,8 @@ class ManageArtistController extends Controller
 
         $artist->name = $request->artist_id;
         $artist->belonging = ($request->filled('belonging')) ? $request->input('belonging') : '';
+        $artist->artist_name()->where('locale', 'ja')->update(['name' => $artist->name]);
+        $artist->artist_belonging()->where('locale', 'ja')->update(['text' => $artist->belonging]);
         $artist->save();
 
         return redirect()->route('manage.artist.show', $artist->id)->with('message', __('messages.updated'));
@@ -131,6 +143,8 @@ class ManageArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
+        $artist->artist_name()->delete();
+        $artist->artist_belonging()->delete();
         $artist->parts()->dissociate();
         $artist->albums()->dissociate();
         $artist->delete();

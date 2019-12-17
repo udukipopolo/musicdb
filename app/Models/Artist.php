@@ -28,4 +28,9 @@ class Artist extends Model
     {
         return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'name');
     }
+
+    public function artist_belonging()
+    {
+        return $this->morphMany('App\Models\LocaleText', 'localable')->where('column', 'belonging');
+    }
 }

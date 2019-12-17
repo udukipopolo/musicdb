@@ -25,6 +25,11 @@ class TransLocaleSeeder extends Seeder
                 'locale' => 'ja',
                 'name' => $artist->name,
             ]);
+            $artist->artist_belonging()->create([
+                'column' => 'belonging',
+                'locale' => 'ja',
+                'name' => $artist->belonging,
+            ]);
         }
 
         $albums = Album::all();

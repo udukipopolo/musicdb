@@ -40,7 +40,7 @@ class TransLocaleSeeder extends Seeder
             $album->album_description()->create([
                 'column' => 'description',
                 'locale' => 'ja',
-                'name' => $album->description,
+                'text' => $album->description,
             ]);
         }
 

@@ -154,8 +154,9 @@ class ManageBulkRegistrationController extends Controller
 
                 $url = "https://docs.google.com/spreadsheets/d/{$matches[1]}/export?format=csv";
 
-                $file = new NoRewindIterator(new SplFileObject($url));
-                $file->setFlags(SplFileObject::READ_CSV);
+                $splObj = new SplFileObject($url);
+                $splObj->setFlags(SplFileObject::READ_CSV);
+                $file = new NoRewindIterator($splObj);
 
                 $row_count = 1;
                 foreach ($file as $row_data) {

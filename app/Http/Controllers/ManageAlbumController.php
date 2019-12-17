@@ -101,16 +101,24 @@ class ManageAlbumController extends Controller
                     'name' => $request->artist_id,
                     'belonging' => '',
                 ]);
-                $artist->artist_name()->create([
-                    'column' => 'artist_name',
-                    'locale' => 'ja',
-                    'name' => $artist->name,
-                ]);
-                $artist->artist_belonging()->create([
-                    'column' => 'belonging',
-                    'locale' => 'ja',
-                    'text' => $artist->belonging,
-                ]);
+                $artist->locale_name()->updateOrCreate(
+                    [
+                        'column' => 'artist_name',
+                        'locale' => 'ja',
+                    ],
+                    [
+                        'name' => $artist->name,
+                    ]
+                );
+                $artist->locale_text()->updateOrCreate(
+                    [
+                        'column' => 'belonging',
+                        'locale' => 'ja',
+                    ],
+                    [
+                        'text' => $artist->belonging,
+                    ]
+                );
             }
 
             if ($request->filled('artist_name')) {
@@ -127,21 +135,33 @@ class ManageAlbumController extends Controller
                 'affi_apple_music' => $this->transAffiliateTag('phg', $request->affi_apple_music),
                 'affi_amazon' => $this->transAffiliateTag('amazon', $request->affi_amazon),
             ]);
-            $album->album_title()->create([
-                'column' => 'title',
-                'locale' => 'ja',
-                'name' => $album->title,
-            ]);
-            $album->album_artist_name()->create([
-                'column' => 'artist_name',
-                'locale' => 'ja',
-                'name' => $album->artist_name,
-            ]);
-            $album->album_description()->create([
-                'column' => 'description',
-                'locale' => 'ja',
-                'text' => $album->description,
-            ]);
+            $album->locale_name()->updateOrCreate(
+                [
+                    'column' => 'title',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $album->title,
+                ]
+            );
+            $album->locale_name()->updateOrCreate(
+                [
+                    'column' => 'artist_name',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $album->artist_name,
+                ]
+            );
+            $album->locale_text()->updateOrCreate(
+                [
+                    'column' => 'description',
+                    'locale' => 'ja',
+                ],
+                [
+                    'text' => $album->description,
+                ]
+            );
 
             foreach ($request->musics AS $no=>$title) {
                 if (empty($title)) {
@@ -151,11 +171,15 @@ class ManageAlbumController extends Controller
                     'title' => $title,
                     'track_no' => $no,
                 ]);
-                $music->music_title()->create([
-                    'column' => 'title',
-                    'locale' => 'ja',
-                    'name' => $music->title,
-                ]);
+                $music->locale_name()->updateOrCreate(
+                    [
+                        'column' => 'title',
+                        'locale' => 'ja',
+                    ],
+                    [
+                        'name' => $music->title,
+                    ]
+                );
             }
         });
 
@@ -243,16 +267,24 @@ class ManageAlbumController extends Controller
                     'name' => $request->artist_id,
                     'belonging' => '',
                 ]);
-                $artist->artist_name()->create([
-                    'column' => 'artist_name',
-                    'locale' => 'ja',
-                    'name' => $artist->name,
-                ]);
-                $artist->artist_belonging()->create([
-                    'column' => 'belonging',
-                    'locale' => 'ja',
-                    'text' => $artist->belonging,
-                ]);
+                $artist->locale_name()->updateOrCreate(
+                    [
+                        'column' => 'artist_name',
+                        'locale' => 'ja',
+                    ],
+                    [
+                        'name' => $artist->name,
+                    ]
+                );
+                $artist->locale_text()->updateOrCreate(
+                    [
+                        'column' => 'belonging',
+                        'locale' => 'ja',
+                    ],
+                    [
+                        'text' => $artist->belonging,
+                    ]
+                );
             }
 
             if ($request->filled('artist_name')) {
@@ -268,16 +300,40 @@ class ManageAlbumController extends Controller
             $album->affi_apple_music = $this->transAffiliateTag('phg', $request->affi_apple_music);
             $album->affi_amazon = $this->transAffiliateTag('amazon', $request->affi_amazon);
             $album->save();
-            $album->album_title()->where('locale', 'ja')->update(['name', $album->title]);
-            $album->album_artist_name()->where('locale', 'ja')->update(['name', $album->artist_name]);
-            $album->album_description()->where('locale', 'ja')->update(['text', $album->description]);
+            $album->locale_name()->updateOrCreate(
+                [
+                    'column' => 'title',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $album->title,
+                ]
+            );
+            $album->locale_name()->updateOrCreate(
+                [
+                    'column' => 'artist_name',
+                    'locale' => 'ja',
+                ],
+                [
+                    'name' => $album->artist_name,
+                ]
+            );
+            $album->locale_text()->updateOrCreate(
+                [
+                    'column' => 'description',
+                    'locale' => 'ja',
+                ],
+                [
+                    'text' => $album->description,
+                ]
+            );
 
             foreach ($request->musics AS $no=>$title) {
                 $music = $album->musics()->where('track_no', $no)->first();
                 if (empty($title)) {
                     if ($music) {
                         foreach ($music->parts as $part) {
-                            $part->part_name()->delete();
+                            $part->locale_name()->delete();
                         }
                         $music->parts()->delete();
                         $music->delete();
@@ -285,19 +341,22 @@ class ManageAlbumController extends Controller
                 } else {
                     if ($music) {
                         $music->title = $title;
-                        $music->music_title()->where('locale', 'ja')->update('name', $music->title);
                         $music->save();
                     } else {
                         $music = $album->musics()->create([
                             'title' => $title,
                             'track_no' => $no,
                         ]);
-                        $music->music_title()->create([
+                    }
+                    $music->locale_name()->updateOrCreate(
+                        [
                             'column' => 'title',
                             'locale' => 'ja',
+                        ],
+                        [
                             'name' => $music->title,
-                        ]);
-                    }
+                        ]
+                    );
                 }
             }
 
@@ -316,7 +375,7 @@ class ManageAlbumController extends Controller
     {
         foreach($album->musics as $music) {
             foreach ($music->parts as $part) {
-                $part->part_name()->delete();
+                $part->locale_name()->delete();
             }
             $music->parts()->delete();
             $music->delete();
@@ -396,16 +455,24 @@ class ManageAlbumController extends Controller
                             'name' => $request->input('edit_artist_id.'.$part->id),
                             'belonging' => '',
                         ]);
-                        $artist->artist_name()->create([
-                            'column' => 'artist_name',
-                            'locale' => 'ja',
-                            'name' => $artist->name,
-                        ]);
-                        $artist->artist_belonging()->create([
-                            'column' => 'belonging',
-                            'locale' => 'ja',
-                            'text' => $artist->belonging,
-                        ]);
+                        $artist->locale_name()->updateOrCreate(
+                            [
+                                'column' => 'artist_name',
+                                'locale' => 'ja',
+                            ],
+                            [
+                                'name' => $artist->name,
+                            ]
+                        );
+                        $artist->locale_text()->updateOrCreate(
+                            [
+                                'column' => 'belonging',
+                                'locale' => 'ja',
+                            ],
+                            [
+                                'text' => $artist->belonging,
+                            ]
+                        );
                     }
 
                     if ($request->filled('edit_artist_name.'.$part->id)) {
@@ -418,11 +485,26 @@ class ManageAlbumController extends Controller
                     $part->artist_name = $artist_name;
                     $part->name = $request->input('edit_part_name.'.$part->id);
                     $part->save();
-                    $part->part_artist_name()->where('locale', 'ja')->update(['name', $part->artist_name]);
-                    $part->part_name()->where('locale', 'ja')->update(['name', $part->name]);
+                    $part->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'artist_name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'name' => $part->artist_name,
+                        ]
+                    );
+                    $part->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'name' => $part->name,
+                        ]
+                    );
                 } else {
-                    $part->part_artist_name()->deelte();
-                    $part->part_name()->deelte();
+                    $part->locale_name()->deelte();
                     $part->delete();
                 }
             }
@@ -440,16 +522,24 @@ class ManageAlbumController extends Controller
                             'name' => $request->input('add_artist_id.'.$no),
                             'belonging' => '',
                         ]);
-                        $artist->artist_name()->create([
-                            'column' => 'artist_name',
-                            'locale' => 'ja',
-                            'name' => $artist->name,
-                        ]);
-                        $artist->artist_belonging()->create([
-                            'column' => 'belonging',
-                            'locale' => 'ja',
-                            'text' => $artist->belonging,
-                        ]);
+                        $artist->locale_name()->updateOrCreate(
+                            [
+                                'column' => 'artist_name',
+                                'locale' => 'ja',
+                            ],
+                            [
+                                'name' => $artist->name,
+                            ]
+                        );
+                        $artist->locale_text()->updateOrCreate(
+                            [
+                                'column' => 'belonging',
+                                'locale' => 'ja',
+                            ],
+                            [
+                                'text' => $artist->belonging,
+                            ]
+                        );
                     }
 
                     if ($request->filled('add_artist_name.'.$no)) {
@@ -463,16 +553,24 @@ class ManageAlbumController extends Controller
                         'artist_name' => $artist_name,
                         'name' => $request->input('add_part_name.'.$no)
                     ]);
-                    $part->part_artist_name()->create([
-                        'column' => 'artist_name',
-                        'locale' => 'ja',
-                        'name' => $part->artist_name,
-                    ]);
-                    $part->part_name()->create([
-                        'column' => 'name',
-                        'locale' => 'ja',
-                        'name' => $part->name,
-                    ]);
+                    $part->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'artist_name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'name' => $part->artist_name,
+                        ]
+                    );
+                    $part->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'name' => $part->name,
+                        ]
+                    );
 
                 }
             }

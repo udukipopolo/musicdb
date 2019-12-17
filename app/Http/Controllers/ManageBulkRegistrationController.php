@@ -59,6 +59,25 @@ class ManageBulkRegistrationController extends Controller
                                 'name' => $row->get(1),
                                 'belonging' => '',
                             ]);
+                            $album_artist->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'artist_name',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $album_artist->name,
+                                ]
+                            );
+                            $album_artist->locale_text()->updateOrCreate(
+                                [
+                                    'column' => 'belonging',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'text' => $album_artist->belonging,
+                                ]
+                            );
+
                         }
 
                         // アルバム
@@ -72,6 +91,34 @@ class ManageBulkRegistrationController extends Controller
                                 'artist_name' => $row->get(2),
                                 'description' => '',
                             ]);
+                            $album->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'title',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $album->title,
+                                ]
+                            );
+                            $album->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'artist_name',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $album->artist_name,
+                                ]
+                            );
+                            $album->locale_text()->updateOrCreate(
+                                [
+                                    'column' => 'description',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'text' => $album->description,
+                                ]
+                            );
+
                         }
 
                         // 楽曲
@@ -81,6 +128,16 @@ class ManageBulkRegistrationController extends Controller
                                 'title' => $row->get(4),
                                 'track_no' => $row->get(3),
                             ]);
+                            $music->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'title',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $music->title,
+                                ]
+                            );
+
                         }
 
                         // パートアーティスト
@@ -104,6 +161,25 @@ class ManageBulkRegistrationController extends Controller
                                 'artist_name' => $row->get(7),
                                 'name' => $row->get(5),
                             ]);
+                            $part->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'artist_name',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $part->artist_name,
+                                ]
+                            );
+                            $part->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'name',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $part->name,
+                                ]
+                            );
+
                         }
                     }
 
@@ -170,16 +246,24 @@ class ManageBulkRegistrationController extends Controller
                                 'name' => $row->get(1),
                                 'belonging' => '',
                             ]);
-                            $album_artist->artist_name()->create([
-                                'column' => 'artist_name',
-                                'locale' => 'ja',
-                                'name' => $album_artist->name,
-                            ]);
-                            $album_artist->artist_belonging()->create([
-                                'column' => 'belonging',
-                                'locale' => 'ja',
-                                'text' => $album_artist->belonging,
-                            ]);
+                            $album_artist->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'artist_name',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $album_artist->name,
+                                ]
+                            );
+                            $album_artist->locale_text()->updateOrCreate(
+                                [
+                                    'column' => 'belonging',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'text' => $album_artist->belonging,
+                                ]
+                            );
 
                         }
 
@@ -194,21 +278,34 @@ class ManageBulkRegistrationController extends Controller
                                 'artist_name' => $row->get(2),
                                 'description' => '',
                             ]);
-                            $album->album_title()->create([
-                                'column' => 'title',
-                                'locale' => 'ja',
-                                'name' => $album->title,
-                            ]);
-                            $album->album_artist_name()->create([
-                                'column' => 'artist_name',
-                                'locale' => 'ja',
-                                'name' => $album->artist_name,
-                            ]);
-                            $album->album_description()->create([
-                                'column' => 'description',
-                                'locale' => 'ja',
-                                'text' => $album->description,
-                            ]);
+                            $album->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'title',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $album->title,
+                                ]
+                            );
+                            $album->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'artist_name',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $album->artist_name,
+                                ]
+                            );
+                            $album->locale_text()->updateOrCreate(
+                                [
+                                    'column' => 'description',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'text' => $album->description,
+                                ]
+                            );
+
                         }
 
                         // 楽曲
@@ -218,11 +315,16 @@ class ManageBulkRegistrationController extends Controller
                                 'title' => $row->get(4),
                                 'track_no' => $row->get(3),
                             ]);
-                            $music->music_title()->create([
-                                'column' => 'title',
-                                'locale' => 'ja',
-                                'name' => $music->title,
-                            ]);
+                            $music->locale_name()->updateOrCreate(
+                                [
+                                    'column' => 'title',
+                                    'locale' => 'ja',
+                                ],
+                                [
+                                    'name' => $music->title,
+                                ]
+                            );
+
                         }
 
                         // パートアーティスト

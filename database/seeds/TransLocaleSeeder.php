@@ -33,7 +33,6 @@ class TransLocaleSeeder extends Seeder
                 [
                     'column' => 'belonging',
                     'locale' => 'ja',
-                    'text' => $artist->belonging,
                 ],
                 [
                     'text' => $artist->belonging,

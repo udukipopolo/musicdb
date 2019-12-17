@@ -23,4 +23,9 @@ class Artist extends Model
     {
         return $this->hasMany(Album::class);
     }
+
+    public function artist_name()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'name');
+    }
 }

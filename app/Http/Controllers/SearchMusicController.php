@@ -102,9 +102,9 @@ class SearchMusicController extends Controller
                     }
                     if ($request->filled('music_part')) {
                         if (mb_strlen($request->music_part) > 2) {
-                            $parts->whereRaw("MATCH(part_name) AGAINST( ? )", [$request->music_part]);
+                            $parts->whereRaw("MATCH(name) AGAINST( ? )", [$request->music_part]);
                         } else {
-                            $parts->where('part_name', 'LIKE', '%'.$request->music_part.'%');
+                            $parts->where('name', 'LIKE', '%'.$request->music_part.'%');
                         }
                     }
                 });

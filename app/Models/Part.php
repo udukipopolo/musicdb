@@ -13,7 +13,7 @@ class Part extends Model
         'music_id',
         'artist_id',
         'artist_name',
-        'part_name',
+        'name',
     ];
 
     public function music()
@@ -24,5 +24,15 @@ class Part extends Model
     public function artist()
     {
         return $this->belongsTo(Artist::class);
+    }
+
+    public function part_artist_name()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'artist_name');
+    }
+
+    public function part_name()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'name');
     }
 }

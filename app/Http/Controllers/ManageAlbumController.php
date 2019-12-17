@@ -347,7 +347,7 @@ class ManageAlbumController extends Controller
 
                     $part->artist_id = $artist->id;
                     $part->artist_name = $artist_name;
-                    $part->part_name = $request->input('edit_part_name.'.$part->id);
+                    $part->name = $request->input('edit_part_name.'.$part->id);
                     $part->save();
                 } else {
                     $part->delete();
@@ -374,7 +374,7 @@ class ManageAlbumController extends Controller
                     $music->parts()->create([
                         'artist_id' => $artist->id,
                         'artist_name' => $artist_name,
-                        'part_name' => $request->input('add_part_name.'.$no)
+                        'name' => $request->input('add_part_name.'.$no)
                     ]);
                 }
             }

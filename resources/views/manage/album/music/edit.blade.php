@@ -129,7 +129,7 @@ $(document).ready(function(){
                                         @include('layouts.parts.error_message', ['key'=>'edit_artist_name.'.$part->id])
                                     </td>
                                     <td>
-                                        {{ Form::text("edit_part_name[".$part->id."]", $part->part_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_part_name.'.$part->id)]) }}
+                                        {{ Form::text("edit_part_name[".$part->id."]", $part->name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_part_name.'.$part->id)]) }}
                                         @include('layouts.parts.error_message', ['key'=>'edit_part_name.'.$part->id])
                                     </td>
                                 </tr>

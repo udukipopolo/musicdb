@@ -46,7 +46,7 @@
                                 @foreach($music->parts as $part)
                                     <tr>
                                         <td>{{ Html::linkRoute('search.artist.show', $part->artist_name, [$part->artist->id]) }}</td>
-                                        <td>{{ $part->part_name }}</td>
+                                        <td>{{ $part->name }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

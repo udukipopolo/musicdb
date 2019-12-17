@@ -73,7 +73,7 @@
                                                 <td>{{ $music->track_no }}</td>
                                             <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>
                                             <td>{{ Html::linkRoute('search.artist.show', $part->artist_name, [$part->artist->id]) }}</td>
-                                            <td>{{ $part->part_name }}</td>
+                                            <td>{{ $part->name }}</td>
                                         </tr>
                                     @endforeach
                                 @endforeach

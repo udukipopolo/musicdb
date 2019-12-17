@@ -96,13 +96,13 @@ class ManageBulkRegistrationController extends Controller
                         $part = $music->parts()
                             ->where('artist_id', $part_artist->id)
                             ->where('artist_name', $row->get(7))
-                            ->where('part_name', $row->get(5))
+                            ->where('name', $row->get(5))
                             ->first();
                         if (!$part) {
                             $music->parts()->create([
                                 'artist_id' => $part_artist->id,
                                 'artist_name' => $row->get(7),
-                                'part_name' => $row->get(5),
+                                'name' => $row->get(5),
                             ]);
                         }
                     }

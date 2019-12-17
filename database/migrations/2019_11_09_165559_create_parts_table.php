@@ -18,14 +18,14 @@ class CreatePartsTable extends Migration
             $table->bigInteger('music_id')->unsigned()->index()->comment('音楽ID');
             $table->bigInteger('artist_id')->unsigned()->index()->comment('アーティストID');
             $table->string('artist_name')->comment('アーティスト名(表示名)');
-            $table->string('part_name')->comment('パート');
+            $table->string('name')->comment('パート');
             $table->timestamps();
             $table->bigInteger('created_by')->nullable()->unsigned();
             $table->bigInteger('updated_by')->nullable()->unsigned();
         });
 
         \DB::statement('ALTER TABLE `parts` ADD FULLTEXT INDEX ft_artist_name (`artist_name`) WITH PARSER ngram');
-        \DB::statement('ALTER TABLE `parts` ADD FULLTEXT INDEX ft_part_name (`part_name`) WITH PARSER ngram');
+        \DB::statement('ALTER TABLE `parts` ADD FULLTEXT INDEX ft_part_name (`name`) WITH PARSER ngram');
     }
 
     /**

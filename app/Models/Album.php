@@ -27,4 +27,18 @@ class Album extends Model
         return $this->belongsTo(Artist::class);
     }
 
+    public function album_title()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'title');
+    }
+
+    public function album_artist_name()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'artist_name');
+    }
+
+    public function album_description()
+    {
+        return $this->morphMany('App\Models\LocaleText', 'localable')->where('column', 'description');
+    }
 }

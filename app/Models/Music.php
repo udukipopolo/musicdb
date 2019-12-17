@@ -24,4 +24,9 @@ class Music extends Model
     {
         return $this->hasMany(Part::class);
     }
+
+    public function music_title()
+    {
+        return $this->morphMany('App\Models\LocaleName', 'localable')->where('column', 'title');
+    }
 }

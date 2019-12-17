@@ -169,6 +169,17 @@ class ManageBulkRegistrationController extends Controller
                                 'name' => $row->get(1),
                                 'belonging' => '',
                             ]);
+                            $album_artist->artist_name()->create([
+                                'column' => 'artist_name',
+                                'locale' => 'ja',
+                                'name' => $album_artist->name,
+                            ]);
+                            $album_artist->artist_belonging()->create([
+                                'column' => 'belonging',
+                                'locale' => 'ja',
+                                'text' => $album_artist->belonging,
+                            ]);
+
                         }
 
                         // アルバム
@@ -182,6 +193,21 @@ class ManageBulkRegistrationController extends Controller
                                 'artist_name' => $row->get(2),
                                 'description' => '',
                             ]);
+                            $album->album_title()->create([
+                                'column' => 'title',
+                                'locale' => 'ja',
+                                'name' => $album->title,
+                            ]);
+                            $album->album_artist_name()->create([
+                                'column' => 'artist_name',
+                                'locale' => 'ja',
+                                'name' => $album->artist_name,
+                            ]);
+                            $album->album_description()->create([
+                                'column' => 'description',
+                                'locale' => 'ja',
+                                'text' => $album->description,
+                            ]);
                         }
 
                         // 楽曲
@@ -190,6 +216,11 @@ class ManageBulkRegistrationController extends Controller
                             $music = $album->musics()->create([
                                 'title' => $row->get(4),
                                 'track_no' => $row->get(3),
+                            ]);
+                            $music->music_title()->create([
+                                'column' => 'title',
+                                'locale' => 'ja',
+                                'name' => $music->title,
                             ]);
                         }
 
@@ -209,11 +240,22 @@ class ManageBulkRegistrationController extends Controller
                             ->where('part_name', $row->get(5))
                             ->first();
                         if (!$part) {
-                            $music->parts()->create([
+                            $part = $music->parts()->create([
                                 'artist_id' => $part_artist->id,
                                 'artist_name' => $row->get(7),
                                 'part_name' => $row->get(5),
                             ]);
+                            $part->part_artist_name()->create([
+                                'column' => 'artist_name',
+                                'locale' => 'ja',
+                                'name' => $part->artist_name,
+                            ]);
+                            $part->part_name()->create([
+                                'column' => 'name',
+                                'locale' => 'ja',
+                                'name' => $part->name,
+                            ]);
+
                         }
                     }
 

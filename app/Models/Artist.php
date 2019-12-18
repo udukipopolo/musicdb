@@ -68,9 +68,9 @@ class Artist extends Model
         }
 
         if ($locale == 'ja') {
-            return $this->locale_name()->where('column', $column)->where('locale', 'ja')->first()->text;
+            return $this->locale_text()->where('column', $column)->where('locale', 'ja')->first()->text;
         } else {
-            return $this->locale_name()
+            return $this->locale_text()
                 ->where('column', $column)
                 ->whereIn('locale', [$locale, 'ja'])
                 ->orderByRaw("FIELD(locale, '{$locale}', 'ja')")

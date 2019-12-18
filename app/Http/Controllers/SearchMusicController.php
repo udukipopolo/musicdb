@@ -23,8 +23,8 @@ class SearchMusicController extends Controller
             if ($request->filled('album_title')) {
                 $musics->whereIn('id', function($query) use($request) {
                     $query->from('locale_names')
-                        ->select('locale_names.locale_id')
-                        ->where('locale_names.locale_type', 'albums');
+                        ->select('locale_names.localable_id')
+                        ->where('locale_names.localable_type', 'albums');
                     if (mb_strlen($request->album_title) > 2) {
                         $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_title]);
                     } else {
@@ -44,8 +44,8 @@ class SearchMusicController extends Controller
             if ($request->filled('music_title')) {
                 $musics->whereIn('id', function($query) use($request) {
                     $query->from('locale_names')
-                        ->select('locale_names.locale_id')
-                        ->where('locale_names.locale_type', 'musics');
+                        ->select('locale_names.localable_id')
+                        ->where('locale_names.localable_type', 'musics');
                     if (mb_strlen($request->album_title) > 2) {
                         $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_title]);
                     } else {
@@ -158,8 +158,8 @@ class SearchMusicController extends Controller
                     if ($request->filled('music_part')) {
                         $query->whereIn('parts.id', function($query2) use($request) {
                             $query2->from('locale_name')
-                                ->select('locale_names.locale_id')
-                                ->where('locale_names.locale_type', 'parts');
+                                ->select('locale_names.localable_id')
+                                ->where('locale_names.localable_type', 'parts');
                             if (mb_strlen($request->music_part) > 2) {
                                 $query2->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_part]);
                             } else {

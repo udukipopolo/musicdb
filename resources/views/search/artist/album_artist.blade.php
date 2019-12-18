@@ -21,7 +21,7 @@
                     <h3>所属事務所</h3>
 
                     <div class="col-md-12">
-                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'rows'=>'4', 'readonly']) }}
+                        {{ Form::textarea('belonging', $artist->getLocaleText('belonging'), ['class'=>'form-control-plaintext', 'rows'=>'4', 'readonly']) }}
                     </div>
 
 
@@ -40,10 +40,10 @@
                             <tbody>
                                 @foreach($musics as $music)
                                 <tr>
-                                    <td>{{ Html::linkRoute('search.album.show', $music->album->title, [$music->album->id]) }}</td>
-                                    <td>{{ $music->album->artist_name }}</td>
+                                    <td>{{ Html::linkRoute('search.album.show', $music->album->getLocaleName('title'), [$music->album->id]) }}</td>
+                                    <td>{{ $music->album->getLocaleName('artist_name') }}</td>
                                     <td>{{ $music->track_no }}</td>
-                                    <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>
+                                    <td>{{ Html::linkRoute('search.music.show', $music->getLocaleName('title'), [$music->id]) }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

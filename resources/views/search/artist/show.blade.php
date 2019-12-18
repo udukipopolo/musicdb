@@ -21,7 +21,7 @@
                     <h3>所属事務所</h3>
 
                     <div class="col-md-12">
-                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'rows'=>'4', 'readonly']) }}
+                        {{ Form::textarea('belonging', $artist->getLocaleText('belonging''), ['class'=>'form-control-plaintext', 'rows'=>'4', 'readonly']) }}
                     </div>
 
 
@@ -41,9 +41,9 @@
                             <tbody>
                                 @foreach($parts as $part)
                                 <tr>
-                                    <td>{{ Html::linkRoute('search.album.show', $part->music->album->title, [$part->music->album->id]) }}</td>
-                                    <td>{{ Html::linkRoute('search.album_artist.show', $part->music->album->artist_name, [$part->music->album->artist_id]) }}</td>
-                                    <td>{{ Html::linkRoute('search.music.show', $part->music->title, [$part->music->id]) }}</td>
+                                    <td>{{ Html::linkRoute('search.album.show', $part->music->album->getLocaleName('title'), [$part->music->album->id]) }}</td>
+                                    <td>{{ Html::linkRoute('search.album_artist.show', $part->music->album->getLocaleName('artist_name'), [$part->music->album->artist_id]) }}</td>
+                                    <td>{{ Html::linkRoute('search.music.show', $part->music->getLocaleName('title'), [$part->music->id]) }}</td>
                                     <td>{{ $part->artist_name }}</td>
                                     <td>{{ $part->name }}</td>
                                 </tr>
@@ -61,7 +61,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="card">
                                 <div class="card-body">
-                                {{ Html::linkRoute('search.album.show', $album->title, [$album->id]) }}
+                                {{ Html::linkRoute('search.album.show', $album->getLocaleName('title'), [$album->id]) }}
                                 </div>
                             </div>
                         </div>

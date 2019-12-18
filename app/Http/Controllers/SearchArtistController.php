@@ -20,7 +20,8 @@ class SearchArtistController extends Controller
             if ($request->filled('artist_name')) {
                 $artists->whereIn('id', function($query) use($request) {
                     $query->from('locale_names')
-                        ->select('locale_names.artist_id');
+                        ->select('locale_names.artist_id')
+                        ->whereNotNull('artist_id');
                         if (mb_strlen($request->artist_name) > 2) {
                             $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]);
                         } else {

@@ -64,7 +64,8 @@ class SearchMusicController extends Controller
             }
 
             if ($request->filled('artist_name')) {
-                $artists_ids = LocaleName::select('artist_id')
+                $artists_ids = LocaleName::distinct()
+                    ->select('artist_id')
                     ->whereNotNull('artist_id');
                 if (mb_strlen($request->artist_name) > 2) {
                     $artists_ids->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);

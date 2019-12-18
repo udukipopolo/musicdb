@@ -29,20 +29,6 @@ class SearchArtistController extends Controller
                         }
                 });
 
-                // $artists->where(function($query) use($request) {
-                //     if (mb_strlen($request->artist_name) > 2) {
-                //         $query->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);
-                //     } else {
-                //         $query->where('name', 'LIKE', '%'.$request->artist_name.'%');
-                //     }
-                // })
-                // ->orWhereHas('parts', function($parts) use($request) {
-                //     if (mb_strlen($request->artist_name) > 2) {
-                //         $parts->whereRaw("MATCH(artist_name) AGAINST( ? )", [$request->artist_name]);
-                //     } else {
-                //         $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%');
-                //     }
-                // });
             }
 
             $artists->orderBy('name', 'ASC');

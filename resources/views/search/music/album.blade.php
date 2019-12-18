@@ -16,12 +16,12 @@
                     @endauth
                 </div>
                 <div class="card-body">
-                    <h2>{{ $album->title }}</h2>
+                    <h2>{{ $album->getLocaleName('title') }}</h2>
 
                     <div class="form-group row">
                         {{ Form::label('album_artist', 'アルバムアーティスト', ['class'=>'col-form-label col-md-4'])}}
                         <div class="col-md-8">
-                            <p class="form-control-plaintext">{{ Html::linkRoute('search.album_artist.show', $album->artist_name, [$album->artist->id]) }}</p>
+                            <p class="form-control-plaintext">{{ Html::linkRoute('search.album_artist.show', $album->getLocaleName('artist_name'), [$album->artist->id]) }}</p>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                                 @foreach($album->musics->sortBy('track_no') as $music)
                                     <tr>
                                         <td>{{ $music->track_no }}</td>
-                                        <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>
+                                        <td>{{ Html::linkRoute('search.music.show', $music->getLocaleName('title'), [$music->id]) }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -50,7 +50,7 @@
                     <div class="form-group row">
                         {{ Form::label('description', '詳細・アルバムに携わった人等', ['class'=>'col-form-label col-md-4'])}}
                         <div class="col-md-8">
-                            {{ Form::textarea('description', $music->album->description, ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
+                            {{ Form::textarea('description', $music->album->getLocaleText('description'), ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
                         </div>
                     </div>
 
@@ -70,9 +70,9 @@
                                 @foreach($album->musics as $music)
                                     @foreach($music->parts as $part)
                                         <tr>
-                                                <td>{{ $music->track_no }}</td>
-                                            <td>{{ Html::linkRoute('search.music.show', $music->title, [$music->id]) }}</td>
-                                            <td>{{ Html::linkRoute('search.artist.show', $part->artist_name, [$part->artist->id]) }}</td>
+                                            <td>{{ $music->track_no }}</td>
+                                            <td>{{ Html::linkRoute('search.music.show', $music->getLocaleName('title'), [$music->id]) }}</td>
+                                            <td>{{ Html::linkRoute('search.artist.show', $part->getLocaleName('artist_name'), [$part->artist->id]) }}</td>
                                             <td>{{ $part->name }}</td>
                                         </tr>
                                     @endforeach

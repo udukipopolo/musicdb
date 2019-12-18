@@ -16,7 +16,7 @@
                     @endauth
                 </div>
                 <div class="card-body">
-                    <h2>{{ $artist->name }}</h2>
+                    <h2>{{ $artist->getLocaleName('name') }}</h2>
 
                     <h3>所属事務所</h3>
 

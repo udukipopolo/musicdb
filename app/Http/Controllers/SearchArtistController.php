@@ -18,20 +18,30 @@ class SearchArtistController extends Controller
             $artists = Artist::query();
 
             if ($request->filled('artist_name')) {
-                $artists->where(function($query) use($request) {
-                    if (mb_strlen($request->artist_name) > 2) {
-                        $query->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);
-                    } else {
-                        $query->where('name', 'LIKE', '%'.$request->artist_name.'%');
-                    }
-                })
-                ->orWhereHas('parts', function($parts) use($request) {
-                    if (mb_strlen($request->artist_name) > 2) {
-                        $parts->whereRaw("MATCH(artist_name) AGAINST( ? )", [$request->artist_name]);
-                    } else {
-                        $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%');
-                    }
+                $artists->whereIn('id', function($query) use($request) {
+                    $query->from('locale_names')
+                        ->select('locale_names.artist_id');
+                        if (mb_strlen($request->artist_name) > 2) {
+                            $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]);
+                        } else {
+                            $query->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
+                        }
                 });
+
+                // $artists->where(function($query) use($request) {
+                //     if (mb_strlen($request->artist_name) > 2) {
+                //         $query->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);
+                //     } else {
+                //         $query->where('name', 'LIKE', '%'.$request->artist_name.'%');
+                //     }
+                // })
+                // ->orWhereHas('parts', function($parts) use($request) {
+                //     if (mb_strlen($request->artist_name) > 2) {
+                //         $parts->whereRaw("MATCH(artist_name) AGAINST( ? )", [$request->artist_name]);
+                //     } else {
+                //         $parts->where('artist_name', 'LIKE', '%'.$request->artist_name.'%');
+                //     }
+                // });
             }
 
             $artists->orderBy('name', 'ASC');

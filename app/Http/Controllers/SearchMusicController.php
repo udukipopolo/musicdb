@@ -22,13 +22,13 @@ class SearchMusicController extends Controller
 
             if ($request->filled('album_title')) {
                 $musics->whereIn('id', function($query) use($request) {
-                    $query->from('locale_name')
-                        ->select('locale_name.locale_id')
-                        ->where('locale_name.locale_type', 'albums');
+                    $query->from('locale_names')
+                        ->select('locale_names.locale_id')
+                        ->where('locale_names.locale_type', 'albums');
                     if (mb_strlen($request->album_title) > 2) {
-                        $query->whereRaw("MATCH(locale_name.name) AGAINST( ? )", [$request->album_title]);
+                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_title]);
                     } else {
-                        $query->where('locale_name.name', 'LIKE', '%'.$request->album_title.'%');
+                        $query->where('locale_names.name', 'LIKE', '%'.$request->album_title.'%');
                     }
                 });
 
@@ -43,13 +43,13 @@ class SearchMusicController extends Controller
 
             if ($request->filled('music_title')) {
                 $musics->whereIn('id', function($query) use($request) {
-                    $query->from('locale_name')
-                        ->select('locale_name.locale_id')
-                        ->where('locale_name.locale_type', 'musics');
+                    $query->from('locale_names')
+                        ->select('locale_names.locale_id')
+                        ->where('locale_names.locale_type', 'musics');
                     if (mb_strlen($request->album_title) > 2) {
-                        $query->whereRaw("MATCH(locale_name.name) AGAINST( ? )", [$request->album_title]);
+                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_title]);
                     } else {
-                        $query->where('locale_name.name', 'LIKE', '%'.$request->album_title.'%');
+                        $query->where('locale_names.name', 'LIKE', '%'.$request->album_title.'%');
                     }
                 });
 

@@ -75,7 +75,7 @@ class SearchMusicController extends Controller
                     ->pluck('artist_id');
                 $musics->whereIn('artist_id', $artists_ids)
                     ->orWhereIn('album_id', functioN($query) use($artists_ids) {
-                        $query->form('albums')
+                        $query->from('albums')
                             ->select('albums.id')
                             ->whereIn('albums.artist_id', $artists_ids);
                     });

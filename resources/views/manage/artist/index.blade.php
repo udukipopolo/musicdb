@@ -31,7 +31,7 @@
                     <div class="row">
                     @foreach ($artists as $artist)
                     <div class="col-lg-3 col-md-4 col-sm-6">
-                        {{ Html::linkRoute('manage.artist.show', $artist->name, [$artist->id]) }}
+                        {{ Html::linkRoute('manage.artist.show', $artist->getLocaleName('name'), [$artist->id]) }}
                     </div>
                     @endforeach
                     </div>

@@ -23,6 +23,7 @@ class SearchMusicController extends Controller
             if ($request->filled('album_title')) {
                 $musics->whereIn('album_id', function($query) use($request) {
                     $query->from('locale_names')
+                        ->distinct()
                         ->select('locale_names.localable_id')
                         ->where('locale_names.localable_type', 'albums');
                     if (mb_strlen($request->album_title) > 2) {
@@ -37,6 +38,7 @@ class SearchMusicController extends Controller
             if ($request->filled('music_title')) {
                 $musics->whereIn('id', function($query) use($request) {
                     $query->from('locale_names')
+                        ->distinct()
                         ->select('locale_names.localable_id')
                         ->where('locale_names.localable_type', 'musics');
                     if (mb_strlen($request->music_title) > 2) {
@@ -79,6 +81,7 @@ class SearchMusicController extends Controller
                         ->select('albums.id')
                         ->whereIn('albums.artist_id', function($query2) use($request) {
                             $query2->from('locale_names')
+                                ->distinct()
                                 ->select('locale_names.artist_id')
                                 ->whereNotNull('locale_names.artist_id');
                             if (mb_strlen($request->album_artist) > 2) {
@@ -99,6 +102,7 @@ class SearchMusicController extends Controller
                     if ($request->filled('music_artist')) {
                         $query->whereIn('parts.artist_id', function($query2) use($request) {
                             $query2->from('locale_names')
+                                ->distinct()
                                 ->select('locale_names.artist_id')
                                 ->whereNotNull('locale_names.artist_id');
                             if (mb_strlen($request->album_artmusic_artistist) > 2) {
@@ -111,6 +115,7 @@ class SearchMusicController extends Controller
                     if ($request->filled('music_part')) {
                         $query->whereIn('parts.id', function($query2) use($request) {
                             $query2->from('locale_names')
+                                ->distinct()
                                 ->select('locale_names.localable_id')
                                 ->where('locale_names.localable_type', 'parts');
                             if (mb_strlen($request->music_part) > 2) {

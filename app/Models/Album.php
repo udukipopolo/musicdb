@@ -55,6 +55,10 @@ class Album extends Model
     public function getLocaleName($column, $locale = null)
     {
         if (empty($locale)) {
+            $locale = \App::getLocale();
+        }
+
+        if ($locale == 'ja') {
             return $this->locale_name()->where('column', $column)->where('locale', 'ja')->first()->name;
         } else {
             return $this->locale_name()
@@ -68,6 +72,10 @@ class Album extends Model
     public function getLocaleText($column, $locale = null)
     {
         if (empty($locale)) {
+            $locale = \App::getLocale();
+        }
+
+        if ($locale == 'ja') {
             return $this->locale_name()->where('column', $column)->where('locale', 'ja')->first()->text;
         } else {
             return $this->locale_name()

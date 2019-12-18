@@ -128,7 +128,7 @@ class ManageBulkRegistrationController extends Controller
                     ]);
                     $album_artist->locale_name()->updateOrCreate(
                         [
-                            'column' => 'artist_name',
+                            'column' => 'name',
                             'locale' => 'ja',
                         ],
                         [
@@ -218,7 +218,7 @@ class ManageBulkRegistrationController extends Controller
                     ]);
                     $part_artist->locale_name()->updateOrCreate(
                         [
-                            'column' => 'artist_name',
+                            'column' => 'name',
                             'locale' => 'ja',
                         ],
                         [

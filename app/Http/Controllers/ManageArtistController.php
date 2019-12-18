@@ -64,7 +64,7 @@ class ManageArtistController extends Controller
         ]);
         $artist->locale_name()->updateOrCreate(
             [
-                'column' => 'artist_name',
+                'column' => 'name',
                 'locale' => 'ja',
             ],
             [
@@ -140,7 +140,7 @@ class ManageArtistController extends Controller
         $artist->save();
         $artist->locale_name()->updateOrCreate(
             [
-                'column' => 'artist_name',
+                'column' => 'name',
                 'locale' => 'ja',
             ],
             [

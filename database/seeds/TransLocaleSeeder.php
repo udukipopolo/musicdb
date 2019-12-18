@@ -22,7 +22,7 @@ class TransLocaleSeeder extends Seeder
         foreach($artists as $artist) {
             $artist->locale_name()->updateOrCreate(
                 [
-                    'column' => 'artist_name',
+                    'column' => 'name',
                     'locale' => 'ja',
                 ],
                 [

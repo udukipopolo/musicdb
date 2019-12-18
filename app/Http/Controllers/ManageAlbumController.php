@@ -103,7 +103,7 @@ class ManageAlbumController extends Controller
                 ]);
                 $artist->locale_name()->updateOrCreate(
                     [
-                        'column' => 'artist_name',
+                        'column' => 'name',
                         'locale' => 'ja',
                     ],
                     [
@@ -271,7 +271,7 @@ class ManageAlbumController extends Controller
                 ]);
                 $artist->locale_name()->updateOrCreate(
                     [
-                        'column' => 'artist_name',
+                        'column' => 'name',
                         'locale' => 'ja',
                     ],
                     [
@@ -461,7 +461,7 @@ class ManageAlbumController extends Controller
                         ]);
                         $artist->locale_name()->updateOrCreate(
                             [
-                                'column' => 'artist_name',
+                                'column' => 'name',
                                 'locale' => 'ja',
                             ],
                             [
@@ -530,7 +530,7 @@ class ManageAlbumController extends Controller
                         ]);
                         $artist->locale_name()->updateOrCreate(
                             [
-                                'column' => 'artist_name',
+                                'column' => 'name',
                                 'locale' => 'ja',
                             ],
                             [

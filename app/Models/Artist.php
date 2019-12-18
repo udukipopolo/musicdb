@@ -43,4 +43,31 @@ class Artist extends Model
     {
         return $this->morphMany('App\Models\LocaleText', 'localable')->where('column', 'belonging');
     }
+
+    public function getLocaleName($column, $locale = null)
+    {
+        if (empty($locale)) {
+            return $this->locale_name()->where('column', $column)->where('locale', 'ja')->first()->name;
+        } else {
+            return $this->locale_name()
+                ->where('column', $column)
+                ->whereIn('locale', [$locale, 'ja'])
+                ->orderByRaw("FIELD(locale, '{$locale}', 'ja')")
+                ->first()->name;
+        }
+    }
+
+    public function getLocaleText($column, $locale = null)
+    {
+        if (empty($locale)) {
+            return $this->locale_name()->where('column', $column)->where('locale', 'ja')->first()->text;
+        } else {
+            return $this->locale_name()
+                ->where('column', $column)
+                ->whereIn('locale', [$locale, 'ja'])
+                ->orderByRaw("FIELD(locale, '{$locale}', 'ja')")
+                ->first()->text;
+        }
+    }
+
 }

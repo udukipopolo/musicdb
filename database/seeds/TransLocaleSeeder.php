@@ -26,6 +26,7 @@ class TransLocaleSeeder extends Seeder
                     'locale' => 'ja',
                 ],
                 [
+                    'artist_id' => $artist->id,
                     'name' => $artist->name,
                 ]
             );
@@ -57,6 +58,7 @@ class TransLocaleSeeder extends Seeder
                     'locale' => 'ja',
                 ],
                 [
+                    'artist_id' => $album->artist_id,
                     'name' => $album->artist_name,
                 ]
             );
@@ -92,6 +94,7 @@ class TransLocaleSeeder extends Seeder
                     'locale' => 'ja',
                 ],
                 [
+                    'artist_id' => $part->artist_id,
                     'name' => $part->artist_name,
                 ]
             );

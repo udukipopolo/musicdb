@@ -107,6 +107,7 @@ class ManageAlbumController extends Controller
                         'locale' => 'ja',
                     ],
                     [
+                        'artist_id' => $artist->id,
                         'name' => $request->artist_id,
                     ]
                 );
@@ -150,6 +151,7 @@ class ManageAlbumController extends Controller
                     'locale' => 'ja',
                 ],
                 [
+                    'artist_id' => $album->artist_id,
                     'name' => $artist_name,
                 ]
             );
@@ -273,6 +275,7 @@ class ManageAlbumController extends Controller
                         'locale' => 'ja',
                     ],
                     [
+                        'artist_id' => $artist->id,
                         'name' => $request->artist_id,
                     ]
                 );
@@ -315,6 +318,7 @@ class ManageAlbumController extends Controller
                     'locale' => 'ja',
                 ],
                 [
+                    'artist_id' => $album->artist_id,
                     'name' => $artist_name,
                 ]
             );
@@ -461,6 +465,7 @@ class ManageAlbumController extends Controller
                                 'locale' => 'ja',
                             ],
                             [
+                                'artist_id' => $artist->id,
                                 'name' => $request->input('edit_artist_id.'.$part->id),
                             ]
                         );
@@ -491,6 +496,7 @@ class ManageAlbumController extends Controller
                             'locale' => 'ja',
                         ],
                         [
+                            'artist_id' => $part->artist_id,
                             'name' => $artist_name,
                         ]
                     );
@@ -528,6 +534,7 @@ class ManageAlbumController extends Controller
                                 'locale' => 'ja',
                             ],
                             [
+                                'artist_id' => $artist->id,
                                 'name' => $request->input('add_artist_id.'.$no),
                             ]
                         );
@@ -559,6 +566,7 @@ class ManageAlbumController extends Controller
                             'locale' => 'ja',
                         ],
                         [
+                            'artist_id' => $part->artist_id,
                             'name' => $artist_name,
                         ]
                     );

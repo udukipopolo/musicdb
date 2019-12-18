@@ -19,4 +19,9 @@ class LocaleName extends Model
     {
         return $this->morphTo();
     }
+
+    public function artist()
+    {
+        return $this->belongsTo(Artist::class);
+    }
 }

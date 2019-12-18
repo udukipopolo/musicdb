@@ -19,6 +19,7 @@ class CreateLocaleNamesTable extends Migration
             $table->string('localable_type');
             $table->string('locale', 2)->default('ja')->comment('言語');
             $table->string('column')->comment('項目');
+            $table->bigInteger('artist_id')->unsigned()->nullable()->comment('アーティスト・別名義の場合のみ');
             $table->string('name')->comment('名称');
             $table->timestamps();
             $table->bigInteger('created_by')->nullable()->unsigned();

@@ -44,166 +44,7 @@ class ManageBulkRegistrationController extends Controller
                 $file = new SplFileObject($file_path);
                 $file->setFlags(SplFileObject::READ_CSV);
 
-                $row_count = 1;
-                foreach ($file as $row_data) {
-                    if ($row_count > 1) {
-                        $row = collect($row_data);
-                        // $row->transform(function($item, $key) {
-                        //     return mb_convert_encoding($item, 'UTF-8', 'SJIS');
-                        // });
-
-                        // アルバムアーティスト
-                        $album_artist = Artist::where('name', $row->get(1))->first();
-                        if (!$album_artist) {
-                            $album_artist = Artist::create([
-                                'name' => $row->get(1),
-                                'belonging' => '',
-                            ]);
-                            $album_artist->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'artist_name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(1),
-                                ]
-                            );
-                            $album_artist->locale_text()->updateOrCreate(
-                                [
-                                    'column' => 'belonging',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'text' => '',
-                                ]
-                            );
-
-                        }
-
-                        // アルバム
-                        $album = Album::where('title', $row->get(0))
-                            ->where('artist_id', $album_artist->id)
-                            ->first();
-                        if (!$album) {
-                            $album = Album::create([
-                                'title' => $row->get(0),
-                                'artist_id' => $album_artist->id,
-                                'artist_name' => $row->get(2),
-                                'description' => '',
-                            ]);
-                            $album->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'title',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(0),
-                                ]
-                            );
-                            $album->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'artist_name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(2),
-                                ]
-                            );
-                            $album->locale_text()->updateOrCreate(
-                                [
-                                    'column' => 'description',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'text' => '',
-                                ]
-                            );
-
-                        }
-
-                        // 楽曲
-                        $music = $album->musics()->where('track_no', $row->get(3))->first();
-                        if (!$music) {
-                            $music = $album->musics()->create([
-                                'title' => $row->get(4),
-                                'track_no' => $row->get(3),
-                            ]);
-                            $music->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'title',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(4),
-                                ]
-                            );
-
-                        }
-
-                        // パートアーティスト
-                        $part_artist = Artist::where('name', $row->get(6))->first();
-                        if (!$part_artist) {
-                            $part_artist = Artist::create([
-                                'name' => $row->get(6),
-                                'belonging' => '',
-                            ]);
-                            $part_artist->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'artist_name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(6),
-                                ]
-                            );
-                            $part_artist->locale_text()->updateOrCreate(
-                                [
-                                    'column' => 'belonging',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'text' => '',
-                                ]
-                            );
-
-                        }
-
-                        // パート
-                        $part = $music->parts()
-                            ->where('artist_id', $part_artist->id)
-                            ->where('artist_name', $row->get(7))
-                            ->where('name', $row->get(5))
-                            ->first();
-                        if (!$part) {
-                            $music->parts()->create([
-                                'artist_id' => $part_artist->id,
-                                'artist_name' => $row->get(7),
-                                'name' => $row->get(5),
-                            ]);
-                            $part->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'artist_name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(7),
-                                ]
-                            );
-                            $part->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(5),
-                                ]
-                            );
-
-                        }
-                    }
-
-                    $row_count++;
-                }
+                $this->registCsv($file);
             });
         } catch(\Exception $e) {
             \Log::debug($e->getMessage());
@@ -253,155 +94,7 @@ class ManageBulkRegistrationController extends Controller
                 $splObj->setFlags(SplFileObject::READ_CSV);
                 $file = new NoRewindIterator($splObj);
 
-                $row_count = 1;
-                foreach ($file as $row_data) {
-                    if ($row_count > 1) {
-                        $row = collect($row_data);
-
-                        // アルバムアーティスト
-                        $album_artist = Artist::where('name', $row->get(1))->first();
-                        if (!$album_artist) {
-                            $album_artist = Artist::create([
-                                'name' => $row->get(1),
-                                'belonging' => '',
-                            ]);
-                            $album_artist->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'artist_name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(1),
-                                ]
-                            );
-                            $album_artist->locale_text()->updateOrCreate(
-                                [
-                                    'column' => 'belonging',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'text' => '',
-                                ]
-                            );
-
-                        }
-
-                        // アルバム
-                        $album = Album::where('title', $row->get(0))
-                            ->where('artist_id', $album_artist->id)
-                            ->first();
-                        if (!$album) {
-                            $album = Album::create([
-                                'title' => $row->get(0),
-                                'artist_id' => $album_artist->id,
-                                'artist_name' => $row->get(2),
-                                'description' => '',
-                            ]);
-                            $album->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'title',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(0),
-                                ]
-                            );
-                            $album->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'artist_name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(2),
-                                ]
-                            );
-                            $album->locale_text()->updateOrCreate(
-                                [
-                                    'column' => 'description',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'text' => '',
-                                ]
-                            );
-
-                        }
-
-                        // 楽曲
-                        $music = $album->musics()->where('track_no', $row->get(3))->first();
-                        if (!$music) {
-                            $music = $album->musics()->create([
-                                'title' => $row->get(4),
-                                'track_no' => $row->get(3),
-                            ]);
-                            $music->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'title',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(4),
-                                ]
-                            );
-
-                        }
-
-                        // パートアーティスト
-                        $part_artist = Artist::where('name', $row->get(6))->first();
-                        if (!$part_artist) {
-                            $part_artist = Artist::create([
-                                'name' => $row->get(6),
-                                'belonging' => '',
-                            ]);
-                            $part_artist->locale_name()->updateOrCreate(
-                                [
-                                    'column' => 'artist_name',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'name' => $row->get(6),
-                                ]
-                            );
-                            $part_artist->locale_text()->updateOrCreate(
-                                [
-                                    'column' => 'belonging',
-                                    'locale' => 'ja',
-                                ],
-                                [
-                                    'text' => '',
-                                ]
-                            );
-
-                        }
-
-                        // パート
-                        $part = $music->parts()
-                            ->where('artist_id', $part_artist->id)
-                            ->where('artist_name', $row->get(7))
-                            ->where('part_name', $row->get(5))
-                            ->first();
-                        if (!$part) {
-                            $part = $music->parts()->create([
-                                'artist_id' => $part_artist->id,
-                                'artist_name' => $row->get(7),
-                                'part_name' => $row->get(5),
-                            ]);
-                            $part->part_artist_name()->create([
-                                'column' => 'artist_name',
-                                'locale' => 'ja',
-                                'name' => $row->get(7),
-                            ]);
-                            $part->part_name()->create([
-                                'column' => 'name',
-                                'locale' => 'ja',
-                                'name' => $row->get(5),
-                            ]);
-
-                        }
-                    }
-
-                    $row_count++;
-                }
+                $this->registCsv($file);
             });
         } catch(\Exception $e) {
             $validator->after(function($validator) {
@@ -414,5 +107,174 @@ class ManageBulkRegistrationController extends Controller
         }
 
         return redirect()->route('manage.bulk.regist.index')->with('message', __('messages.csv_file.complete'));
+    }
+
+    private function registCsv($file)
+    {
+        $row_count = 1;
+        foreach ($file as $row_data) {
+            if ($row_count > 1) {
+                $row = collect($row_data);
+                // $row->transform(function($item, $key) {
+                //     return mb_convert_encoding($item, 'UTF-8', 'SJIS');
+                // });
+
+                // アルバムアーティスト
+                $album_artist = Artist::where('name', $row->get(1))->first();
+                if (!$album_artist) {
+                    $album_artist = Artist::create([
+                        'name' => $row->get(1),
+                        'belonging' => '',
+                    ]);
+                    $album_artist->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'artist_name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'artist_id' => $album_artist->id,
+                            'name' => $row->get(1),
+                        ]
+                    );
+                    $album_artist->locale_text()->updateOrCreate(
+                        [
+                            'column' => 'belonging',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'text' => '',
+                        ]
+                    );
+
+                }
+
+                // アルバム
+                $album = Album::where('title', $row->get(0))
+                    ->where('artist_id', $album_artist->id)
+                    ->first();
+                if (!$album) {
+                    $album = Album::create([
+                        'title' => $row->get(0),
+                        'artist_id' => $album_artist->id,
+                        'artist_name' => $row->get(2),
+                        'description' => '',
+                    ]);
+                    $album->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'title',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'name' => $row->get(0),
+                        ]
+                    );
+                    $album->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'artist_name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'artist_id' => $album->artist_id,
+                            'name' => $row->get(2),
+                        ]
+                    );
+                    $album->locale_text()->updateOrCreate(
+                        [
+                            'column' => 'description',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'text' => '',
+                        ]
+                    );
+
+                }
+
+                // 楽曲
+                $music = $album->musics()->where('track_no', $row->get(3))->first();
+                if (!$music) {
+                    $music = $album->musics()->create([
+                        'title' => $row->get(4),
+                        'track_no' => $row->get(3),
+                    ]);
+                    $music->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'title',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'name' => $row->get(4),
+                        ]
+                    );
+
+                }
+
+                // パートアーティスト
+                $part_artist = Artist::where('name', $row->get(6))->first();
+                if (!$part_artist) {
+                    $part_artist = Artist::create([
+                        'name' => $row->get(6),
+                        'belonging' => '',
+                    ]);
+                    $part_artist->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'artist_name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'artist_id' => $part_artist->id,
+                            'name' => $row->get(6),
+                        ]
+                    );
+                    $part_artist->locale_text()->updateOrCreate(
+                        [
+                            'column' => 'belonging',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'text' => '',
+                        ]
+                    );
+
+                }
+
+                // パート
+                $part = $music->parts()
+                    ->where('artist_id', $part_artist->id)
+                    ->where('artist_name', $row->get(7))
+                    ->where('name', $row->get(5))
+                    ->first();
+                if (!$part) {
+                    $part = $music->parts()->create([
+                        'artist_id' => $part_artist->id,
+                        'artist_name' => $row->get(7),
+                        'name' => $row->get(5),
+                    ]);
+                    $part->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'artist_name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'artist_id' => $part->artist_id,
+                            'name' => $row->get(7),
+                        ]
+                    );
+                    $part->locale_name()->updateOrCreate(
+                        [
+                            'column' => 'name',
+                            'locale' => 'ja',
+                        ],
+                        [
+                            'name' => $row->get(5),
+                        ]
+                    );
+
+                }
+            }
+
+            $row_count++;
+        }
+
     }
 }

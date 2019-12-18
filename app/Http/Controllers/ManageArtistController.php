@@ -68,6 +68,7 @@ class ManageArtistController extends Controller
                 'locale' => 'ja',
             ],
             [
+                'artist_id' => $artist->id,
                 'name' => $request->artist_id,
             ]
         );
@@ -143,6 +144,7 @@ class ManageArtistController extends Controller
                 'locale' => 'ja',
             ],
             [
+                'artist_id' => $artist->id,
                 'name' => $request->artist_id,
             ]
         );

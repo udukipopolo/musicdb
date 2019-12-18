@@ -46,10 +46,10 @@ class SearchMusicController extends Controller
                     $query->from('locale_names')
                         ->select('locale_names.localable_id')
                         ->where('locale_names.localable_type', 'musics');
-                    if (mb_strlen($request->album_title) > 2) {
-                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_title]);
+                    if (mb_strlen($request->music_title) > 2) {
+                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_title]);
                     } else {
-                        $query->where('locale_names.name', 'LIKE', '%'.$request->album_title.'%');
+                        $query->where('locale_names.name', 'LIKE', '%'.$request->music_title.'%');
                     }
                 });
 

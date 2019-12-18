@@ -21,7 +21,7 @@ class SearchMusicController extends Controller
             $musics = Music::query();
 
             if ($request->filled('album_title')) {
-                $musics->whereIn('id', function($query) use($request) {
+                $musics->whereIn('album_id', function($query) use($request) {
                     $query->from('locale_names')
                         ->select('locale_names.localable_id')
                         ->where('locale_names.localable_type', 'albums');

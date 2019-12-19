@@ -32,7 +32,7 @@ class SearchArtistController extends Controller
                     $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( :select_param  IN NATURAL LANGUAGE MODE)) AS score"));
                     $artists->where(\DB::raw("MATCH(locale_names.name) AGAINST( :where_param  IN NATURAL LANGUAGE MODE)"));
                     $artists->orderBy('score', 'DESC');
-                    $artists->setBindings([':select_param'=>$request->artist_name, ':where_param'=>$request->artist_name]);
+                    $artists->setBindings(['select_param'=>$request->artist_name, 'where_param'=>$request->artist_name]);
                 }
             } else {
                 $artists->orderBy('artists.name', 'ASC');

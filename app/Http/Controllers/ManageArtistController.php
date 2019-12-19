@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use App\Models\LocaleName;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -180,8 +181,11 @@ class ManageArtistController extends Controller
 
     public function apiArtistList(Request $request)
     {
-        $artists = Artist::query();
-        $artists->select(['name', 'id']);
+        $artists = LocaleName::query();
+        $artists->distinct()->select(['name', 'id']);
+        $artists->where('localabble_type', 'artists')
+            ->where('locale', 'ja')
+            ->where('column', 'name');
         if ($request->filled('q')) {
             $artists->where('name', 'LIKE', '%'.$request->q.'%');
         }

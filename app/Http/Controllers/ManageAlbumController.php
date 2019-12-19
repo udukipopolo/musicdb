@@ -675,4 +675,18 @@ class ManageAlbumController extends Controller
 
         return $parse['scheme'].'://'.$parse['host'].$parse['path'].'?'.http_build_query($query);
     }
+
+    public function apiPartList(Request $request)
+    {
+        $parts = LocaleName::query();
+        $parts->distinct()->select(['name', 'artist_id']);
+        $parts->where('localabble_type', 'parts')
+            ->where('locale', 'ja')
+            ->where('column', 'name');
+        if ($request->filled('q')) {
+            $parts->where('name', 'LIKE', '%'.$request->q.'%');
+        }
+        return $parts->get()->toJson();
+    }
+
 }

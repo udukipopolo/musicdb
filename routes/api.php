@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['as'=>'api.'], function () {
     Route::get('artist/list', 'ManageArtistController@apiArtistList')->name('artist.list');
+    Route::get('part/list', 'ManageAlbumController@apiPartList')->name('part.list');
 });

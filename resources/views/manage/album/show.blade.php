@@ -27,14 +27,14 @@
                 <div class="form-group row">
                     {{ Form::label('title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('title', $album->title, ['class'=>'form-control-plaintext', 'readonly']) }}
+                        {{ Form::text('title', $album->getLocaleName('title', 'ja'), ['class'=>'form-control-plaintext', 'readonly']) }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('artist_name', $album->artist_name, ['class'=>'form-control-plaintext', 'readonly']) }}
+                        {{ Form::text('artist_name', $album->getLocaleName('artist_name', 'ja'), ['class'=>'form-control-plaintext', 'readonly']) }}
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
                                 @foreach($album->musics->sortBy('track_no') as $music)
                                 <tr>
                                     <td>{{ $music->track_no }}</td>
-                                    <td>{{ Html::linkRoute('manage.album.music.edit', $music->title, [$album->id, $music->id], []) }}</td>
+                                    <td>{{ Html::linkRoute('manage.album.music.edit', $music->getLocaleName('title', 'ja'), [$album->id, $music->id], []) }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -63,7 +63,7 @@
                 <div class="form-group row">
                     {{ Form::label('description', '詳細・アルバムに携わった人等', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::textarea('description', $album->description, ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
+                        {{ Form::textarea('description', $album->getLocaleText('description', 'ja'), ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
                     </div>
                 </div>
 

@@ -39,7 +39,7 @@
                             @foreach ($albums as $album)
                             <tr>
                                 <td>
-                                    {{ Html::linkRoute('manage.album.show', $album->title, [$album->id]) }}
+                                    {{ Html::linkRoute('manage.album.show', $album->getLocaleName('title', 'ja'), [$album->id]) }}
                                 </td>
                                 <td>
                                     {{ $album->artist_name }}

@@ -19,14 +19,14 @@
                 <div class="form-group row">
                     {{ Form::label('name', 'アーティスト名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('name', $artist->name, ['class'=>'form-control-plaintext', 'readonly']) }}
+                        {{ Form::text('name', $artist->getLocaleName('name', 'ja'), ['class'=>'form-control-plaintext', 'readonly']) }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     {{ Form::label('belonging', '所属事務所', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::textarea('belonging', $artist->belonging, ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
+                        {{ Form::textarea('belonging', $artist->getLocaleText('belonging', 'ja'), ['class'=>'form-control-plaintext', 'rows'=>'6', 'readonly']) }}
                     </div>
                 </div>
 

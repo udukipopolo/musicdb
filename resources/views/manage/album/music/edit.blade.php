@@ -69,14 +69,14 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('album_title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('album_title', $album->title, ['class'=>'form-control-plaintext', 'readonly']) }}
+                        {{ Form::text('album_title', $album->getLocaleName('title', 'ja'), ['class'=>'form-control-plaintext', 'readonly']) }}
                     </div>
                 </div>
 
                 <div class="form-group row">
                     {{ Form::label('artist', 'アルバムアーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('artist_name', $album->artist_name, ['class'=>'form-control-plaintext', 'readonly']) }}
+                        {{ Form::text('artist_name', $album->getLocaleName('artist_name', 'ja'), ['class'=>'form-control-plaintext', 'readonly']) }}
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('artist', '楽曲名', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('music_title', $music->title, ['class'=>'form-control-plaintext', 'readonly']) }}
+                        {{ Form::text('music_title', $music->getLocaleName('title', 'ja'), ['class'=>'form-control-plaintext', 'readonly']) }}
                     </div>
                 </div>
 
@@ -121,15 +121,15 @@ $(document).ready(function(){
                                 @foreach ($parts as $part)
                                 <tr>
                                     <td>
-                                        {{ Form::text("edit_artist_id[".$part->id."]", $part->artist->name, ['class'=>'form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'.$part->id), 'id'=>'edit_artist_'.$part->id]) }}
+                                        {{ Form::text("edit_artist_id[".$part->id."]", $part->artist->getLocaleName('name', 'ja'), ['class'=>'form-control js-autocomplete'.ViewUtil::hasErrorClass($errors, 'edit_artist_id.'.$part->id), 'id'=>'edit_artist_'.$part->id]) }}
                                         @include('layouts.parts.error_message', ['key'=>'edit_artist_id.'.$part->id])
                                     </td>
                                     <td>
-                                        {{ Form::text("edit_artist_name[".$part->id."]", $part->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_artist_name.'.$part->id), 'id'=>"edit_artist_{$part->id}_name"]) }}
+                                        {{ Form::text("edit_artist_name[".$part->id."]", $part->getLocaleName('artist_name', 'ja'), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_artist_name.'.$part->id), 'id'=>"edit_artist_{$part->id}_name"]) }}
                                         @include('layouts.parts.error_message', ['key'=>'edit_artist_name.'.$part->id])
                                     </td>
                                     <td>
-                                        {{ Form::text("edit_part_name[".$part->id."]", $part->name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_part_name.'.$part->id)]) }}
+                                        {{ Form::text("edit_part_name[".$part->id."]", $part->getLocaleName('name', 'ja'), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'edit_part_name.'.$part->id)]) }}
                                         @include('layouts.parts.error_message', ['key'=>'edit_part_name.'.$part->id])
                                     </td>
                                 </tr>

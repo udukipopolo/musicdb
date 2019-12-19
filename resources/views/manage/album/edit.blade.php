@@ -44,7 +44,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('album_title', 'アルバムタイトル', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::text('album_title', $album->title, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'album_title'), 'placeholder'=>'Q-MHz']) }}
+                        {{ Form::text('album_title', $album->getLocaleName('title', 'ja'), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'album_title'), 'placeholder'=>'Q-MHz']) }}
                         @include('layouts.parts.error_message', ['key'=>'album_title'])
                     </div>
                 </div>
@@ -52,12 +52,12 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-4">
-                        {{ Form::text('artist_id', $album->artist->name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist', 'placeholder'=>'Q-MHz']) }}
+                        {{ Form::text('artist_id', $album->artist->getLocaleName('name', 'ja'), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_id'), 'id'=>'album_artist', 'placeholder'=>'Q-MHz']) }}
                         @include('layouts.parts.error_message', ['key'=>'artist_id'])
                         <span class="help-block">※アーティスト名を入力してください。</span>
                     </div>
                     <div class="col-md-4">
-                        {{ Form::text('artist_name', $album->artist_name, ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name', 'placeholder'=>'別名義']) }}
+                        {{ Form::text('artist_name', $album->getLocaleName('artist_name', 'ja'), ['class'=>'form-control'.ViewUtil::hasErrorClass($errors, 'artist_name'), 'id'=>'album_artist_name', 'placeholder'=>'別名義']) }}
                         @include('layouts.parts.error_message', ['key'=>'artist_name'])
                         <span class="help-block">※別名義で登録したい場合は、こちらに入力</span>
                     </div>
@@ -87,7 +87,7 @@ $(document).ready(function(){
                                 <tr>
                                     <td>{{ $no }}</td>
                                     <td>
-                                        {{ Form::text("musics[{$no}]", old('musics.'.$no) ?: ($music = $musics->firstWhere('track_no', $no)) ? $music->title : null, ['class'=>'form-control']+(($no==1) ? ['placeholder'=>'LiVE DiVE MHz!!'] : [])) }}
+                                        {{ Form::text("musics[{$no}]", old('musics.'.$no) ?: ($music = $musics->firstWhere('track_no', $no)) ? $music->getLocaleName('title', 'ja') : null, ['class'=>'form-control']+(($no==1) ? ['placeholder'=>'LiVE DiVE MHz!!'] : [])) }}
                                     </td>
                                 </tr>
                                 @endfor
@@ -101,7 +101,7 @@ $(document).ready(function(){
                 <div class="form-group row">
                     {{ Form::label('description', '詳細・アルバムに携わった人等', ['class'=>'col-form-label col-md-4'])}}
                     <div class="col-md-8">
-                        {{ Form::textarea('description', $album->description, ['class'=>'form-control', 'rows'=>'6']) }}
+                        {{ Form::textarea('description', $album->getLocaleText('description', 'ja'), ['class'=>'form-control', 'rows'=>'6']) }}
                     </div>
                 </div>
 

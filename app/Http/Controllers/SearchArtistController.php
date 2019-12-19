@@ -24,7 +24,6 @@ class SearchArtistController extends Controller
             });
             $artists->select([
                 'artists.*',
-                'locale_names.name',
             ]);
 
             if ($request->filled('artist_name')) {

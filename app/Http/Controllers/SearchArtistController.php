@@ -18,7 +18,7 @@ class SearchArtistController extends Controller
             $artists = Artist::query();
             $artists->join('locale_names', function($join) {
                 $join->on('locale_names.localable_id', '=', 'artists.id')
-                    ->where('locale_names.localbale_type', '=', 'artists')
+                    ->where('locale_names.localable_type', '=', 'artists')
                     ->where('locale_names.column', '=', 'name')
                     ->where('locale_names.locale', '=', 'ja');
             });

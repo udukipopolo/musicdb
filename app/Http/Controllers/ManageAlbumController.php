@@ -44,9 +44,6 @@ class ManageAlbumController extends Controller
     {
         $params = [];
 
-        $artists = Artist::orderBy('name', 'ASC')->get()->pluck('name', 'id');
-        $params['artists'] = $artists;
-
         return view('manage.album.create', $params);
     }
 
@@ -214,7 +211,6 @@ class ManageAlbumController extends Controller
     {
         $params = [
             'album' => $album,
-            'artists' => Artist::orderBy('name', 'ASC')->get()->pluck('name', 'id'),
         ];
 
         return view('manage.album.edit', $params);

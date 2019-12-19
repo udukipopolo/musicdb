@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\LocaleName;
 use App\Models\Music;
 use App\Services\PhgService;
 use Illuminate\Http\Request;

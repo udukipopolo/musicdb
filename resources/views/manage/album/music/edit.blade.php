@@ -26,7 +26,8 @@ function setAutocomplete() {
                 enabled: true
             }
         },
-        theme: "bootstrap"
+        adjustWidth: false,
+        theme: "bootstrap",
     };
 
     $(".name-autocomplete").easyAutocomplete(name_options);
@@ -39,6 +40,7 @@ function setAutocomplete() {
                 enabled: true
             }
         },
+        adjustWidth: false,
         theme: "bootstrap"
     };
 

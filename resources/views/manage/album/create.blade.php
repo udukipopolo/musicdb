@@ -20,6 +20,7 @@ $(document).ready(function(){
             match: {
                 enabled: true
             },
+            adjustWidth: false,
             theme: "bootstrap"
         }
     };

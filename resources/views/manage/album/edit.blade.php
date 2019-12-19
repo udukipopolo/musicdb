@@ -23,6 +23,7 @@ $(document).ready(function(){
                 enabled: true
             }
         },
+        adjustWidth: false,
         theme: "bootstrap"
     };
 

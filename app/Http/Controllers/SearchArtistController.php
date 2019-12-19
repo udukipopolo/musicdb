@@ -25,8 +25,8 @@ class SearchArtistController extends Controller
             });
             if ($request->input('search_type') == 'like') {
                 $artists->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
-                $artists->groupBy('aritsts.id');
-                $artists->orderBy('aritsts.name', 'ASC');
+                $artists->groupBy('artists.id');
+                $artists->orderBy('artists.name', 'ASC');
             } else {
                 $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ? )) AS score", [$request->artist_name]));
                 $artists->where(\DB::raw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]));

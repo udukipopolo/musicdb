@@ -55,10 +55,10 @@ class SearchArtistController extends Controller
                         ->distinct()
                         ->select('locale_names.artist_id')
                         ->whereNotNull('artist_id');
-                        if (mb_strlen($request->artist_name) > 2) {
-                            $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]);
-                        } else {
+                        if ($request->input('search_type') == 'like') {
                             $query->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
+                        } else {
+                            $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]);
                         }
                 });
 

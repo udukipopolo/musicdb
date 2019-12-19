@@ -29,11 +29,10 @@ class SearchArtistController extends Controller
                     $artists->groupBy('artists.id');
                     $artists->orderBy('artists.name', 'ASC');
                 } else {
-                    $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ?  IN NATURAL LANGUAGE MODE)) AS score"));
+                    $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ?  IN NATURAL LANGUAGE MODE)) AS score")->setBindings([$request->artist_name]));
                     $artists->whereRaw("MATCH(locale_names.name) AGAINST( ?  IN NATURAL LANGUAGE MODE)", [$request->artist_name]);
                     $artists->groupBy('artists.id');
                     $artists->orderBy('score', 'DESC');
-                    $artists->setBindings([$request->artist_name]);
                 }
             } else {
                 $artists->orderBy('artists.name', 'ASC');

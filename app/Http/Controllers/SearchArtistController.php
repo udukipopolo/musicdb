@@ -16,12 +16,6 @@ class SearchArtistController extends Controller
 
         if (count($request->query()) > 0) {
             $artists = Artist::query();
-            $artists->join('locale_names', function($join) {
-                $join->on('locale_names.localable_id', '=', 'artists.id')
-                    ->where('locale_names.localable_type', '=', 'artists')
-                    ->where('locale_names.column', '=', 'name')
-                    ->where('locale_names.locale', '=', 'ja');
-            });
             $artists->select([
                 'artists.*',
             ]);
@@ -41,7 +35,18 @@ class SearchArtistController extends Controller
 
             }
 
-            $artists->orderBy('locale_names.name', 'ASC');
+            if (mb_strlen($request->artist_name) > 2) {
+                $artists->addSelect(\DB::raw("MATCH(locale_names.name) AGAINST( ? ) AS score", [$request->artist_name]));
+                $artists->orderBy('score', 'DESC');
+            } else {
+                $artists->join('locale_names', function($join) {
+                    $join->on('locale_names.localable_id', '=', 'artists.id')
+                        ->where('locale_names.localable_type', '=', 'artists')
+                        ->where('locale_names.column', '=', 'name')
+                        ->where('locale_names.locale', '=', 'ja');
+                });
+                $artists->orderBy('locale_names.name', 'ASC');
+            }
 
             $params['artists'] = $artists->paginate(50);
         }

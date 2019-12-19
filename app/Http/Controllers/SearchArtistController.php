@@ -19,20 +19,23 @@ class SearchArtistController extends Controller
             $artists->select([
                 'artists.*',
             ]);
-            $artists->join('locale_names', function($join) {
-                $join->on('locale_names.artist_id', '=', 'artists.id')
-                    ->where('locale_names.column', '=', 'name');
-            });
-            if ($request->input('search_type') == 'like') {
-                $artists->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
-                $artists->groupBy('artists.id');
-                $artists->orderBy('artists.name', 'ASC');
+            if ($request->filled('artist_name')) {
+                $artists->join('locale_names', function($join) {
+                    $join->on('locale_names.artist_id', '=', 'artists.id')
+                        ->where('locale_names.column', '=', 'name');
+                });
+                if ($request->input('search_type') == 'like') {
+                    $artists->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
+                    $artists->groupBy('artists.id');
+                    $artists->orderBy('artists.name', 'ASC');
+                } else {
+                    $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ? )) AS score", [$request->artist_name]));
+                    $artists->where(\DB::raw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]));
+                    $artists->orderBy('score', 'DESC');
+                }
             } else {
-                $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ? )) AS score", [$request->artist_name]));
-                $artists->where(\DB::raw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]));
-                $artists->orderBy('score', 'DESC');
+                $artists->orderBy('artists.name', 'ASC');
             }
-
 
             // $artists->join('locale_names', function($join) {
             //     $join->on('locale_names.localable_id', '=', 'artists.id')

@@ -680,7 +680,7 @@ class ManageAlbumController extends Controller
     {
         $parts = LocaleName::query();
         $parts->distinct()->select(['name', 'artist_id']);
-        $parts->where('localabble_type', 'parts')
+        $parts->where('localable_type', 'parts')
             ->where('locale', 'ja')
             ->where('column', 'name');
         if ($request->filled('q')) {

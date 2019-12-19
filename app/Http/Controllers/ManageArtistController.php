@@ -183,7 +183,7 @@ class ManageArtistController extends Controller
     {
         $artists = LocaleName::query();
         $artists->distinct()->select(['name', 'id']);
-        $artists->where('localabble_type', 'artists')
+        $artists->where('localable_type', 'artists')
             ->where('locale', 'ja')
             ->where('column', 'name');
         if ($request->filled('q')) {

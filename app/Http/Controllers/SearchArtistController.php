@@ -29,8 +29,8 @@ class SearchArtistController extends Controller
                     $artists->groupBy('artists.id');
                     $artists->orderBy('artists.name', 'ASC');
                 } else {
-                    $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ? )) AS score", [$request->artist_name]));
-                    $artists->where(\DB::raw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]));
+                    $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ?  IN NATURAL LANGUAGE MODE)) AS score", [$request->artist_name]));
+                    $artists->where(\DB::raw("MATCH(locale_names.name) AGAINST( ?  IN NATURAL LANGUAGE MODE)", [$request->artist_name]));
                     $artists->orderBy('score', 'DESC');
                 }
             } else {

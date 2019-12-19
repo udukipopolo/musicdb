@@ -19,7 +19,8 @@ $(document).ready(function(){
         list: {
             match: {
                 enabled: true
-            }
+            },
+            theme: "bootstrap"
         }
     };
 

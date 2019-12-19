@@ -25,7 +25,8 @@ function setAutocomplete() {
             match: {
                 enabled: true
             }
-        }
+        },
+        theme: "bootstrap"
     };
 
     $(".name-autocomplete").easyAutocomplete(name_options);
@@ -37,7 +38,8 @@ function setAutocomplete() {
             match: {
                 enabled: true
             }
-        }
+        },
+        theme: "bootstrap"
     };
 
     $(".part-autocomplete").easyAutocomplete(part_options);

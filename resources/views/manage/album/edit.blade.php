@@ -22,7 +22,8 @@ $(document).ready(function(){
             match: {
                 enabled: true
             }
-        }
+        },
+        theme: "bootstrap"
     };
 
     $("#album_artist").easyAutocomplete(options);

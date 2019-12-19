@@ -16,55 +16,56 @@ class SearchArtistController extends Controller
 
         if (count($request->query()) > 0) {
             $artists = Artist::query();
-            // $artists->select([
-            //     'artists.*',
-            // ]);
-            // if ($request->filled('artist_name')) {
-            //     $artists->join('locale_names', function($join) {
-            //         $join->on('locale_names.artist_id', '=', 'artists.id')
-            //             ->where('locale_names.column', '=', 'name');
-            //     });
-            //     if ($request->input('search_type') == 'like') {
-            //         $artists->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
-            //         $artists->groupBy('artists.id');
-            //         $artists->orderBy('artists.name', 'ASC');
-            //     } else {
-            //         $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( :kyeword  IN NATURAL LANGUAGE MODE)) AS score"));
-            //         $artists->whereRaw("MATCH(locale_names.name) AGAINST( :kyeword  IN NATURAL LANGUAGE MODE)");
-            //         $artists->groupBy('artists.id');
-            //         $artists->orderBy('score', 'DESC');
-            //         $artists->setBindings(['kyeword'=>$request->artist_name]);
-            //     }
-            // } else {
-            //     $artists->orderBy('artists.name', 'ASC');
-            // }
-
-            $artists->join('locale_names', function($join) {
-                $join->on('locale_names.localable_id', '=', 'artists.id')
-                    ->where('locale_names.localable_type', '=', 'artists')
-                    ->where('locale_names.column', '=', 'name')
-                    ->where('locale_names.locale', '=', 'ja');
-            });
             $artists->select([
                 'artists.*',
             ]);
-
             if ($request->filled('artist_name')) {
-                $artists->whereIn('artists.id', function($query) use($request) {
-                    $query->from('locale_names')
-                        ->distinct()
-                        ->select('locale_names.artist_id')
-                        ->whereNotNull('artist_id');
-                        if ($request->input('search_type') == 'like') {
-                            $query->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
-                        } else {
-                            $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]);
-                        }
+                $artists->join('locale_names', function($join) {
+                    $join->on('locale_names.artist_id', '=', 'artists.id')
+                        ->whereRaw("locale_names.column = 'name'");
                 });
-
+                if ($request->input('search_type') == 'like') {
+                    $artists->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
+                    $artists->groupBy('artists.id');
+                    $artists->orderBy('artists.name', 'ASC');
+                } else {
+                    $artists->addSelect(\DB::raw("MAX(MATCH(locale_names.name) AGAINST( ?  IN NATURAL LANGUAGE MODE)) AS score"));
+                    $artists->whereRaw("MATCH(locale_names.name) AGAINST( ?  IN NATURAL LANGUAGE MODE)");
+                    $artists->groupBy('artists.id');
+                    $artists->orderBy('score', 'DESC');
+                    $artists->setBindings([$request->artist_name, $request->artist_name]);
+                    \Log::debug($artists->toSql());
+                }
+            } else {
+                $artists->orderBy('artists.name', 'ASC');
             }
 
-            $artists->orderBy('locale_names.name', 'ASC');
+            // $artists->join('locale_names', function($join) {
+            //     $join->on('locale_names.localable_id', '=', 'artists.id')
+            //         ->where('locale_names.localable_type', '=', 'artists')
+            //         ->where('locale_names.column', '=', 'name')
+            //         ->where('locale_names.locale', '=', 'ja');
+            // });
+            // $artists->select([
+            //     'artists.*',
+            // ]);
+
+            // if ($request->filled('artist_name')) {
+            //     $artists->whereIn('artists.id', function($query) use($request) {
+            //         $query->from('locale_names')
+            //             ->distinct()
+            //             ->select('locale_names.artist_id')
+            //             ->whereNotNull('artist_id');
+            //             if ($request->input('search_type') == 'like') {
+            //                 $query->where('locale_names.name', 'LIKE', '%'.$request->artist_name.'%');
+            //             } else {
+            //                 $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->artist_name]);
+            //             }
+            //     });
+
+            // }
+
+            // $artists->orderBy('locale_names.name', 'ASC');
 
             $params['artists'] = $artists->paginate(50);
         }

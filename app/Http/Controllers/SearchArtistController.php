@@ -16,7 +16,7 @@ class SearchArtistController extends Controller
 
         if (count($request->query()) > 0) {
             $artists = Artist::query();
-            $artists->deistinct()
+            $artists->distinct()
                 ->select([
                     'artists.*',
                 ]);

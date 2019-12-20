@@ -16,9 +16,10 @@ class SearchArtistController extends Controller
 
         if (count($request->query()) > 0) {
             $artists = Artist::query();
-            $artists->select([
-                'artists.*',
-            ]);
+            $artists->deistinct()
+                ->select([
+                    'artists.*',
+                ]);
             if ($request->filled('artist_name')) {
                 $artists->join('locale_names', function($join) {
                     $join->on('locale_names.artist_id', '=', 'artists.id')
@@ -67,7 +68,7 @@ class SearchArtistController extends Controller
 
             // $artists->orderBy('locale_names.name', 'ASC');
 
-            $params['artists'] = $artists->paginate(50);
+            $params['artists'] = $artists->paginate(50, ['artists.*']);
         }
 
         return view('search.artist.index', $params);

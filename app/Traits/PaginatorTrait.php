@@ -5,7 +5,7 @@ use Illuminate\Pagination\Paginator;
 
 trait PaginatorTrait
 {
-    public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+    public function paginateEx($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
     {
         $page = $page ?: Paginator::resolveCurrentPage($pageName);
 

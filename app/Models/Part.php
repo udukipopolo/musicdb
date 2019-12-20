@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use App\Traits\AuthorObservable;
+use App\Traits\PaginatorTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Part extends Model
 {
-    use AuthorObservable;
+    use AuthorObservable, PaginatorTrait;
 
     protected $fillable = [
         'music_id',

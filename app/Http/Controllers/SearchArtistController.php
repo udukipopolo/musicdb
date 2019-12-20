@@ -68,7 +68,7 @@ class SearchArtistController extends Controller
 
             // $artists->orderBy('locale_names.name', 'ASC');
 
-            $params['artists'] = $artists->paginateEx(50, ['distinct artists.id']);
+            $params['artists'] = $artists->paginate(50, ['distinct artists.id']);
         }
 
         return view('search.artist.index', $params);

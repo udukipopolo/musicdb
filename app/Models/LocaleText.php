@@ -3,12 +3,11 @@
 namespace App\Models;
 
 use App\Traits\AuthorObservable;
-use App\Traits\PaginatorTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class LocaleText extends Model
 {
-    use AuthorObservable, PaginatorTrait;
+    use AuthorObservable;
 
     protected $fillable = [
         'locale',

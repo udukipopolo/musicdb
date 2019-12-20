@@ -4,13 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Artist;
 use App\Models\Music;
-use App\Traits\PaginatorTrait;
 use Illuminate\Http\Request;
 
 class SearchArtistController extends Controller
 {
-    use PaginatorTrait;
-
     public function index(Request $request)
     {
         $params = [];
@@ -70,7 +67,7 @@ class SearchArtistController extends Controller
 
             // $artists->orderBy('locale_names.name', 'ASC');
 
-            $params['artists'] = $this->paginate($artists, 50, ['artists.id']);
+            $params['artists'] = $artists->paginate(50);
         }
 
         return view('search.artist.index', $params);

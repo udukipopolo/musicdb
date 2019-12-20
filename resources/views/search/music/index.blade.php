@@ -25,6 +25,22 @@
                                 <label class="sr-only" form="artist_name">アーティスト名</label>
                                 {{ Form::text('artist_name', @$input['artist_name'], ['class'=>'form-control', 'placeholder'=>'アーティスト名']) }}
                             </div>
+
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    {{ Form::radio('search_type', 'fulltext', (!isset($input['search_type']) || $input['search_type'] == 'fulltext'), ['class'=>'from-check-input', 'id'=>'search_type_fulltext']) }}
+                                    <label class="form-check-label" for="search_type_fulltext">
+                                        あいまい検索
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    {{ Form::radio('search_type', 'like', (@$input['search_type'] == 'like'), ['class'=>'from-check-input', 'id'=>'search_type_like']) }}
+                                    <label class="form-check-label" for="search_type_like">
+                                        部分一致検索
+                                    </label>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="row">
                             <h4 class="col-md-12">絞り込み</h4>

@@ -26,10 +26,10 @@ class SearchMusicController extends Controller
                         ->distinct()
                         ->select('locale_names.localable_id')
                         ->where('locale_names.localable_type', 'albums');
-                    if (mb_strlen($request->album_title) > 2) {
-                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_title]);
-                    } else {
+                    if ($request->input('search_type') == 'like') {
                         $query->where('locale_names.name', 'LIKE', '%'.$request->album_title.'%');
+                    } else {
+                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_title]);
                     }
                 });
 
@@ -41,10 +41,10 @@ class SearchMusicController extends Controller
                         ->distinct()
                         ->select('locale_names.localable_id')
                         ->where('locale_names.localable_type', 'musics');
-                    if (mb_strlen($request->music_title) > 2) {
-                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_title]);
-                    } else {
+                    if ($request->input('search_type') == 'like') {
                         $query->where('locale_names.name', 'LIKE', '%'.$request->music_title.'%');
+                    } else {
+                        $query->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_title]);
                     }
                 });
 
@@ -54,10 +54,10 @@ class SearchMusicController extends Controller
                 $artists_ids = LocaleName::distinct()
                     ->select('artist_id')
                     ->whereNotNull('artist_id');
-                if (mb_strlen($request->artist_name) > 2) {
-                    $artists_ids->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);
-                } else {
+                if ($request->input('search_type') == 'like') {
                     $artists_ids->where('name', 'LIKE', '%'.$request->artist_name.'%');
+                } else {
+                    $artists_ids->whereRaw("MATCH(name) AGAINST( ? )", [$request->artist_name]);
                 }
                 $artists_ids = $artists_ids->get()
                     ->pluck('artist_id');
@@ -84,10 +84,10 @@ class SearchMusicController extends Controller
                                 ->distinct()
                                 ->select('locale_names.artist_id')
                                 ->whereNotNull('locale_names.artist_id');
-                            if (mb_strlen($request->album_artist) > 2) {
-                                $query2->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_artist]);
-                            } else {
+                            if ($request->input('search_type') == 'like') {
                                 $query2->where('locale_names.name', 'LIKE', '%'.$request->album_artist.'%');
+                            } else {
+                                $query2->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->album_artist]);
                             }
 
                         });
@@ -105,10 +105,10 @@ class SearchMusicController extends Controller
                                 ->distinct()
                                 ->select('locale_names.artist_id')
                                 ->whereNotNull('locale_names.artist_id');
-                            if (mb_strlen($request->album_artmusic_artistist) > 2) {
-                                $query2->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_artist]);
-                            } else {
+                            if ($request->input('search_type') == 'like') {
                                 $query2->where('locale_names.name', 'LIKE', '%'.$request->music_artist.'%');
+                            } else {
+                                $query2->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_artist]);
                             }
                         });
                     }
@@ -118,10 +118,10 @@ class SearchMusicController extends Controller
                                 ->distinct()
                                 ->select('locale_names.localable_id')
                                 ->where('locale_names.localable_type', 'parts');
-                            if (mb_strlen($request->music_part) > 2) {
-                                $query2->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_part]);
-                            } else {
+                            if ($request->input('search_type') == 'like') {
                                 $query2->where('locale_names.name', 'LIKE', '%'.$request->music_part.'%');
+                            } else {
+                                $query2->whereRaw("MATCH(locale_names.name) AGAINST( ? )", [$request->music_part]);
                             }
                         });
                     }

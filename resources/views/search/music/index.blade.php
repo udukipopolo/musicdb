@@ -27,17 +27,19 @@
                             </div>
 
                             <div class="col-md-4">
-                                <div class="form-check">
-                                    {{ Form::radio('search_type', 'fulltext', (!isset($input['search_type']) || $input['search_type'] == 'fulltext'), ['class'=>'from-check-input', 'id'=>'search_type_fulltext']) }}
-                                    <label class="form-check-label" for="search_type_fulltext">
-                                        あいまい検索
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    {{ Form::radio('search_type', 'like', (@$input['search_type'] == 'like'), ['class'=>'from-check-input', 'id'=>'search_type_like']) }}
-                                    <label class="form-check-label" for="search_type_like">
-                                        部分一致検索
-                                    </label>
+                                <div class="row">
+                                    <div class="form-check col-md-6">
+                                        {{ Form::radio('search_type', 'fulltext', (!isset($input['search_type']) || $input['search_type'] == 'fulltext'), ['class'=>'from-check-input', 'id'=>'search_type_fulltext']) }}
+                                        <label class="form-check-label" for="search_type_fulltext">
+                                            あいまい検索
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-md-6">
+                                        {{ Form::radio('search_type', 'like', (@$input['search_type'] == 'like'), ['class'=>'from-check-input', 'id'=>'search_type_like']) }}
+                                        <label class="form-check-label" for="search_type_like">
+                                            部分一致検索
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
 

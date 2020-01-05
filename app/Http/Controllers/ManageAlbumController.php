@@ -329,38 +329,39 @@ class ManageAlbumController extends Controller
                 ]
             );
 
-            foreach ($request->musics AS $no=>$title) {
-                $music = $album->musics()->where('track_no', $no)->first();
-                if (empty($title)) {
-                    if ($music) {
-                        foreach ($music->parts as $part) {
-                            $part->locale_name()->delete();
+            if ($request->filled('musics')) {
+                foreach ($request->musics AS $no=>$title) {
+                    $music = $album->musics()->where('track_no', $no)->first();
+                    if (empty($title)) {
+                        if ($music) {
+                            foreach ($music->parts as $part) {
+                                $part->locale_name()->delete();
+                            }
+                            $music->parts()->delete();
+                            $music->delete();
                         }
-                        $music->parts()->delete();
-                        $music->delete();
-                    }
-                } else {
-                    if ($music) {
-                        $music->title = $title;
-                        $music->save();
                     } else {
-                        $music = $album->musics()->create([
-                            'title' => $title,
-                            'track_no' => $no,
-                        ]);
+                        if ($music) {
+                            $music->title = $title;
+                            $music->save();
+                        } else {
+                            $music = $album->musics()->create([
+                                'title' => $title,
+                                'track_no' => $no,
+                            ]);
+                        }
+                        $music->locale_name()->updateOrCreate(
+                            [
+                                'column' => 'title',
+                                'locale' => 'ja',
+                            ],
+                            [
+                                'name' => $title,
+                            ]
+                        );
                     }
-                    $music->locale_name()->updateOrCreate(
-                        [
-                            'column' => 'title',
-                            'locale' => 'ja',
-                        ],
-                        [
-                            'name' => $title,
-                        ]
-                    );
                 }
             }
-
         });
 
         return redirect()->route('manage.album.show', $album)->with('message', __('messages.updated'));

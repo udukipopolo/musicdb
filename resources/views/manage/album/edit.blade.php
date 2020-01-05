@@ -82,7 +82,7 @@ $(document).ready(function(){
                                 if (old('musics') && count(old('musics')) > 10) {
                                     $max = count(old('musics'));
                                 } else {
-                                    $max = ($musics->count() > 0) $musics->max('track_no') : 0;
+                                    $max = ($musics->count() > 0) ? $musics->max('track_no') : 0;
                                 }
                                 @endphp
                                 @for($no = 1; $no <= $max; $no++)

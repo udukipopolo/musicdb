@@ -19,7 +19,29 @@ $(function() {
         colHeaders: true,
         filters: true,
         dropdownMenu: true,
-        allowInsertRow: true
+        allowInsertRow: true,
+        contextMenu: {
+            items: {
+                row_above: {
+                    name: '上に行を挿入',
+                    callback: function (key, normalizedSelection) {
+                        var latestSelection = normalizedSelection[Math.max(normalizedSelection.length - 1, 0)];
+                        this.alter('insert_row', latestSelection.start.row);
+                        var col = hot.propToCol(COL_PRODUCTCODE);
+                        hot.selectCell(latestSelection.start.row, col);
+                    }
+                },
+                row_below: {
+                    name: '下に行を挿入',
+                    callback: function (key, normalizedSelection) {
+                        var latestSelection = normalizedSelection[Math.max(normalizedSelection.length - 1, 0)];
+                        this.alter('insert_row', latestSelection.end.row + 1);
+                        var col = hot.propToCol(COL_PRODUCTCODE);
+                        hot.selectCell(latestSelection.end.row + 1, col);
+                    }
+                }
+            }
+        }
     });
 });
 </script>

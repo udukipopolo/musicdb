@@ -21,7 +21,7 @@ $(function() {
         stretchH: 'all',
         startRows: 15,
         wordWrap: false,
-        colmuns: [
+        columns: [
             {
                 type: 'text'
             },

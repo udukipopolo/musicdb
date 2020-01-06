@@ -10,7 +10,7 @@ $(function() {
 
     var container = document.getElementById('sheet');
     var hot = new Handsontable(container, {
-        data: data,
+//        data: data,
         rowHeaders: true,
         colHeaders: true,
         filters: false,

@@ -17,7 +17,7 @@
                             <div class="form-group">
                             {{ Form::file('csv_file', ['class'=>'form-control-file'.ViewUtil::hasErrorClass($errors, 'csv_file')]) }}
                             <p class="help-block">※文字エンコーディングはUTF-8にしてください。</p>
-                            <p class="help-block">サンプルは<a href="/sample/音楽DB一括登録用フォーマット-サンプル.csv" target="_blank">こちら</a></p>
+                            <p class="help-block">サンプルは<a href="/sample/touch_the_music_format.csv" target="_blank">こちら</a></p>
                             @include('layouts.parts.error_message', ['key'=>'csv_file'])
                             </div>
                             {{ Form::submit('送信', ['class'=>'btn btn-primary']) }}

@@ -2,6 +2,18 @@
 
 @section('head')
 {{ Html::style('css/handsontable.full.min.css') }}
+{{ Html::style('js/handsontable.full.min.js') }}
+<script>
+    var hotElement = $('#sheet');
+    var hotSettings = {
+        colHeaders: [
+            'album_title',
+            'album_artist'
+        ]
+    };
+    var hot = new Handsontable(hotElement, hotSettings);
+</script>
+
 @endsection
 
 @section('content')
@@ -23,18 +35,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('foot')
-{{ Html::style('js/handsontable.full.min.js') }}
-<script>
-    var hotElement = $('#sheet');
-    var hotSettings = {
-        colHeaders: [
-            'album_title',
-            'album_artist'
-        ]
-    };
-    var hot = new Handsontable(hotElement, hotSettings);
-</script>
 @endsection

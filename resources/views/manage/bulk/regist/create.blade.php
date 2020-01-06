@@ -49,6 +49,9 @@ $(function() {
                         var col = hot.propToCol(COL_PRODUCTCODE);
                         hot.selectCell(latestSelection.end.row + 1, col);
                     }
+                },
+                remove_row: {
+                    name: '行を削除'
                 }
             }
         }

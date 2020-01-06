@@ -45,7 +45,7 @@ $(function() {
             },
             {
                 type: 'text'
-            },
+            }
         ],
         colHeaders: [
             'アルバムタイトル',

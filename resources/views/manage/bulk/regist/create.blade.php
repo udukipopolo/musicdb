@@ -21,6 +21,7 @@ $(function() {
         stretchH: 'all',
         startRows: 15,
         startCols: 8,
+        wordWrap: false,
         colHeaders: [
             'アルバムタイトル',
             'アルバムアーティスト',

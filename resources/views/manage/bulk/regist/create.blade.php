@@ -6,10 +6,6 @@
 <script>
 $(function() {
     var data = [
-        ['', 'Ford', 'Tesla', 'Toyota', 'Honda'],
-        ['2017', 10, 11, 12, 13],
-        ['2018', 20, 11, 14, 13],
-        ['2019', 30, 15, 12, 13]
     ];
 
     var container = document.getElementById('sheet');
@@ -21,6 +17,17 @@ $(function() {
         dropdownMenu: false,
         allowInsertColumn: false,
         allowRemoveColumn: false,
+        startRows: 15,
+        colHeaders: [
+            'アルバムタイトル',
+            'アルバムアーティスト',
+            'アルバムアーティスト(表示名義)',
+            '楽曲トラックNO',
+            '楽曲名',
+            'パート',
+            'アーティスト名',
+            'アーティスト名(表示名義)'
+        ],
         contextMenu: {
             items: {
                 row_above: {

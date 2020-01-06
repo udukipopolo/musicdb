@@ -20,6 +20,13 @@ class ManageBulkRegistrationController extends Controller
         return view('manage.bulk.regist.index', $params);
     }
 
+    public function create()
+    {
+        $params = [];
+
+        return view('manage.bulk.regist.create', $params);
+    }
+
     public function csv(Request $request)
     {
         $validator = \Validator::make(

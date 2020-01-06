@@ -2,7 +2,7 @@
 
 @section('head')
 {{ Html::style('css/handsontable.full.min.css') }}
-{{ Html::style('js/handsontable.full.min.js') }}
+{{ Html::script('js/handsontable.full.min.js') }}
 <script>
     var hotElement = $('#sheet');
     var hotSettings = {

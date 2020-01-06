@@ -18,6 +18,7 @@ $(function() {
         allowInsertColumn: false,
         allowRemoveColumn: false,
         width: '100%',
+        stretchHString: 'all',
         startRows: 15,
         colHeaders: [
             'アルバムタイトル',

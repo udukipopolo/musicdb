@@ -17,8 +17,8 @@ $(function() {
         data: data,
         rowHeaders: true,
         colHeaders: true,
-        filters: true,
-        dropdownMenu: true,
+        filters: false,
+        dropdownMenu: false,
         allowInsertColumn: false,
         allowRemoveColumn: false,
         contextMenu: {

@@ -20,6 +20,7 @@ $(function() {
         width: '100%',
         stretchH: 'all',
         startRows: 15,
+        startCols: 8,
         colHeaders: [
             'アルバムタイトル',
             'アルバムアーティスト',

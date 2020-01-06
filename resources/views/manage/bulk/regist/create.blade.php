@@ -20,8 +20,33 @@ $(function() {
         width: '100%',
         stretchH: 'all',
         startRows: 15,
-        startCols: 8,
         wordWrap: false,
+        colmuns: [
+            {
+                type: 'text'
+            },
+            {
+                type: 'text'
+            },
+            {
+                type: 'text'
+            },
+            {
+                type: 'numeric'
+            },
+            {
+                type: 'text'
+            },
+            {
+                type: 'text'
+            },
+            {
+                type: 'text'
+            },
+            {
+                type: 'text'
+            },
+        ],
         colHeaders: [
             'アルバムタイトル',
             'アルバムアーティスト',

@@ -17,6 +17,7 @@ $(function() {
         dropdownMenu: false,
         allowInsertColumn: false,
         allowRemoveColumn: false,
+        width: '100%',
         startRows: 15,
         colHeaders: [
             'アルバムタイトル',

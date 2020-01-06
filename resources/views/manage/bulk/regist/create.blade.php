@@ -19,7 +19,8 @@ $(function() {
         colHeaders: true,
         filters: true,
         dropdownMenu: true,
-        allowInsertRow: true,
+        allowInsertColumn: false,
+        allowRemoveColumn: false,
         contextMenu: {
             items: {
                 row_above: {

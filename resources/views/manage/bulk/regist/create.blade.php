@@ -90,6 +90,11 @@ $(function() {
             hot.alter('insert_row', hot.countRows());
         }
     });
+
+    $('#btn-regist').click(function() {
+        var datas = hot.getData();
+        console.log(datas);
+    });
 });
 </script>
 
@@ -111,10 +116,15 @@ $(function() {
                     </div>
 
                     <div class="col-md-12">
-                        <div class="input-group">
-                            {{ Form::number('add_row_num', 1, ['class'=>'form-control', 'id'=>'add_row_num', 'min'=>'1']) }}
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="btn-add-row">行追加</button>
+                        <div class="btn-toolbar" role="toolbar">
+                            <div class="input-group mr-2">
+                                {{ Form::number('add_row_num', 1, ['class'=>'form-control', 'id'=>'add_row_num', 'min'=>'1']) }}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="btn-add-row">行追加</button>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-primary" type="button" id="btn-regist">登録</button>
                             </div>
                         </div>
                     </div>

@@ -95,7 +95,7 @@ $(function() {
         var datas = hot.getData();
         console.log(datas);
         $.ajax({
-            url: "{{ route('bulk.regist.store') }}",
+            url: "{{ route('manage.bulk.regist.store') }}",
             type: 'POST',
             data: {datas: datas},
             dataType: 'json'

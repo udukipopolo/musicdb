@@ -99,7 +99,7 @@ $(function() {
             type: 'POST',
             data: {datas: datas},
             dataType: 'json'
-        }).done(functioN(data) {
+        }).done(function(data) {
 
         }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
 

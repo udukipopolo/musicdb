@@ -27,6 +27,20 @@ class ManageBulkRegistrationController extends Controller
         return view('manage.bulk.regist.create', $params);
     }
 
+    public function store(Request $request)
+    {
+        $validator = \Validator::make(
+            $request->all(),
+            [
+                'datas' => 'required|array',
+            ]
+        );
+
+        if ($validator->fails()) {
+
+        }
+    }
+
     public function csv(Request $request)
     {
         $validator = \Validator::make(

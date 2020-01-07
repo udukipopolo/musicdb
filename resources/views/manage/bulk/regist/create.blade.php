@@ -94,6 +94,16 @@ $(function() {
     $('#btn-regist').click(function() {
         var datas = hot.getData();
         console.log(datas);
+        $.ajax({
+            url: "{{ route('bulk.regist.store') }}",
+            type: 'POST',
+            data: {datas: datas},
+            dataType: 'json'
+        }).done(functioN(data) {
+
+        }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
+
+        });
     });
 });
 </script>

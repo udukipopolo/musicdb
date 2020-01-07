@@ -86,7 +86,7 @@ $(function() {
 
     $('#btn-add-row').click(function() {
         var add_row_num = $('#add_row_num').val();
-        foreach(num = 1; num <= add_row_num; num++) {
+        for(num = 1; num <= add_row_num; num++) {
             hot.alter('insert_row', hot.countRows());
         }
     });

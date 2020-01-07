@@ -31,6 +31,11 @@ return [
         'url' => 'AmazonのURLを指定してください。',
     ],
 
+    'bulk_regist' => [
+        'complete' => 'データの登録が完了しました。',
+        'failed' => 'データの登録に失敗しました。',
+    ],
+
     'search_artist' => 'アーティスト検索',
     'search_music' => '楽曲検索',
     'manage_artist' => 'アーティスト管理',

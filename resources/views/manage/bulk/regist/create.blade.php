@@ -103,9 +103,18 @@ $(function() {
             data: {datas: datas},
             dataType: 'json'
         }).done(function(data) {
-
+            if ($data.status == 'success') {
+                alert('@lang("messages.bulk_regist.complete")');
+                hot.clear();
+            } else {
+                if (data.error_message) {
+                    alert(data.error_message);
+                } else {
+                    alert('@lang("messages.bulk_regist.failed")');
+                }
+            }
         }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
-
+            alert('@lang("messages.bulk_regist.failed")');
         });
     });
 });

@@ -37,8 +37,19 @@ class ManageBulkRegistrationController extends Controller
         );
 
         if ($validator->fails()) {
-
+            return collect([
+                'status' => 'error',
+                'error_message' => __('messages.bulk_regist.failed'),
+            ])->toJson();
         }
+
+        \DB::transaction(function () use($request) {
+
+        });
+
+        return collect([
+            'status' => 'success',
+        ])->toJson();
     }
 
     public function csv(Request $request)

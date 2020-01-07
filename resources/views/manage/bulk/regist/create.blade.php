@@ -83,6 +83,13 @@ $(function() {
             }
         }
     });
+
+    $('#btn-add-row').click(function() {
+        var add_row_num = $('#add_row_num').val();
+        foreach(num = 1; num <= add_row_num; num++) {
+            hot.alter('insert_row', hot.countRows());
+        }
+    });
 });
 </script>
 
@@ -101,6 +108,15 @@ $(function() {
 
                     <div class="col-md-12">
                         <div id="sheet"></div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            {{ Form::number('add_row_num', 1, ['class'=>'form-control', 'id'=>'add_row_num', 'min'=>'1']) }}
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="btn-add-row">行追加</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

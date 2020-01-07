@@ -95,6 +95,9 @@ $(function() {
         var datas = hot.getData();
         console.log(datas);
         $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             url: "{{ route('manage.bulk.regist.store') }}",
             type: 'POST',
             data: {datas: datas},

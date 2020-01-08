@@ -47,7 +47,7 @@ class ManageBulkRegistrationController extends Controller
             return collect([
                 'status' => 'error',
                 'error_message' => __('messages.bulk_regist.failed'),
-                'errors' => $validator->errors,
+                'errors' => $validator->errors()->toArray(),
             ])->toJson();
         }
 

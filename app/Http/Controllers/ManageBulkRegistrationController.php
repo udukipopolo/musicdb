@@ -44,6 +44,8 @@ class ManageBulkRegistrationController extends Controller
         }
 
         \DB::transaction(function () use($request) {
+            \Log::debug($request->datas);
+
 
         });
 

@@ -33,6 +33,13 @@ class ManageBulkRegistrationController extends Controller
             $request->all(),
             [
                 'datas' => 'required|array',
+                'datas.*.1' => 'required_with:datas.*.0',
+                'datas.*.2' => 'required_with:datas.*.0',
+                'datas.*.3' => 'required_with:datas.*.0',
+                'datas.*.4' => 'required_with:datas.*.0',
+                'datas.*.5' => 'required_with:datas.*.0',
+                'datas.*.6' => 'required_with:datas.*.0',
+                'datas.*.7' => 'required_with:datas.*.0',
             ]
         );
 
@@ -40,6 +47,7 @@ class ManageBulkRegistrationController extends Controller
             return collect([
                 'status' => 'error',
                 'error_message' => __('messages.bulk_regist.failed'),
+                'errors' => $validator->errors,
             ])->toJson();
         }
 
@@ -47,7 +55,7 @@ class ManageBulkRegistrationController extends Controller
             \Log::debug($request->datas);
 
             foreach ($request->datas as $row_data) {
-                $this->processRow($row_data);
+                //$this->processRow($row_data);
             }
         });
 

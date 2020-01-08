@@ -52,8 +52,6 @@ class ManageBulkRegistrationController extends Controller
         }
 
         \DB::transaction(function () use($request) {
-            \Log::debug($request->datas);
-
             foreach ($request->datas as $row_data) {
                 //$this->processRow($row_data);
             }

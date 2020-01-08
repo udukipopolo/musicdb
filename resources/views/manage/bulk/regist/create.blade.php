@@ -103,7 +103,7 @@ $(function() {
             data: {datas: datas},
             dataType: 'json'
         }).done(function(data) {
-            if ($data.status == 'success') {
+            if (data.status == 'success') {
                 alert('@lang("messages.bulk_regist.complete")');
                 hot.clear();
             } else {

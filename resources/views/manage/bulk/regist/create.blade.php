@@ -109,6 +109,7 @@ $(function() {
             } else {
                 if (data.error_message) {
                     alert(data.error_message);
+                    console.log(data.errors);
                 } else {
                     alert('@lang("messages.bulk_regist.failed")');
                 }

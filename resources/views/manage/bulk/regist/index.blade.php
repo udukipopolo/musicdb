@@ -11,13 +11,13 @@
                 <div class="card-body">
                     @include('layouts.parts.message')
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-5">
                         <h3>一括入力</h3>
 
                         {{ Html::linkRoute('manage.bulk.regist.create', '入力画面へ進む', [], ['class'=>'btn btn-primary']) }}
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-5">
                         <h3>CSVアップロード</h3>
                         {{ Form::open(['route'=>['manage.bulk.regist.csv'], 'method'=>'POST', 'class'=>'form-horizontal', 'files'=>true]) }}
                             <div class="form-group">
@@ -30,7 +30,7 @@
                         {{ Form::close() }}
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-5">
                         <h3>Googleスプレッドシート</h3>
                         {{ Form::open(['route'=>['manage.bulk.regist.gss'], 'method'=>'POST', 'class'=>'form-horizontal']) }}
                             <div class="form-group">

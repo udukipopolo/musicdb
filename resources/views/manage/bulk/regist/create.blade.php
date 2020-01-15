@@ -125,7 +125,6 @@ $(function() {
                     }
                     hot.setDataAtCell(index, 8, mes);
                 });
-                //hot.clear();
             } else {
                 if (data.error_message) {
                     alert(data.error_message);
@@ -137,6 +136,10 @@ $(function() {
         }).fail(function(XMLHttpRequest, textStatus, errorThrown) {
             alert('@lang("messages.bulk_regist.failed")');
         });
+    });
+
+    $('#btn-regist').click(function() {
+        hot.clear();
     });
 });
 </script>
@@ -168,6 +171,9 @@ $(function() {
                             </div>
                             <div class="btn-group">
                                 <button class="btn btn-primary" type="button" id="btn-regist">登録</button>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-default" type="button" id="btn-clear">クリア</button>
                             </div>
                         </div>
                     </div>

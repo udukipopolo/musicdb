@@ -52,6 +52,22 @@ $(function() {
                 renderer: function(instance, td, row, col, prop, value, cellProperties) {
                 	Handsontable.renderers.TextRenderer.apply(this, arguments);
     				td.style.background = '#FFFFC0';
+                    var color = '';
+                    switch (value) {
+                        case 'OK'':
+                            color = 'blue';
+                            break;
+                        case 'NG':
+                            color = 'red';
+                            break;
+                        case 'DUP':
+                            color = 'yellow';
+                            break;
+                        default:
+                            color = 'black';
+                            break;
+                    }
+                    td.style.color = color;
             	}
             }
         ],
@@ -102,7 +118,6 @@ $(function() {
 
     $('#btn-regist').click(function() {
         var datas = hot.getData();
-        console.log(datas);
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -136,8 +151,6 @@ $(function() {
                             break;
                     }
                     hot.setDataAtCell(index, 8, mes);
-                    var cell = hot.getCell(index, 8);
-                    cell.style.color = color;
                 });
             } else {
                 if (data.error_message) {

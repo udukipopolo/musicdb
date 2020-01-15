@@ -48,7 +48,11 @@ $(function() {
             },
             {
                 type: 'text',
-                readOnly: true
+                readOnly: true,
+                renderer: function(instance, td, row, col, prop, value, cellProperties) {
+                	Handsontable.renderers.TextRenderer.apply(this, arguments);
+    				td.style.background = '#FFFFC0';
+            	}
             }
         ],
         colHeaders: [
@@ -133,7 +137,7 @@ $(function() {
                     }
                     hot.setDataAtCell(index, 8, mes);
                     var cell = hot.getCell(index, 8);
-                    cell.addClass(color);
+                    cell.style.color = color;
                 });
             } else {
                 if (data.error_message) {

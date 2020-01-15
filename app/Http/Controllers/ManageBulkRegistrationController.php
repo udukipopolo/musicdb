@@ -173,6 +173,18 @@ class ManageBulkRegistrationController extends Controller
         // $row->transform(function($item, $key) {
         //     return mb_convert_encoding($item, 'UTF-8', 'SJIS');
         // });
+        if (
+            empty($row->get(0)) &&
+            empty($row->get(1)) &&
+            empty($row->get(2)) &&
+            empty($row->get(3)) &&
+            empty($row->get(4)) &&
+            empty($row->get(5)) &&
+            empty($row->get(6)) &&
+            empty($row->get(7))
+        ) {
+            return 0;
+        }
 
         if (
             empty($row->get(0)) ||
@@ -184,7 +196,7 @@ class ManageBulkRegistrationController extends Controller
             empty($row->get(6)) ||
             empty($row->get(7))
         ) {
-            return false;
+            return 2;
         }
 
         // アルバムアーティスト
@@ -340,6 +352,6 @@ class ManageBulkRegistrationController extends Controller
 
         }
 
-        return true;
+        return 1;
     }
 }

@@ -111,11 +111,19 @@ $(function() {
             if (data.status == 'success') {
                 alert('@lang("messages.bulk_regist.complete")');
                 data.result.forEach(function(value, index) {
-                    if (value) {
-                        hot.setDataAtCell(index, 8, 'OK');
-                    } else {
-                        hot.setDataAtCell(index, 8, 'NG');
+                    var mes = '';
+                    switch (value) {
+                        case 0:
+                            mes = '';
+                            break;
+                        case 1:
+                            mes = 'OK';
+                            break;
+                        case 2:
+                            mes = 'NG';
+                            break;
                     }
+                    hot.setDataAtCell(index, 8, mes);
                 });
                 //hot.clear();
             } else {

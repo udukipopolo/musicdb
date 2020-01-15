@@ -10,7 +10,7 @@
                     @auth
                     <div class="btn-toolbar float-right" role="toolbar">
                         <div class="btn-group" role="group">
-                            <a href="{{ route('manage.album.edit', [$music->album->id]) }}" class="btn btn-success">編集</a>
+                            <a href="{{ route('manage.music.edit', [$music->album->id, $music->id]) }}" class="btn btn-success">編集</a>
                         </div>
                     </div>
                     @endauth

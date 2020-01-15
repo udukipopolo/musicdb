@@ -138,7 +138,7 @@ $(function() {
         });
     });
 
-    $('#btn-regist').click(function() {
+    $('#btn-clear').click(function() {
         hot.clear();
     });
 });
@@ -169,11 +169,11 @@ $(function() {
                                     <button class="btn btn-outline-secondary" type="button" id="btn-add-row">行追加</button>
                                 </div>
                             </div>
-                            <div class="btn-group">
+                            <div class="btn-group mr-2">
                                 <button class="btn btn-primary" type="button" id="btn-regist">登録</button>
                             </div>
                             <div class="btn-group">
-                                <button class="btn btn-default" type="button" id="btn-clear">クリア</button>
+                                <button class="btn btn-light" type="button" id="btn-clear">クリア</button>
                             </div>
                         </div>
                     </div>

@@ -54,7 +54,7 @@ $(function() {
     				td.style.background = '#FFFFC0';
                     var color = '';
                     switch (value) {
-                        case 'OK'':
+                        case 'OK':
                             color = 'blue';
                             break;
                         case 'NG':

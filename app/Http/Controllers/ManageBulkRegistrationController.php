@@ -350,6 +350,8 @@ class ManageBulkRegistrationController extends Controller
                 ]
             );
 
+        } else {
+            return 3;
         }
 
         return 1;

@@ -112,18 +112,28 @@ $(function() {
                 alert('@lang("messages.bulk_regist.complete")');
                 data.result.forEach(function(value, index) {
                     var mes = '';
+                    var color = 'black';
                     switch (value) {
                         case 0:
                             mes = '';
+                            color = 'black';
                             break;
                         case 1:
                             mes = 'OK';
+                            color = 'blue';
                             break;
                         case 2:
                             mes = 'NG';
+                            color = 'red';
+                            break;
+                        case 3:
+                            mes = 'DUP';
+                            color = 'yellow';
                             break;
                     }
                     hot.setDataAtCell(index, 8, mes);
+                    var cell = hot.getCell(index, 8);
+                    cell.addClass(color);
                 });
             } else {
                 if (data.error_message) {

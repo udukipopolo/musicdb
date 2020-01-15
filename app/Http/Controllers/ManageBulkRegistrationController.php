@@ -51,14 +51,17 @@ class ManageBulkRegistrationController extends Controller
             ])->toJson();
         }
 
-        \DB::transaction(function () use($request) {
-            foreach ($request->datas as $row_data) {
-                //$this->processRow($row_data);
+
+        $result = [];
+        \DB::transaction(function () use($request, &$result) {
+            foreach ($request->datas as $row_no=>$row_data) {
+                $result[$row_no] = $this->processRow($row_data);
             }
         });
 
         return collect([
             'status' => 'success',
+            'result' => $result,
         ])->toJson();
     }
 
@@ -181,7 +184,7 @@ class ManageBulkRegistrationController extends Controller
             empty($row->get(6)) ||
             empty($row->get(7))
         ) {
-            return;
+            return false;
         }
 
         // アルバムアーティスト
@@ -337,5 +340,6 @@ class ManageBulkRegistrationController extends Controller
 
         }
 
+        return true;
     }
 }

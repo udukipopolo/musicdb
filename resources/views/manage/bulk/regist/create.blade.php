@@ -45,6 +45,10 @@ $(function() {
             },
             {
                 type: 'text'
+            },
+            {
+                type: 'text',
+                readOnly: true
             }
         ],
         colHeaders: [
@@ -55,7 +59,8 @@ $(function() {
             '楽曲名',
             'パート',
             'アーティスト名',
-            'アーティスト名(表示名義)'
+            'アーティスト名(表示名義)',
+            '結果'
         ],
         contextMenu: {
             items: {
@@ -105,7 +110,14 @@ $(function() {
         }).done(function(data) {
             if (data.status == 'success') {
                 alert('@lang("messages.bulk_regist.complete")');
-                hot.clear();
+                data.result.forEach(function(value, index) {
+                    if (value) {
+                        hot.setDataAtCell(index, 8, 'OK');
+                    } else {
+                        hot.setDataAtCell(index, 8, 'NG');
+                    }
+                });
+                //hot.clear();
             } else {
                 if (data.error_message) {
                     alert(data.error_message);

@@ -19,14 +19,16 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="row">
-                                    <label class="btn btn-light {{ (!isset($input['search_type']) || $input['search_type'] == 'fulltext') ? 'active' : '' }}">
-                                        {{ Form::radio('search_type', 'fulltext', (!isset($input['search_type']) || $input['search_type'] == 'fulltext'), ['class'=>'from-check-input', 'id'=>'search_type_fulltext']) }}
-                                        あいまい検索
-                                    </label>
-                                    <label class="btn btn-light {{ (@$input['search_type'] == 'like') ? 'active' : '' }}">
-                                        {{ Form::radio('search_type', 'like', (@$input['search_type'] == 'like'), ['class'=>'from-check-input', 'id'=>'search_type_like']) }}
-                                        部分一致検索
-                                    </label>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light {{ (!isset($input['search_type']) || $input['search_type'] == 'fulltext') ? 'active' : '' }}">
+                                            {{ Form::radio('search_type', 'fulltext', (!isset($input['search_type']) || $input['search_type'] == 'fulltext'), ['class'=>'from-check-input', 'id'=>'search_type_fulltext']) }}
+                                            あいまい検索
+                                        </label>
+                                        <label class="btn btn-light {{ (@$input['search_type'] == 'like') ? 'active' : '' }}">
+                                            {{ Form::radio('search_type', 'like', (@$input['search_type'] == 'like'), ['class'=>'from-check-input', 'id'=>'search_type_like']) }}
+                                            部分一致検索
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

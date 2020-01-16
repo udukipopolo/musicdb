@@ -27,8 +27,8 @@
                             </div>
 
                         </div>
-                        <div class="row">
-                            <h4 class="col-md-12">絞り込み</h4>
+                        <div class="row mb-3">
+                            <strong class="col-md-12">絞り込み</strong>
                             <div class="col-md-4">
                                 <label class="sr-only" form="album_artist">アルバムアーティスト</label>
                                 {{ Form::text('album_artist', @$input['album_artist'], ['class'=>'form-control', 'placeholder'=>'アルバムアーティスト']) }}

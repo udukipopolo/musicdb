@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">
                     ユーザ検索
@@ -12,7 +12,7 @@
                     @include('layouts.parts.message')
 
                     {{ Form::open(['route'=>['user.index'], 'method'=>'GET', 'class'=>'']) }}
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-4">
                                 <label class="sr-only" form="user_name">@lang('messages.user_name')</label>
                                 {{ Form::text('user_name', @$input['user_name'], ['class'=>'form-control', 'placeholder'=>__('messages.user_name')]) }}

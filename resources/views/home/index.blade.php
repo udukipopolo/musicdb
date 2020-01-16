@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12 mb-5">
+        <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">@lang('messages.search_music')</div>
 
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="col-md-12 mb-5">
+        <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">@lang('messages.search_artist')</div>
 

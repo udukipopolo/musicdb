@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="mr-auto p-3">アーティスト詳細</h3>
+                アーティスト詳細
                 <div class="btn-toolbar float-right" role="toolbar">
                     <div class="btn-group" role="group">
                         <a href="{{ route('manage.artist.edit', [$artist->id]) }}" class="btn btn-success">編集</a>

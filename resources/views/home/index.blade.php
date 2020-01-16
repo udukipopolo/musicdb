@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-5">
             <div class="card">
                 <div class="card-header">@lang('messages.search_music')</div>
 
                 <div class="card-body">
                     {{ Form::open(['route'=>['search.music.index'], 'method'=>'GET', 'class'=>'']) }}
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-4">
                                 <label class="sr-only" form="name">@lang('messages.album_title')</label>
                                 {{ Form::text('album_title', @$input['album_title'], ['class'=>'form-control', 'placeholder'=>__('messages.album_title')]) }}
@@ -33,13 +33,13 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 mb-5">
             <div class="card">
                 <div class="card-header">@lang('messages.search_artist')</div>
 
                 <div class="card-body">
                     {{ Form::open(['route'=>['search.artist.index'], 'method'=>'GET', 'class'=>'']) }}
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-4">
                                 <label class="sr-only" form="artist_name">@lang('messages.artist_id')</label>
                                 {{ Form::text('artist_name', @$input['artist_name'], ['class'=>'form-control', 'placeholder'=>__('messages.artist_id')]) }}

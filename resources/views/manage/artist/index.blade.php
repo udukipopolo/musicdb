@@ -19,9 +19,7 @@
                         <div class="form-group mx-sm-3 mb-2">
                             {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
                         </div>
-                        <div class="form-group">
-                            {{ Html::linkRoute('manage.artist.create', '新規登録', [], ['class'=>'btn btn-primary']) }}
-                        </div>
+                        {{ Html::linkRoute('manage.artist.create', '新規登録', [], ['class'=>'btn btn-primary']) }}
                     {{ Form::close() }}
                 </div>
             </div>

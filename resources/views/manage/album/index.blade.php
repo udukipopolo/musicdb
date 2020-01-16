@@ -12,10 +12,16 @@
                     @include('layouts.parts.message')
 
                     {{ Form::open(['route'=>['manage.album.index'], 'method'=>'GET', 'class'=>'form-inline']) }}
-                        <label class="sr-only" form="name">アルバムタイトル</label>
-                        {{ Form::text('title', @$input['title'], ['class'=>'form-control', 'placeholder'=>'アルバムタイトル']) }}
-                        {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
-                        {{ Html::linkRoute('manage.album.create', '新規登録', [], ['class'=>'btn btn-primary']) }}
+                        <div class="form-group">
+                            <label class="sr-only" form="name">アルバムタイトル</label>
+                            {{ Form::text('title', @$input['title'], ['class'=>'form-control', 'placeholder'=>'アルバムタイトル']) }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
+                        </div>
+                        <div class="form-group">
+                            {{ Html::linkRoute('manage.album.create', '新規登録', [], ['class'=>'btn btn-primary']) }}
+                        </div>
                     {{ Form::close() }}
                 </div>
             </div>

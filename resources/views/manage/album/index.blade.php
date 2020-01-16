@@ -34,7 +34,7 @@
                     アルバム一覧
                 </div>
                 <tr class="card-body">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped mb-3">
                         <thead>
                             <tr>
                                 <th>アルバム名</th>

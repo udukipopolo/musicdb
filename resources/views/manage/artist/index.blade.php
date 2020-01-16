@@ -34,7 +34,7 @@
                     アーティスト一覧
                 </div>
                 <div class="card-body">
-                    <div class="row MB-3">
+                    <div class="row mb-3">
                     @foreach ($artists as $artist)
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         {{ Html::linkRoute('manage.artist.show', $artist->getLocaleName('name', 'ja'), [$artist->id]) }}

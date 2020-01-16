@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">
                     アルバム管理
@@ -12,11 +12,11 @@
                     @include('layouts.parts.message')
 
                     {{ Form::open(['route'=>['manage.album.index'], 'method'=>'GET', 'class'=>'form-inline']) }}
-                        <div class="form-group">
+                        <div class="form-group mb-2">
                             <label class="sr-only" form="name">アルバムタイトル</label>
                             {{ Form::text('title', @$input['title'], ['class'=>'form-control', 'placeholder'=>'アルバムタイトル']) }}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mx-sm-3 mb-2">
                             {{ Form::submit('検索', ['class'=>'btn btn-light']) }}
                         </div>
                         <div class="form-group">

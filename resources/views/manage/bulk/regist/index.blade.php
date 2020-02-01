@@ -11,6 +11,14 @@
                 <div class="card-body">
                     @include('layouts.parts.message')
 
+                    @error('row_error')
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="閉じる"><span aria-hidden="true">×</span></button>
+                        {!! $message !!}
+                    </div>
+                    @enderror
+
+
                     <div class="col-md-12 mb-5">
                         <h3>一括入力</h3>
 

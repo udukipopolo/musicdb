@@ -78,8 +78,9 @@ class ManageBulkRegistrationController extends Controller
             return back()->withErrors($validator);
         }
 
+        $errors = [];
         try {
-            \DB::transaction(function () use($request) {
+            \DB::transaction(function () use($request, &$errors) {
                 \setlocale(LC_ALL, 'ja_JP.UTF-8');
 
                 $uploaded_file = $request->file('csv_file');
@@ -89,7 +90,7 @@ class ManageBulkRegistrationController extends Controller
                 $file = new SplFileObject($file_path);
                 $file->setFlags(SplFileObject::READ_CSV);
 
-                $this->registCsv($file);
+                $errors = $this->registCsv($file);
             });
         } catch(\Exception $e) {
             \Log::debug($e->getMessage());
@@ -97,6 +98,16 @@ class ManageBulkRegistrationController extends Controller
                 $validator->errors()->add('csv_file', __('messages.csv_file.failed'));
             });
         }
+
+        $validator->after(function($validator) use($errors) {
+            if (count($errors) > 0) {
+                $message = '';
+                foreach ($errors as $row_no=>$error) {
+                    $message .= $row_no.':'.$error.'<br>';
+                }
+                $validator->errors()->add('row_error', $message);
+            }
+        });
 
         if ($validator->fails()) {
             return back()->withErrors($validator);
@@ -122,8 +133,9 @@ class ManageBulkRegistrationController extends Controller
             return back()->withErrors($validator);
         }
 
+        $errors = [];
         try {
-            \DB::transaction(function () use($request) {
+            \DB::transaction(function () use($request, &$errors) {
                 $matches = null;
                 preg_match('/^https:\/\/docs\.google\.com\/spreadsheets\/d\/(.+)\/edit.+$/u', $request->url, $matches);
 
@@ -139,13 +151,21 @@ class ManageBulkRegistrationController extends Controller
                 $splObj->setFlags(SplFileObject::READ_CSV);
                 $file = new NoRewindIterator($splObj);
 
-                $this->registCsv($file);
+                $errors = $this->registCsv($file);
             });
         } catch(\Exception $e) {
             $validator->after(function($validator) {
                 $validator->errors()->add('csv_file', __('messages.csv_file.failed'));
             });
         }
+
+        $validator->after(function($validator) use($errors) {
+            if (count($errors) > 0) {
+                foreach ($errors as $row_no=>$error) {
+                    $validator->errors()->add('row_error', $row_no.':'.$error);
+                }
+            }
+        });
 
         if ($validator->fails()) {
             return back()->withErrors($validator);
@@ -157,14 +177,25 @@ class ManageBulkRegistrationController extends Controller
     private function registCsv($file)
     {
         $row_count = 1;
+        $errors = [];
         foreach ($file as $row_data) {
             if ($row_count > 1) {
-                $this->processRow($row_data);
+                $result = $this->processRow($row_data);
+                switch($result) {
+                    case 2:
+                        $errors[$row_count] = __('messages.csv_file.row.empty');
+                    break;
+                    case 3:
+                        $errors[$row_count] = __('messages.csv_file.row.dup');
+                    break;
+                    default:
+                }
             }
 
             $row_count++;
         }
 
+        return $errors;
     }
 
     private function processRow($row_data)

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">@lang('messages.search')</div>
                 <div class="card-body">
-                    {{ Form::open(['route'=>['home.index'], 'method'=>'GET', 'class'=>'']) }}
+                    {{ Form::open(['route'=>['home'], 'method'=>'GET', 'class'=>'']) }}
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label class="sr-only" form="name">@lang('messages.search')</label>

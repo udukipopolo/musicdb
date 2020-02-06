@@ -48,6 +48,8 @@ return [
     'manage_bulk_regist' => '一括登録',
     'manage_user' => 'ユーザ管理',
 
+    'music' => '楽曲',
+    'artist' => 'アーティスト',
 
     'email' => 'メールアドレス',
     'user_name' => 'ユーザ名',

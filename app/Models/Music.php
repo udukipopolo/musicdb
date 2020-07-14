@@ -9,6 +9,8 @@ class Music extends Model
 {
     use AuthorObservable;
 
+    protected $table = 'musics';
+
     protected $fillable = [
         'title',
         'album_id',
@@ -73,6 +75,4 @@ class Music extends Model
                 ->first()->text;
         }
     }
-
-
 }

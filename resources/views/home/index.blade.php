@@ -4,6 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12 mb-3">
+            <div class="jumbotron">
+                <h1 class="display-4">音成 -otonari-</h1>
+                <p class="lead">音楽データベース。説明云々。</p>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-3">
             <div class="card">
                 <div class="card-header">@lang('messages.search')</div>
                 <div class="card-body">

@@ -12,6 +12,7 @@ class LocaleName extends Model
     protected $fillable = [
         'locale',
         'column',
+        'artist_id',
         'name',
     ];
 

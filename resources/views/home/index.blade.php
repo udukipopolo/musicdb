@@ -6,7 +6,7 @@
         <div class="col-md-12 mb-3">
             <div class="jumbotron">
                 <h1 class="display-4">音成 -otonari-</h1>
-                <p class="lead">音楽データベース。説明云々。</p>
+                <p class="lead">Creator's Database</p>
             </div>
         </div>
 

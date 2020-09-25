@@ -33,8 +33,11 @@
 
                 <div class="form-group row">
                     {{ Form::label('artist', 'アーティスト', ['class'=>'col-form-label col-md-4'])}}
-                    <div class="col-md-8">
+                    <div class="input-group col-md-8">
                         {{ Form::text('artist_name', $album->getLocaleName('artist_name', 'ja'), ['class'=>'form-control-plaintext', 'readonly']) }}
+                        <div class="input-group-append">
+                            <a href="{{ route('manage.artist.show', [$album->artist->id]) }}" class="btn btn-outline-secondary"><i class="fa fa-user"></i></a>
+                        </div>
                     </div>
                 </div>
 

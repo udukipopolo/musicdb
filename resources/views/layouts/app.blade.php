@@ -7,7 +7,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
+    <meta name="description" content="@section('description')音楽クリエイターデータベース@show" />
+    <meta property="og:title" content="{{ config('app.name') }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ Request::url() }}" />
+    <meta property="og:image" content="" />
+    <meta property="og:site_name" content="{{ config('app.name') }}" />
+    <meta property="og:description" content="@section('description')音楽クリエイターデータベース@show" />
+    <meta property="og:locale" content="ja_JP" />
 
     <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

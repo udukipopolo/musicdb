@@ -7,9 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>@section('title')@endsection{{ config('app.name') }}</title>
     <meta name="description" content="@section('description')音楽クリエイターデータベース@show" />
-    <meta property="og:title" content="{{ config('app.name') }}" />
+    <meta property="og:title" content="@section('title')@endsection{{ config('app.name') }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ Request::url() }}" />
     <meta property="og:image" content="" />
